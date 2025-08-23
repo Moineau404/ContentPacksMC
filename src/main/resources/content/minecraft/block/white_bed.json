@@ -1,0 +1,12 @@
+{
+  "color": "white",
+  "properties": {
+    "ignited_by_lava": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 0.2,
+    "destroy_time": 0.2,
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:bed"
+}

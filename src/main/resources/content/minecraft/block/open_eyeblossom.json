@@ -1,0 +1,16 @@
+{
+  "open": true,
+  "properties": {
+    "offset": "xz",
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "map_color_provider": {
+      "value": "orange",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:grass"
+  },
+  "type": "minecraft:eyeblossom"
+}

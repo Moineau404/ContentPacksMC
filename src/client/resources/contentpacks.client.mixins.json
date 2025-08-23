@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "mod.moineau.contentpacks.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "BlockColorsMixin",
+    "BlockStateManagersAccessor",
+    "HangingSignEditScreenMixin",
+    "IntegratedServerLoaderMixin",
+    "MinecraftClientMixin",
+    "OptionsScreenMixin",
+    "RenderLayersMixin",
+    "TexturedRenderLayersMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

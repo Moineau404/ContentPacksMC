@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "push_reaction": "block",
+    "explosion_resistance": 1.5,
+    "destroy_time": 1.5,
+    "map_color_provider": {
+      "value": "stone_gray",
+      "type": "minecraft:constant"
+    }
+  },
+  "type": "minecraft:piston_head"
+}

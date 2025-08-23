@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.spore_blossom.step",
+  "place": "minecraft:block.spore_blossom.place",
+  "hit": "minecraft:block.spore_blossom.hit",
+  "fall": "minecraft:block.spore_blossom.fall",
+  "break": "minecraft:block.spore_blossom.break"
+}

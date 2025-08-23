@@ -1,0 +1,15 @@
+{
+  "tree": "minecraft:acacia",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:grass"
+  },
+  "type": "minecraft:sapling"
+}

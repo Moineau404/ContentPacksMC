@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "terrain_particles": false,
+    "replaceable": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "collision": false
+  },
+  "type": "minecraft:structure_void"
+}

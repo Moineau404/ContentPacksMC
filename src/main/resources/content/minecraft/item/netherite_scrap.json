@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "minecraft:damage_resistant": {
+      "types": "#minecraft:is_fire"
+    }
+  },
+  "type": "minecraft:item"
+}

@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "offset": "xz",
+    "replaceable": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "water_blue",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:wet_grass"
+  },
+  "type": "minecraft:tall_seagrass"
+}

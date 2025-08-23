@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "force_solid": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 0.2,
+    "destroy_time": 0.2,
+    "map_color_provider": {
+      "value": "black",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:sculk_vein"
+  },
+  "type": "minecraft:sculk_vein"
+}

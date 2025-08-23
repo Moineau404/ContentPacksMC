@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "force_solid": true,
+    "occlusion": false,
+    "random_ticks": true,
+    "map_color_provider": {
+      "value": "gray",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:dried_ghast"
+  },
+  "type": "minecraft:dried_ghast"
+}

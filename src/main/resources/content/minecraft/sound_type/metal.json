@@ -1,0 +1,8 @@
+{
+  "step": "minecraft:block.metal.step",
+  "place": "minecraft:block.metal.place",
+  "hit": "minecraft:block.metal.hit",
+  "fall": "minecraft:block.metal.fall",
+  "pitch": 1.5,
+  "break": "minecraft:block.metal.break"
+}

@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.deepslate_tiles.step",
+  "place": "minecraft:block.deepslate_tiles.place",
+  "hit": "minecraft:block.deepslate_tiles.hit",
+  "fall": "minecraft:block.deepslate_tiles.fall",
+  "break": "minecraft:block.deepslate_tiles.break"
+}

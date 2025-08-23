@@ -1,0 +1,14 @@
+{
+  "falling_dust_color": "#00DBD3A0",
+  "properties": {
+    "instrument": "snare",
+    "explosion_resistance": 0.5,
+    "destroy_time": 0.5,
+    "map_color_provider": {
+      "value": "pale_yellow",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:sand"
+  },
+  "type": "minecraft:sand"
+}

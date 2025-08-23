@@ -1,0 +1,17 @@
+{
+  "leaf_particle_chance": 0.01,
+  "properties": {
+    "ignited_by_lava": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "explosion_resistance": 0.2,
+    "destroy_time": 0.2,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:grass"
+  },
+  "type": "minecraft:mangrove_leaves"
+}

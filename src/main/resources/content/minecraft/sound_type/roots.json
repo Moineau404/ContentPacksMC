@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.roots.step",
+  "place": "minecraft:block.roots.place",
+  "hit": "minecraft:block.roots.hit",
+  "fall": "minecraft:block.roots.fall",
+  "break": "minecraft:block.roots.break"
+}

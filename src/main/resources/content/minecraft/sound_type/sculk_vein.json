@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.sculk_vein.step",
+  "place": "minecraft:block.sculk_vein.place",
+  "hit": "minecraft:block.sculk_vein.hit",
+  "fall": "minecraft:block.sculk_vein.fall",
+  "break": "minecraft:block.sculk_vein.break"
+}

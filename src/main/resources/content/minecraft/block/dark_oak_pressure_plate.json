@@ -1,0 +1,19 @@
+{
+  "block_set_type": "minecraft:dark_oak",
+  "properties": {
+    "instrument": "bass",
+    "ignited_by_lava": true,
+    "force_solid": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 0.5,
+    "destroy_time": 0.5,
+    "map_color_provider": {
+      "value": "brown",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:pressure_plate"
+}

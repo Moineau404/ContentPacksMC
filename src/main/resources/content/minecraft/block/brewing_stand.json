@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "occlusion": false,
+    "explosion_resistance": 0.5,
+    "destroy_time": 0.5,
+    "map_color_provider": {
+      "value": "iron_gray",
+      "type": "minecraft:constant"
+    }
+  },
+  "type": "minecraft:brewing_stand"
+}

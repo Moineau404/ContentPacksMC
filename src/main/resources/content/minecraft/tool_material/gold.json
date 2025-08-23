@@ -1,0 +1,8 @@
+{
+  "attack_damage": 0.0,
+  "enchantability": 22,
+  "repair_items": "#minecraft:gold_tool_materials",
+  "incorrect_blocks": "#minecraft:incorrect_for_gold_tool",
+  "durability": 32,
+  "mining_speed": 12.0
+}

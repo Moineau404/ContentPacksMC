@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.resin_bricks.step",
+  "place": "minecraft:block.resin_bricks.place",
+  "hit": "minecraft:block.resin_bricks.hit",
+  "fall": "minecraft:block.resin_bricks.fall",
+  "break": "minecraft:block.resin_bricks.break"
+}

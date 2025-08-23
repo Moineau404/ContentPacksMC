@@ -1,0 +1,17 @@
+{
+  "turns_into": "minecraft:sand",
+  "brush_sound": "minecraft:item.brush.brushing.sand",
+  "brush_completed_sound": "minecraft:item.brush.brushing.sand",
+  "properties": {
+    "instrument": "snare",
+    "push_reaction": "destroy",
+    "explosion_resistance": 0.25,
+    "destroy_time": 0.25,
+    "map_color_provider": {
+      "value": "pale_yellow",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:suspicious_sand"
+  },
+  "type": "minecraft:brushable"
+}

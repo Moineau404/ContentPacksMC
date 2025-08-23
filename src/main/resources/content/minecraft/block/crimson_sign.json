@@ -1,0 +1,17 @@
+{
+  "wood_type": "minecraft:crimson",
+  "properties": {
+    "instrument": "bass",
+    "force_solid": true,
+    "occlusion": false,
+    "explosion_resistance": 1.0,
+    "destroy_time": 1.0,
+    "map_color_provider": {
+      "value": "dull_pink",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:nether_wood"
+  },
+  "type": "minecraft:standing_sign"
+}

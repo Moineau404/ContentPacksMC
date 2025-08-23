@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "chime",
+    "friction": 0.98,
+    "explosion_resistance": 0.5,
+    "destroy_time": 0.5,
+    "map_color_provider": {
+      "value": "pale_purple",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:glass"
+  },
+  "type": "minecraft:block"
+}

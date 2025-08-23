@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "offset": "xyz",
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:small_dripleaf"
+  },
+  "type": "minecraft:small_dripleaf"
+}

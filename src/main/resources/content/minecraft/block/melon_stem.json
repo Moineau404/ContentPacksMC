@@ -1,0 +1,17 @@
+{
+  "fruit": "minecraft:melon",
+  "attached_stem": "minecraft:attached_melon_stem",
+  "seed": "minecraft:melon_seeds",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:hard_crop"
+  },
+  "type": "minecraft:stem"
+}

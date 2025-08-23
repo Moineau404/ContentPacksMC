@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "terrain_particles": false,
+    "valid_spawn": {
+      "type": "minecraft:false"
+    },
+    "push_reaction": "block",
+    "occlusion": false,
+    "explosion_resistance": 3600000.8,
+    "destroy_time": -1.0
+  },
+  "type": "minecraft:barrier"
+}

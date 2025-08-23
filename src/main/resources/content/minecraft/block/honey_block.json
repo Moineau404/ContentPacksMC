@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "occlusion": false,
+    "speed_factor": 0.4,
+    "jump_factor": 0.5,
+    "map_color_provider": {
+      "value": "orange",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:honey"
+  },
+  "type": "minecraft:honey"
+}

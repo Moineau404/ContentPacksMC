@@ -1,0 +1,27 @@
+{
+  "leaf_particle_chance": 0.1,
+  "leaf_particle": {
+    "type": "minecraft:cherry_leaves"
+  },
+  "properties": {
+    "valid_spawn": {
+      "values": [
+        "minecraft:ocelot",
+        "minecraft:parrot"
+      ],
+      "type": "minecraft:whitelist"
+    },
+    "ignited_by_lava": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "explosion_resistance": 0.2,
+    "destroy_time": 0.2,
+    "map_color_provider": {
+      "value": "pink",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:cherry_leaves"
+  },
+  "type": "minecraft:untinted_particle_leaves"
+}

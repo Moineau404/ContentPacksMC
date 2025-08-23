@@ -1,0 +1,11 @@
+{
+  "color": "light_blue",
+  "properties": {
+    "instrument": "hat",
+    "occlusion": false,
+    "explosion_resistance": 0.3,
+    "destroy_time": 0.3,
+    "sound": "minecraft:glass"
+  },
+  "type": "minecraft:stained_glass_pane"
+}

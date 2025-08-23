@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.lantern.step",
+  "place": "minecraft:block.lantern.place",
+  "hit": "minecraft:block.lantern.hit",
+  "fall": "minecraft:block.lantern.fall",
+  "break": "minecraft:block.lantern.break"
+}

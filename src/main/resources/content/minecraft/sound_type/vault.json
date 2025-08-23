@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.vault.step",
+  "place": "minecraft:block.vault.place",
+  "hit": "minecraft:block.vault.hit",
+  "fall": "minecraft:block.vault.fall",
+  "break": "minecraft:block.vault.break"
+}

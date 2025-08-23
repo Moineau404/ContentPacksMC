@@ -1,0 +1,8 @@
+{
+  "potted": "minecraft:jungle_sapling",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false
+  },
+  "type": "minecraft:flower_pot"
+}

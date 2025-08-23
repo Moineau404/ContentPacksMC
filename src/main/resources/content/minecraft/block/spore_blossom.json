@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:spore_blossom"
+  },
+  "type": "minecraft:spore_blossom"
+}

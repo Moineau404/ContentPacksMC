@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:crafter",
+  "properties": {
+    "minecraft:container": []
+  },
+  "type": "minecraft:block"
+}

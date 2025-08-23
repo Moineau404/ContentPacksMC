@@ -1,0 +1,17 @@
+{
+  "spawn_particles": false,
+  "fire_damage": 2,
+  "properties": {
+    "instrument": "bass",
+    "ignited_by_lava": true,
+    "occlusion": false,
+    "explosion_resistance": 2.0,
+    "destroy_time": 2.0,
+    "map_color_provider": {
+      "value": "spruce_brown",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:campfire"
+}

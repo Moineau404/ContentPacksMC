@@ -1,0 +1,11 @@
+{
+  "block": "minecraft:sweet_berry_bush",
+  "properties": {
+    "minecraft:food": {
+      "nutrition": 2,
+      "saturation": 0.4
+    },
+    "minecraft:consumable": {}
+  },
+  "type": "minecraft:block"
+}

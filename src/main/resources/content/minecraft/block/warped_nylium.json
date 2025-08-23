@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "random_ticks": true,
+    "explosion_resistance": 0.4,
+    "destroy_time": 0.4,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "teal",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:nylium"
+  },
+  "type": "minecraft:nylium"
+}

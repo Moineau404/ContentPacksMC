@@ -1,0 +1,19 @@
+{
+  "wood_type": "minecraft:oak",
+  "properties": {
+    "instrument": "bass",
+    "ignited_by_lava": true,
+    "force_solid": true,
+    "description": "block.minecraft.oak_hanging_sign",
+    "occlusion": false,
+    "explosion_resistance": 1.0,
+    "destroy_time": 1.0,
+    "map_color_provider": {
+      "value": "oak_tan",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:hanging_sign"
+  },
+  "type": "minecraft:wall_hanging_sign"
+}

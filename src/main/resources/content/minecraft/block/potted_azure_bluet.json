@@ -1,0 +1,8 @@
+{
+  "potted": "minecraft:azure_bluet",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false
+  },
+  "type": "minecraft:flower_pot"
+}

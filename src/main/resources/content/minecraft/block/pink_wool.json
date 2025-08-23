@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "guitar",
+    "ignited_by_lava": true,
+    "explosion_resistance": 0.8,
+    "destroy_time": 0.8,
+    "map_color_provider": {
+      "value": "pink",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wool"
+  },
+  "type": "minecraft:block"
+}

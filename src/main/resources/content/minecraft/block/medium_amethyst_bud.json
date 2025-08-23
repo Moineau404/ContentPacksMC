@@ -1,0 +1,17 @@
+{
+  "height": 4.0,
+  "width": 10.0,
+  "properties": {
+    "force_solid": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 1.5,
+    "destroy_time": 1.5,
+    "map_color_provider": {
+      "value": "purple",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:large_amethyst_bud"
+  },
+  "type": "minecraft:amethyst_cluster"
+}

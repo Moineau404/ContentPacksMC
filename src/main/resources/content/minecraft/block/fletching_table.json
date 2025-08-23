@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "bass",
+    "ignited_by_lava": true,
+    "explosion_resistance": 2.5,
+    "destroy_time": 2.5,
+    "map_color_provider": {
+      "value": "oak_tan",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:fletching_table"
+}

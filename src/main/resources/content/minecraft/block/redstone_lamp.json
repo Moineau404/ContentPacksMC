@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "valid_spawn": {
+      "type": "minecraft:true"
+    },
+    "explosion_resistance": 0.3,
+    "destroy_time": 0.3,
+    "map_color_provider": {
+      "value": "terracotta_orange",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:glass"
+  },
+  "type": "minecraft:redstone_lamp"
+}

@@ -1,0 +1,11 @@
+{
+  "block": "minecraft:cave_vines",
+  "properties": {
+    "minecraft:food": {
+      "nutrition": 2,
+      "saturation": 0.4
+    },
+    "minecraft:consumable": {}
+  },
+  "type": "minecraft:block"
+}

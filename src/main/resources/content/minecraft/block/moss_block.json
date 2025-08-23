@@ -1,0 +1,14 @@
+{
+  "feature": "minecraft:moss_patch_bonemeal",
+  "properties": {
+    "push_reaction": "destroy",
+    "explosion_resistance": 0.1,
+    "destroy_time": 0.1,
+    "map_color_provider": {
+      "value": "green",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:moss"
+  },
+  "type": "minecraft:bonemealable_feature_placer"
+}

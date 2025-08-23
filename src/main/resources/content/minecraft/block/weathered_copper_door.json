@@ -1,0 +1,16 @@
+{
+  "block_set_type": "minecraft:copper",
+  "weathering_state": "weathered",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 6.0,
+    "destroy_time": 3.0,
+    "map_color_provider": {
+      "value": "dark_aqua",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:copper"
+  },
+  "type": "minecraft:weathering_copper_door"
+}

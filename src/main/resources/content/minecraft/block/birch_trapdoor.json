@@ -1,0 +1,19 @@
+{
+  "block_set_type": "minecraft:birch",
+  "properties": {
+    "instrument": "bass",
+    "valid_spawn": {
+      "type": "minecraft:false"
+    },
+    "ignited_by_lava": true,
+    "occlusion": false,
+    "explosion_resistance": 3.0,
+    "destroy_time": 3.0,
+    "map_color_provider": {
+      "value": "pale_yellow",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:trapdoor"
+}

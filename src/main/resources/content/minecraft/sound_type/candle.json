@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.candle.step",
+  "place": "minecraft:block.candle.place",
+  "hit": "minecraft:block.candle.hit",
+  "fall": "minecraft:block.candle.fall",
+  "break": "minecraft:block.candle.break"
+}

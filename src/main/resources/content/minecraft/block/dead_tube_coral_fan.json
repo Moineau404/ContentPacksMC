@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "force_solid": true,
+    "occlusion": false,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "gray",
+      "type": "minecraft:constant"
+    },
+    "collision": false
+  },
+  "type": "minecraft:base_coral_fan"
+}

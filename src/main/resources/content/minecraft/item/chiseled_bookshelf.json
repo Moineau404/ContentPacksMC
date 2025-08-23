@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:chiseled_bookshelf",
+  "properties": {
+    "minecraft:container": []
+  },
+  "type": "minecraft:block"
+}

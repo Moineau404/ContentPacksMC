@@ -1,0 +1,31 @@
+{
+  "required": true,
+  "package": "mod.moineau.contentpacks.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EntityAttachmentsAccessor",
+    "GameVersionImplMixin",
+    "ModResourcePackCreatorMixin",
+    "ResourceTypeMixin",
+    "block.AbstractBlockAccessor",
+    "block.AbstractBlockMixin",
+    "block.AbstractBlockSettingsMixin",
+    "block.BlockSetTypeMixin",
+    "block.BlocksMixin",
+    "block.BlockWithEntityMixin",
+    "block.ChestBlockMixin",
+    "block.EnderChestBlockMixin",
+    "block.SaplingGeneratorMixin",
+    "block.StairsBlockMixin",
+    "block.TrappedChestBlockMixin",
+    "block.WoodTypeMixin",
+    "item.AxeItemMixin",
+    "item.ItemMixin",
+    "item.ItemSettingsAccessor",
+    "item.ItemSettingsMixin",
+    "item.ShovelItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

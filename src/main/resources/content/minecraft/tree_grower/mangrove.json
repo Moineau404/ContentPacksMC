@@ -1,0 +1,5 @@
+{
+  "tree": "minecraft:mangrove",
+  "secondary_tree": "minecraft:tall_mangrove",
+  "secondary_chance": 0.85
+}

@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.decorated_pot.step",
+  "place": "minecraft:block.decorated_pot.place",
+  "hit": "minecraft:block.decorated_pot.hit",
+  "fall": "minecraft:block.decorated_pot.fall",
+  "break": "minecraft:block.decorated_pot.break"
+}

@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "instrument": "bass",
+    "explosion_resistance": 2.0,
+    "destroy_time": 2.0,
+    "map_color_provider": {
+      "value": "dark_crimson",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:stem"
+  },
+  "type": "minecraft:rotated_pillar"
+}

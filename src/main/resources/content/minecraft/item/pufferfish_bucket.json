@@ -1,0 +1,10 @@
+{
+  "entity_type": "minecraft:pufferfish",
+  "fluid": "minecraft:water",
+  "empty_sound": "minecraft:item.bucket.empty_fish",
+  "properties": {
+    "minecraft:max_stack_size": 1,
+    "minecraft:bucket_entity_data": {}
+  },
+  "type": "minecraft:mob_bucket"
+}

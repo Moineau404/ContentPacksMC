@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 0.8,
+    "destroy_time": 0.8,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "off_white",
+      "type": "minecraft:constant"
+    }
+  },
+  "type": "minecraft:block"
+}

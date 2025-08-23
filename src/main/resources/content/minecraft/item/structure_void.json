@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:structure_void",
+  "properties": {
+    "minecraft:rarity": "epic"
+  },
+  "type": "minecraft:block"
+}

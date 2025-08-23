@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "dynamic_shape": true,
+    "valid_spawn": {
+      "type": "minecraft:false"
+    },
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "pale_yellow",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:scaffolding"
+  },
+  "type": "minecraft:scaffolding"
+}

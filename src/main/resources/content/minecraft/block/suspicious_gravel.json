@@ -1,0 +1,17 @@
+{
+  "turns_into": "minecraft:gravel",
+  "brush_sound": "minecraft:item.brush.brushing.gravel",
+  "brush_completed_sound": "minecraft:item.brush.brushing.gravel",
+  "properties": {
+    "instrument": "snare",
+    "push_reaction": "destroy",
+    "explosion_resistance": 0.25,
+    "destroy_time": 0.25,
+    "map_color_provider": {
+      "value": "stone_gray",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:suspicious_gravel"
+  },
+  "type": "minecraft:brushable"
+}

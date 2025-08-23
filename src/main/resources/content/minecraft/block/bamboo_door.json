@@ -1,0 +1,17 @@
+{
+  "block_set_type": "minecraft:bamboo",
+  "properties": {
+    "instrument": "bass",
+    "ignited_by_lava": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 3.0,
+    "destroy_time": 3.0,
+    "map_color_provider": {
+      "value": "yellow",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:bamboo_wood"
+  },
+  "type": "minecraft:door"
+}

@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "occlusion": false,
+    "explosion_resistance": 6.0,
+    "destroy_time": 5.0,
+    "requires_tool": true,
+    "sound": "minecraft:iron"
+  },
+  "type": "minecraft:iron_bars"
+}

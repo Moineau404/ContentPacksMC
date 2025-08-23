@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "instrument": "custom_head",
+    "push_reaction": "destroy",
+    "explosion_resistance": 1.0,
+    "destroy_time": 1.0
+  },
+  "type": "minecraft:player_head"
+}

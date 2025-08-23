@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.pink_petals.step",
+  "place": "minecraft:block.pink_petals.place",
+  "hit": "minecraft:block.pink_petals.hit",
+  "fall": "minecraft:block.pink_petals.fall",
+  "break": "minecraft:block.pink_petals.break"
+}

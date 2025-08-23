@@ -1,0 +1,8 @@
+{
+  "potted": "minecraft:red_tulip",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false
+  },
+  "type": "minecraft:flower_pot"
+}

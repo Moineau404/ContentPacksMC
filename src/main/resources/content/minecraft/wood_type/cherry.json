@@ -1,0 +1,7 @@
+{
+  "hanging_sign_sound_type": "minecraft:cherry_wood_hanging_sign",
+  "fence_gate_close": "minecraft:block.cherry_wood_fence_gate.close",
+  "fence_gate_open": "minecraft:block.cherry_wood_fence_gate.open",
+  "block_set_type": "minecraft:cherry",
+  "sound_type": "minecraft:cherry_wood"
+}

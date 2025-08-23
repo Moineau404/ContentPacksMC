@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:smoker",
+  "properties": {
+    "minecraft:container": []
+  },
+  "type": "minecraft:block"
+}

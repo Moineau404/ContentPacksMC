@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "collision": false,
+    "sound": "minecraft:crop"
+  },
+  "type": "minecraft:crop"
+}

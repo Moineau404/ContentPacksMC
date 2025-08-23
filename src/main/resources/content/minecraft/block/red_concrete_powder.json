@@ -1,0 +1,14 @@
+{
+  "concrete": "minecraft:red_concrete",
+  "properties": {
+    "instrument": "snare",
+    "explosion_resistance": 0.5,
+    "destroy_time": 0.5,
+    "map_color_provider": {
+      "value": "red",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:sand"
+  },
+  "type": "minecraft:concrete_powder"
+}

@@ -1,0 +1,6 @@
+{
+  "properties": {
+    "minecraft:provides_trim_material": "minecraft:amethyst"
+  },
+  "type": "minecraft:item"
+}

@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "explosion_resistance": 3.0,
+    "destroy_time": 0.2,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:cocoa"
+}

@@ -1,0 +1,9 @@
+{
+  "hook": "minecraft:tripwire_hook",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "collision": false
+  },
+  "type": "minecraft:tripwire"
+}

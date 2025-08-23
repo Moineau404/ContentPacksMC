@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.mangrove_roots.step",
+  "place": "minecraft:block.mangrove_roots.place",
+  "hit": "minecraft:block.mangrove_roots.hit",
+  "fall": "minecraft:block.mangrove_roots.fall",
+  "break": "minecraft:block.mangrove_roots.break"
+}

@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.nether_bricks.step",
+  "place": "minecraft:block.nether_bricks.place",
+  "hit": "minecraft:block.nether_bricks.hit",
+  "fall": "minecraft:block.nether_bricks.fall",
+  "break": "minecraft:block.nether_bricks.break"
+}

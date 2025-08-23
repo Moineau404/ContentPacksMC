@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "explosion_resistance": 0.6,
+    "destroy_time": 0.6,
+    "map_color_provider": {
+      "value": "yellow",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wet_sponge"
+  },
+  "type": "minecraft:wet_sponge"
+}

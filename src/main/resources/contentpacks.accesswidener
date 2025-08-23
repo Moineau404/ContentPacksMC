@@ -1,0 +1,122 @@
+accessWidener v2 named
+
+#AbstractBlock???
+accessible method net/minecraft/block/AbstractBlock getMaxHorizontalModelOffset ()F
+accessible method net/minecraft/block/AbstractBlock getVerticalModelOffsetMultiplier ()F
+
+#AbstractBlock$Settings
+accessible field net/minecraft/block/AbstractBlock$Settings mapColorProvider Ljava/util/function/Function;
+accessible field net/minecraft/block/AbstractBlock$Settings collidable Z
+accessible field net/minecraft/block/AbstractBlock$Settings soundGroup Lnet/minecraft/sound/BlockSoundGroup;
+accessible field net/minecraft/block/AbstractBlock$Settings luminance Ljava/util/function/ToIntFunction;
+accessible field net/minecraft/block/AbstractBlock$Settings resistance F
+accessible field net/minecraft/block/AbstractBlock$Settings hardness F
+accessible field net/minecraft/block/AbstractBlock$Settings toolRequired Z
+accessible field net/minecraft/block/AbstractBlock$Settings randomTicks Z
+accessible field net/minecraft/block/AbstractBlock$Settings slipperiness F
+accessible field net/minecraft/block/AbstractBlock$Settings velocityMultiplier F
+accessible field net/minecraft/block/AbstractBlock$Settings jumpVelocityMultiplier F
+accessible field net/minecraft/block/AbstractBlock$Settings lootTable Lnet/minecraft/registry/RegistryKeyedValue;
+accessible field net/minecraft/block/AbstractBlock$Settings translationKey Lnet/minecraft/registry/RegistryKeyedValue;
+accessible field net/minecraft/block/AbstractBlock$Settings opaque Z
+accessible field net/minecraft/block/AbstractBlock$Settings isAir Z
+accessible field net/minecraft/block/AbstractBlock$Settings burnable Z
+accessible field net/minecraft/block/AbstractBlock$Settings liquid Z
+accessible field net/minecraft/block/AbstractBlock$Settings forceSolid Z
+accessible field net/minecraft/block/AbstractBlock$Settings pistonBehavior Lnet/minecraft/block/piston/PistonBehavior;
+accessible field net/minecraft/block/AbstractBlock$Settings blockBreakParticles Z
+accessible field net/minecraft/block/AbstractBlock$Settings instrument Lnet/minecraft/block/enums/NoteBlockInstrument;
+accessible field net/minecraft/block/AbstractBlock$Settings replaceable Z
+accessible field net/minecraft/block/AbstractBlock$Settings allowsSpawningPredicate Lnet/minecraft/block/AbstractBlock$TypedContextPredicate;
+accessible field net/minecraft/block/AbstractBlock$Settings solidBlockPredicate Lnet/minecraft/block/AbstractBlock$ContextPredicate;
+accessible field net/minecraft/block/AbstractBlock$Settings suffocationPredicate Lnet/minecraft/block/AbstractBlock$ContextPredicate;
+accessible field net/minecraft/block/AbstractBlock$Settings blockVisionPredicate Lnet/minecraft/block/AbstractBlock$ContextPredicate;
+accessible field net/minecraft/block/AbstractBlock$Settings postProcessPredicate Lnet/minecraft/block/AbstractBlock$ContextPredicate;
+accessible field net/minecraft/block/AbstractBlock$Settings emissiveLightingPredicate Lnet/minecraft/block/AbstractBlock$ContextPredicate;
+accessible field net/minecraft/block/AbstractBlock$Settings dynamicBounds Z
+accessible field net/minecraft/block/AbstractBlock$Settings requiredFeatures Lnet/minecraft/resource/featuretoggle/FeatureSet;
+accessible field net/minecraft/block/AbstractBlock$Settings offsetter Lnet/minecraft/block/AbstractBlock$Offsetter;
+
+#AxeItem
+accessible field net/minecraft/item/AxeItem STRIPPED_BLOCKS Ljava/util/Map;
+
+#BlockEntity???
+accessible field net/minecraft/block/entity/BlockEntity type Lnet/minecraft/block/entity/BlockEntityType;
+mutable field net/minecraft/block/entity/BlockEntity type Lnet/minecraft/block/entity/BlockEntityType;
+
+#Biome
+accessible field net/minecraft/world/biome/Biome weather Lnet/minecraft/world/biome/Biome$Weather;
+#Biome$Weather
+accessible class net/minecraft/world/biome/Biome$Weather
+accessible field net/minecraft/world/biome/Biome$Weather temperature F
+accessible field net/minecraft/world/biome/Biome$Weather downfall F
+
+#BlockItem
+accessible field net/minecraft/item/BlockItem block Lnet/minecraft/block/Block;
+mutable field net/minecraft/item/BlockItem block Lnet/minecraft/block/Block;
+
+#BlockSetType
+accessible field net/minecraft/block/BlockSetType VALUES Ljava/util/Map;
+accessible method net/minecraft/block/BlockSetType register (Lnet/minecraft/block/BlockSetType;)Lnet/minecraft/block/BlockSetType;
+
+#EntityAttachments
+accessible method net/minecraft/entity/EntityAttachments <init> (Ljava/util/Map;)V
+
+#Item$Settings
+accessible field net/minecraft/item/Item$Settings components Lnet/minecraft/component/ComponentMap$Builder;
+mutable field net/minecraft/item/Item$Settings components Lnet/minecraft/component/ComponentMap$Builder;
+accessible method net/minecraft/item/Item$Settings getValidatedComponents (Lnet/minecraft/text/Text;Lnet/minecraft/util/Identifier;)Lnet/minecraft/component/ComponentMap;
+accessible field net/minecraft/item/Item$Settings requiredFeatures Lnet/minecraft/resource/featuretoggle/FeatureSet;
+
+#PackScreen
+extendable method net/minecraft/client/gui/screen/pack/PackScreen updatePackLists ()V
+accessible field net/minecraft/client/gui/screen/pack/PackScreen doneButton Lnet/minecraft/client/gui/widget/ButtonWidget;
+
+#ReloadableResourceManagerImpl
+accessible field net/minecraft/resource/ReloadableResourceManagerImpl activeManager Lnet/minecraft/resource/LifecycledResourceManager;
+accessible field net/minecraft/resource/ReloadableResourceManagerImpl type Lnet/minecraft/resource/ResourceType;
+accessible field net/minecraft/resource/ReloadableResourceManagerImpl reloaders Ljava/util/List;
+
+#ResourcePackManager
+accessible field net/minecraft/resource/ResourcePackManager providers Ljava/util/Set;
+mutable field net/minecraft/resource/ResourcePackManager providers Ljava/util/Set;
+
+#SaplingGenerator
+accessible field net/minecraft/block/SaplingGenerator GENERATORS Ljava/util/Map;
+accessible field net/minecraft/block/SaplingGenerator id Ljava/lang/String;
+accessible field net/minecraft/block/SaplingGenerator rareChance F
+accessible field net/minecraft/block/SaplingGenerator megaVariant Ljava/util/Optional;
+accessible field net/minecraft/block/SaplingGenerator rareMegaVariant Ljava/util/Optional;
+accessible field net/minecraft/block/SaplingGenerator regularVariant Ljava/util/Optional;
+accessible field net/minecraft/block/SaplingGenerator rareRegularVariant Ljava/util/Optional;
+accessible field net/minecraft/block/SaplingGenerator beesVariant Ljava/util/Optional;
+accessible field net/minecraft/block/SaplingGenerator rareBeesVariant Ljava/util/Optional;
+
+#ShovelItem
+accessible field net/minecraft/item/ShovelItem PATH_STATES Ljava/util/Map;
+
+#WoodType
+accessible method net/minecraft/block/WoodType register (Lnet/minecraft/block/WoodType;)Lnet/minecraft/block/WoodType;
+accessible field net/minecraft/block/WoodType VALUES Ljava/util/Map;
+
+#Item fields
+accessible field net/minecraft/item/BoatItem boatEntityType Lnet/minecraft/entity/EntityType;
+accessible field net/minecraft/item/BucketItem fluid Lnet/minecraft/fluid/Fluid;
+accessible field net/minecraft/item/DecorationItem entityType Lnet/minecraft/entity/EntityType;
+accessible field net/minecraft/item/EntityBucketItem entityType Lnet/minecraft/entity/EntityType;
+accessible field net/minecraft/item/EntityBucketItem emptyingSound Lnet/minecraft/sound/SoundEvent;
+accessible field net/minecraft/item/MinecartItem type Lnet/minecraft/entity/EntityType;
+accessible field net/minecraft/item/OnAStickItem target Lnet/minecraft/entity/EntityType;
+accessible field net/minecraft/item/OnAStickItem damagePerUse I
+accessible field net/minecraft/item/PowderSnowBucketItem placeSound Lnet/minecraft/sound/SoundEvent;
+accessible field net/minecraft/item/SmithingTemplateItem ARMOR_TRIM_APPLIES_TO_TEXT Lnet/minecraft/text/Text;
+accessible field net/minecraft/item/SmithingTemplateItem ARMOR_TRIM_INGREDIENTS_TEXT Lnet/minecraft/text/Text;
+accessible field net/minecraft/item/SmithingTemplateItem ARMOR_TRIM_BASE_SLOT_DESCRIPTION_TEXT Lnet/minecraft/text/Text;
+accessible field net/minecraft/item/SmithingTemplateItem ARMOR_TRIM_ADDITIONS_SLOT_DESCRIPTION_TEXT Lnet/minecraft/text/Text;
+accessible method net/minecraft/item/SmithingTemplateItem getArmorTrimEmptyBaseSlotTextures ()Ljava/util/List;
+accessible method net/minecraft/item/SmithingTemplateItem getArmorTrimEmptyAdditionsSlotTextures ()Ljava/util/List;
+accessible field net/minecraft/item/SmithingTemplateItem appliesToText Lnet/minecraft/text/Text;
+accessible field net/minecraft/item/SmithingTemplateItem ingredientsText Lnet/minecraft/text/Text;
+accessible field net/minecraft/item/SpawnEggItem type Lnet/minecraft/entity/EntityType;
+accessible field net/minecraft/item/VerticallyAttachableBlockItem wallBlock Lnet/minecraft/block/Block;
+accessible field net/minecraft/item/VerticallyAttachableBlockItem verticalAttachmentDirection Lnet/minecraft/util/math/Direction;

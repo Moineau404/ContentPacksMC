@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 0.75,
+    "destroy_time": 0.75,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "terracotta_white",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:calcite"
+  },
+  "type": "minecraft:block"
+}

@@ -1,0 +1,6 @@
+{
+  "properties": {
+    "minecraft:enchantment_glint_override": true
+  },
+  "type": "minecraft:end_crystal"
+}

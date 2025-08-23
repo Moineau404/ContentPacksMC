@@ -1,0 +1,17 @@
+{
+  "base_state": {
+    "Name": "minecraft:cobbled_deepslate"
+  },
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 6.0,
+    "destroy_time": 3.5,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "deepslate_gray",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:deepslate"
+  },
+  "type": "minecraft:stair"
+}

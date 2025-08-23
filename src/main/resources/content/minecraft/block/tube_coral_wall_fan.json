@@ -1,0 +1,14 @@
+{
+  "dead": "minecraft:dead_tube_coral_wall_fan",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "blue",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:wet_grass"
+  },
+  "type": "minecraft:coral_wall_fan"
+}

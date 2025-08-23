@@ -1,0 +1,8 @@
+{
+  "potted": "minecraft:wither_rose",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false
+  },
+  "type": "minecraft:flower_pot"
+}

@@ -1,0 +1,8 @@
+{
+  "potted": "minecraft:cornflower",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false
+  },
+  "type": "minecraft:flower_pot"
+}

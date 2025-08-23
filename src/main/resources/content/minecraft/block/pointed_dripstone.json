@@ -1,0 +1,19 @@
+{
+  "properties": {
+    "dynamic_shape": true,
+    "offset": "xz",
+    "instrument": "basedrum",
+    "force_solid": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "explosion_resistance": 3.0,
+    "destroy_time": 1.5,
+    "map_color_provider": {
+      "value": "terracotta_brown",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:pointed_dripstone"
+  },
+  "type": "minecraft:pointed_dripstone"
+}

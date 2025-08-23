@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.bamboo.step",
+  "place": "minecraft:block.bamboo_sapling.place",
+  "hit": "minecraft:block.bamboo_sapling.hit",
+  "fall": "minecraft:block.bamboo.fall",
+  "break": "minecraft:block.bamboo_sapling.break"
+}

@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.cherry_sapling.step",
+  "place": "minecraft:block.cherry_sapling.place",
+  "hit": "minecraft:block.cherry_sapling.hit",
+  "fall": "minecraft:block.cherry_sapling.fall",
+  "break": "minecraft:block.cherry_sapling.break"
+}

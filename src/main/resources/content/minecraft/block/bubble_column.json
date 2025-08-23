@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "replaceable": true,
+    "liquid": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "water_blue",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:empty"
+  },
+  "type": "minecraft:bubble_column"
+}

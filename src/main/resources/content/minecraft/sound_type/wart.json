@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.wart_block.step",
+  "place": "minecraft:block.wart_block.place",
+  "hit": "minecraft:block.wart_block.hit",
+  "fall": "minecraft:block.wart_block.fall",
+  "break": "minecraft:block.wart_block.break"
+}

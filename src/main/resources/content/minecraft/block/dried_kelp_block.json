@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "explosion_resistance": 2.5,
+    "destroy_time": 0.5,
+    "map_color_provider": {
+      "value": "green",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:grass"
+  },
+  "type": "minecraft:block"
+}

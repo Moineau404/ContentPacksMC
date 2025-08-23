@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "minecraft:food": {
+      "nutrition": 2,
+      "saturation": 1.2
+    },
+    "minecraft:consumable": {
+      "on_consume_effects": [
+        {
+          "effects": [
+            {
+              "id": "minecraft:poison",
+              "show_icon": true,
+              "duration": 100
+            }
+          ],
+          "probability": 0.6,
+          "type": "minecraft:apply_effects"
+        }
+      ]
+    }
+  },
+  "type": "minecraft:item"
+}

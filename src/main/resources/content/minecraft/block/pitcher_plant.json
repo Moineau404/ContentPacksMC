@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "offset": "xz",
+    "ignited_by_lava": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:crop"
+  },
+  "type": "minecraft:double_plant"
+}

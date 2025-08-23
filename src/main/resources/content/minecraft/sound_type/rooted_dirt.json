@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.rooted_dirt.step",
+  "place": "minecraft:block.rooted_dirt.place",
+  "hit": "minecraft:block.rooted_dirt.hit",
+  "fall": "minecraft:block.rooted_dirt.fall",
+  "break": "minecraft:block.rooted_dirt.break"
+}

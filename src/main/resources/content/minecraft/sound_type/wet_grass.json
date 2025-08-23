@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.wet_grass.step",
+  "place": "minecraft:block.wet_grass.place",
+  "hit": "minecraft:block.wet_grass.hit",
+  "fall": "minecraft:block.wet_grass.fall",
+  "break": "minecraft:block.wet_grass.break"
+}

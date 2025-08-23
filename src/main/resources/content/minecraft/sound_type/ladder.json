@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.ladder.step",
+  "place": "minecraft:block.ladder.place",
+  "hit": "minecraft:block.ladder.hit",
+  "fall": "minecraft:block.ladder.fall",
+  "break": "minecraft:block.ladder.break"
+}

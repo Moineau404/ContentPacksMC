@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "map_color_provider": {
+      "value": "red",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:nether_wart"
+  },
+  "type": "minecraft:nether_wart"
+}

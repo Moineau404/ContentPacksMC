@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.froglight.step",
+  "place": "minecraft:block.froglight.place",
+  "hit": "minecraft:block.froglight.hit",
+  "fall": "minecraft:block.froglight.fall",
+  "break": "minecraft:block.froglight.break"
+}

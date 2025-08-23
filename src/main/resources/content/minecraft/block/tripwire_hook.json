@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "collision": false,
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:trip_wire_hook"
+}

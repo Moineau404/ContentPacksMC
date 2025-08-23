@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "minecraft:food": {
+      "nutrition": 5,
+      "saturation": 6.0
+    },
+    "minecraft:consumable": {}
+  },
+  "type": "minecraft:item"
+}

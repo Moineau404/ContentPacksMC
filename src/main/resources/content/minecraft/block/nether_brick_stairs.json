@@ -1,0 +1,17 @@
+{
+  "base_state": {
+    "Name": "minecraft:nether_bricks"
+  },
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 6.0,
+    "destroy_time": 2.0,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "dark_red",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:nether_bricks"
+  },
+  "type": "minecraft:stair"
+}

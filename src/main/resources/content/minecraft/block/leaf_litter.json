@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "replaceable": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "brown",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:leaf_litter"
+  },
+  "type": "minecraft:leaf_litter"
+}

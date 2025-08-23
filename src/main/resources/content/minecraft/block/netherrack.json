@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 0.4,
+    "destroy_time": 0.4,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "dark_red",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:netherrack"
+  },
+  "type": "minecraft:netherrack"
+}

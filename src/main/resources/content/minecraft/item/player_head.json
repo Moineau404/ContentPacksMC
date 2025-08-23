@@ -1,0 +1,24 @@
+{
+  "block": "minecraft:player_head",
+  "wall_block": "minecraft:player_wall_head",
+  "properties": {
+    "minecraft:rarity": "uncommon",
+    "minecraft:equippable": {
+      "swappable": false,
+      "slot": "head"
+    },
+    "minecraft:attribute_modifiers": [
+      {
+        "type": "minecraft:waypoint_transmit_range",
+        "id": "minecraft:waypoint_transmit_range_hide",
+        "amount": -1.0,
+        "operation": "add_multiplied_total",
+        "slot": "head",
+        "display": {
+          "type": "hidden"
+        }
+      }
+    ]
+  },
+  "type": "minecraft:player_head"
+}

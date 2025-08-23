@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.polished_tuff.step",
+  "place": "minecraft:block.polished_tuff.place",
+  "hit": "minecraft:block.polished_tuff.hit",
+  "fall": "minecraft:block.polished_tuff.fall",
+  "break": "minecraft:block.polished_tuff.break"
+}

@@ -1,0 +1,10 @@
+{
+  "special": true,
+  "show_title": false,
+  "scroll_bar": false,
+  "background_texture": "minecraft:textures/gui/container/creative_inventory/tab_inventory.png",
+  "title": {
+    "translate": "itemGroup.inventory"
+  },
+  "icon": "minecraft:chest"
+}

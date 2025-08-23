@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 0.1,
+    "destroy_time": 0.1,
+    "map_color_provider": {
+      "value": "pale_yellow",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:candle"
+  },
+  "type": "minecraft:candle"
+}

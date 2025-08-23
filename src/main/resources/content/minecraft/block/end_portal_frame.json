@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 3600000.0,
+    "destroy_time": -1.0,
+    "map_color_provider": {
+      "value": "green",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:glass"
+  },
+  "type": "minecraft:end_portal_frame"
+}

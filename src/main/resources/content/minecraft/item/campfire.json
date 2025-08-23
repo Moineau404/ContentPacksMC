@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:campfire",
+  "properties": {
+    "minecraft:container": []
+  },
+  "type": "minecraft:block"
+}

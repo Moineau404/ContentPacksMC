@@ -1,0 +1,16 @@
+{
+  "fruit": "minecraft:pumpkin",
+  "stem": "minecraft:pumpkin_stem",
+  "seed": "minecraft:pumpkin_seeds",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:attached_stem"
+}

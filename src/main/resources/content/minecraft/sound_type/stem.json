@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.stem.step",
+  "place": "minecraft:block.stem.place",
+  "hit": "minecraft:block.stem.hit",
+  "fall": "minecraft:block.stem.fall",
+  "break": "minecraft:block.stem.break"
+}

@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "minecraft:max_stack_size": 1,
+    "minecraft:rarity": "uncommon",
+    "minecraft:provides_banner_patterns": "#minecraft:pattern_item/piglin"
+  },
+  "type": "minecraft:item"
+}

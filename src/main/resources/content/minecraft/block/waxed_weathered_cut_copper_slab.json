@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "explosion_resistance": 6.0,
+    "destroy_time": 3.0,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "dark_aqua",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:copper"
+  },
+  "type": "minecraft:slab"
+}

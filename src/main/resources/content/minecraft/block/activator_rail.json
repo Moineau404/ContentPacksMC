@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "occlusion": false,
+    "explosion_resistance": 0.7,
+    "destroy_time": 0.7,
+    "collision": false,
+    "sound": "minecraft:metal"
+  },
+  "type": "minecraft:powered_rail"
+}

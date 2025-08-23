@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:sniffer_egg",
+  "properties": {
+    "minecraft:rarity": "uncommon"
+  },
+  "type": "minecraft:block"
+}

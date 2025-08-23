@@ -1,0 +1,19 @@
+{
+  "experience": {
+    "min_inclusive": 3,
+    "max_inclusive": 7,
+    "type": "minecraft:uniform"
+  },
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 3.0,
+    "destroy_time": 4.5,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "deepslate_gray",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:deepslate"
+  },
+  "type": "minecraft:drop_experience"
+}

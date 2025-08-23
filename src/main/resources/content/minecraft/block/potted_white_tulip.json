@@ -1,0 +1,8 @@
+{
+  "potted": "minecraft:white_tulip",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false
+  },
+  "type": "minecraft:flower_pot"
+}

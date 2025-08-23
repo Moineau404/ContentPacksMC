@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "random_ticks": true,
+    "explosion_resistance": 0.6,
+    "destroy_time": 0.6,
+    "map_color_provider": {
+      "value": "dirt_brown",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:gravel"
+  },
+  "type": "minecraft:farm"
+}

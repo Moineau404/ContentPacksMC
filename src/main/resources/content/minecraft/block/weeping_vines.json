@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "map_color_provider": {
+      "value": "dark_red",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:weeping_vines"
+  },
+  "type": "minecraft:weeping_vines"
+}

@@ -1,0 +1,5 @@
+{
+  "block": "minecraft:lily_pad",
+  "properties": {},
+  "type": "minecraft:place_on_water_block"
+}

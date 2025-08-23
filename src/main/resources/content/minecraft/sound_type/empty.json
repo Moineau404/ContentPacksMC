@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:intentionally_empty",
+  "place": "minecraft:intentionally_empty",
+  "hit": "minecraft:intentionally_empty",
+  "fall": "minecraft:intentionally_empty",
+  "break": "minecraft:intentionally_empty"
+}

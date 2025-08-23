@@ -1,0 +1,11 @@
+{
+  "candle": "minecraft:orange_candle",
+  "properties": {
+    "force_solid": true,
+    "push_reaction": "destroy",
+    "explosion_resistance": 0.5,
+    "destroy_time": 0.5,
+    "sound": "minecraft:wool"
+  },
+  "type": "minecraft:candle_cake"
+}

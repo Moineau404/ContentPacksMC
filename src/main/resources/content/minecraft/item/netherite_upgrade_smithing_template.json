@@ -1,0 +1,34 @@
+{
+  "additional_slot_description": {
+    "translate": "item.minecraft.smithing_template.netherite_upgrade.additions_slot_description"
+  },
+  "base_slot_empty_icon": [
+    "minecraft:container/slot/helmet",
+    "minecraft:container/slot/sword",
+    "minecraft:container/slot/chestplate",
+    "minecraft:container/slot/pickaxe",
+    "minecraft:container/slot/leggings",
+    "minecraft:container/slot/axe",
+    "minecraft:container/slot/boots",
+    "minecraft:container/slot/hoe",
+    "minecraft:container/slot/shovel"
+  ],
+  "additional_slot_empty_icon": [
+    "minecraft:container/slot/ingot"
+  ],
+  "properties": {
+    "minecraft:rarity": "uncommon"
+  },
+  "applies_to": {
+    "translate": "item.minecraft.smithing_template.netherite_upgrade.applies_to",
+    "color": "blue"
+  },
+  "ingredients": {
+    "translate": "item.minecraft.smithing_template.netherite_upgrade.ingredients",
+    "color": "blue"
+  },
+  "base_slot_description": {
+    "translate": "item.minecraft.smithing_template.netherite_upgrade.base_slot_description"
+  },
+  "type": "minecraft:smithing_template"
+}

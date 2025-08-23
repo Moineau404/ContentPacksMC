@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "ignited_by_lava": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "light_gray",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:moss_carpet"
+  },
+  "type": "minecraft:hanging_moss"
+}

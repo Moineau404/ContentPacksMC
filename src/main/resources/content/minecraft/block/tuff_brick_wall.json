@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "force_solid": true,
+    "explosion_resistance": 6.0,
+    "destroy_time": 1.5,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "terracotta_gray",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:tuff_bricks"
+  },
+  "type": "minecraft:wall"
+}

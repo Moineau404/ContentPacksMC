@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "minecraft:max_stack_size": 1,
+    "minecraft:rarity": "rare",
+    "minecraft:jukebox_playable": "minecraft:lava_chicken"
+  },
+  "type": "minecraft:item"
+}

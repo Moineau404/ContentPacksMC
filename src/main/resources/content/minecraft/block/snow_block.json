@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "explosion_resistance": 0.2,
+    "destroy_time": 0.2,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "white",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:snow"
+  },
+  "type": "minecraft:block"
+}

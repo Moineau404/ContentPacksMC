@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.fungus.step",
+  "place": "minecraft:block.fungus.place",
+  "hit": "minecraft:block.fungus.hit",
+  "fall": "minecraft:block.fungus.fall",
+  "break": "minecraft:block.fungus.break"
+}

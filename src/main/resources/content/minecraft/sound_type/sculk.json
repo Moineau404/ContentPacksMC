@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.sculk.step",
+  "place": "minecraft:block.sculk.place",
+  "hit": "minecraft:block.sculk.hit",
+  "fall": "minecraft:block.sculk.fall",
+  "break": "minecraft:block.sculk.break"
+}

@@ -1,0 +1,8 @@
+{
+  "potted": "minecraft:cactus",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false
+  },
+  "type": "minecraft:flower_pot"
+}

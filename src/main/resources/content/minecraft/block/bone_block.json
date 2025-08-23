@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "xylophone",
+    "explosion_resistance": 2.0,
+    "destroy_time": 2.0,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "pale_yellow",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:bone"
+  },
+  "type": "minecraft:rotated_pillar"
+}

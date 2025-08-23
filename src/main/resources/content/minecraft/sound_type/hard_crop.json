@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.wood.step",
+  "place": "minecraft:item.crop.plant",
+  "hit": "minecraft:block.wood.hit",
+  "fall": "minecraft:block.wood.fall",
+  "break": "minecraft:block.wood.break"
+}

@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "minecraft:max_stack_size": 16,
+    "minecraft:use_cooldown": {
+      "seconds": 1.0
+    }
+  },
+  "type": "minecraft:enderpearl"
+}

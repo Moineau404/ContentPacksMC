@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.gilded_blackstone.step",
+  "place": "minecraft:block.gilded_blackstone.place",
+  "hit": "minecraft:block.gilded_blackstone.hit",
+  "fall": "minecraft:block.gilded_blackstone.fall",
+  "break": "minecraft:block.gilded_blackstone.break"
+}

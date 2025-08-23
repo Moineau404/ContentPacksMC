@@ -1,0 +1,10 @@
+{
+  "particle_options": "minecraft:flame",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "collision": false,
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:torch"
+}

@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:redstone_wire",
+  "properties": {
+    "minecraft:provides_trim_material": "minecraft:redstone"
+  },
+  "type": "minecraft:block"
+}

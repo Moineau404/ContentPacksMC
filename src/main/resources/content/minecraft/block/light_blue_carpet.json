@@ -1,0 +1,14 @@
+{
+  "color": "light_blue",
+  "properties": {
+    "ignited_by_lava": true,
+    "explosion_resistance": 0.1,
+    "destroy_time": 0.1,
+    "map_color_provider": {
+      "value": "light_blue",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wool"
+  },
+  "type": "minecraft:wool_carpet"
+}

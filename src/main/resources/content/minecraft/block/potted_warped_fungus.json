@@ -1,0 +1,8 @@
+{
+  "potted": "minecraft:warped_fungus",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false
+  },
+  "type": "minecraft:flower_pot"
+}

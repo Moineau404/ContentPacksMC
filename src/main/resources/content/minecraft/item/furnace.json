@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:furnace",
+  "properties": {
+    "minecraft:container": []
+  },
+  "type": "minecraft:block"
+}

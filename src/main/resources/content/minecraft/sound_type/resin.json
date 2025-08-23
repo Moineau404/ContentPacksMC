@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.resin.step",
+  "place": "minecraft:block.resin.place",
+  "hit": "minecraft:intentionally_empty",
+  "fall": "minecraft:block.resin.fall",
+  "break": "minecraft:block.resin.break"
+}

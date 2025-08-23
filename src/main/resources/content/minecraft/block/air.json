@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "replaceable": true,
+    "occlusion": false,
+    "air": true,
+    "collision": false
+  },
+  "type": "minecraft:air"
+}

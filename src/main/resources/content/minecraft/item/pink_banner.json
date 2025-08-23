@@ -1,0 +1,9 @@
+{
+  "block": "minecraft:pink_banner",
+  "wall_block": "minecraft:pink_wall_banner",
+  "properties": {
+    "minecraft:max_stack_size": 16,
+    "minecraft:banner_patterns": []
+  },
+  "type": "minecraft:banner"
+}

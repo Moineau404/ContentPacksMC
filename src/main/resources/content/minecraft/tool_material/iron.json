@@ -1,0 +1,8 @@
+{
+  "attack_damage": 2.0,
+  "enchantability": 14,
+  "repair_items": "#minecraft:iron_tool_materials",
+  "incorrect_blocks": "#minecraft:incorrect_for_iron_tool",
+  "durability": 250,
+  "mining_speed": 6.0
+}

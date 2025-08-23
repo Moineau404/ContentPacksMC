@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "minecraft:use_cooldown": {
+      "seconds": 0.5
+    }
+  },
+  "type": "minecraft:wind_charge"
+}

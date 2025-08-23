@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.calcite.step",
+  "place": "minecraft:block.calcite.place",
+  "hit": "minecraft:block.calcite.hit",
+  "fall": "minecraft:block.calcite.fall",
+  "break": "minecraft:block.calcite.break"
+}

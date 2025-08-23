@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.big_dripleaf.step",
+  "place": "minecraft:block.big_dripleaf.place",
+  "hit": "minecraft:block.big_dripleaf.hit",
+  "fall": "minecraft:block.big_dripleaf.fall",
+  "break": "minecraft:block.big_dripleaf.break"
+}

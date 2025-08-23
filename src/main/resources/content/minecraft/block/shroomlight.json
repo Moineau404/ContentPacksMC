@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "explosion_resistance": 1.0,
+    "destroy_time": 1.0,
+    "map_color_provider": {
+      "value": "red",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:shroomlight"
+  },
+  "type": "minecraft:block"
+}

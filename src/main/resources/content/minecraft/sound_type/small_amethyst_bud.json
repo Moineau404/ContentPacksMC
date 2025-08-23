@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.amethyst_cluster.step",
+  "place": "minecraft:block.small_amethyst_bud.place",
+  "hit": "minecraft:block.amethyst_cluster.hit",
+  "fall": "minecraft:block.amethyst_cluster.fall",
+  "break": "minecraft:block.small_amethyst_bud.break"
+}

@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.sculk_catalyst.step",
+  "place": "minecraft:block.sculk_catalyst.place",
+  "hit": "minecraft:block.sculk_catalyst.hit",
+  "fall": "minecraft:block.sculk_catalyst.fall",
+  "break": "minecraft:block.sculk_catalyst.break"
+}

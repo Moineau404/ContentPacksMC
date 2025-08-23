@@ -1,0 +1,10 @@
+{
+  "block": "minecraft:bee_nest",
+  "properties": {
+    "minecraft:bees": [],
+    "minecraft:block_state": {
+      "honey_level": "0"
+    }
+  },
+  "type": "minecraft:block"
+}

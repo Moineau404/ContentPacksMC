@@ -1,0 +1,15 @@
+{
+  "color": "gray",
+  "properties": {
+    "instrument": "hat",
+    "occlusion": false,
+    "explosion_resistance": 0.3,
+    "destroy_time": 0.3,
+    "map_color_provider": {
+      "value": "gray",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:glass"
+  },
+  "type": "minecraft:stained_glass"
+}

@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:barrier",
+  "properties": {
+    "minecraft:rarity": "epic"
+  },
+  "type": "minecraft:block"
+}

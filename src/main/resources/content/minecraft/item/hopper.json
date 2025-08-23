@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:hopper",
+  "properties": {
+    "minecraft:container": []
+  },
+  "type": "minecraft:block"
+}

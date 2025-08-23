@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "random_ticks": true,
+    "explosion_resistance": 1.5,
+    "destroy_time": 1.5,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "purple",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:amethyst"
+  },
+  "type": "minecraft:budding_amethyst"
+}

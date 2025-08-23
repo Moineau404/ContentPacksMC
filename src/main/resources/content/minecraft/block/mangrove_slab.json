@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "bass",
+    "ignited_by_lava": true,
+    "explosion_resistance": 3.0,
+    "destroy_time": 2.0,
+    "map_color_provider": {
+      "value": "red",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:slab"
+}

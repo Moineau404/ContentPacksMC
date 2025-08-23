@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "random_ticks": true,
+    "explosion_resistance": 3.0,
+    "destroy_time": 4.5,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "deepslate_gray",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:deepslate"
+  },
+  "type": "minecraft:redstone_ore"
+}

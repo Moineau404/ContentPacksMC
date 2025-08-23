@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:cave_vines"
+  },
+  "type": "minecraft:cave_vines_plant"
+}

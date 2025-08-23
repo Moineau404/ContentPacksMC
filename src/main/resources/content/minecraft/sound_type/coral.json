@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.coral_block.step",
+  "place": "minecraft:block.coral_block.place",
+  "hit": "minecraft:block.coral_block.hit",
+  "fall": "minecraft:block.coral_block.fall",
+  "break": "minecraft:block.coral_block.break"
+}

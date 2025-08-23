@@ -1,0 +1,16 @@
+{
+  "color": "brown",
+  "properties": {
+    "dynamic_shape": true,
+    "force_solid": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 2.0,
+    "destroy_time": 2.0,
+    "map_color_provider": {
+      "value": "brown",
+      "type": "minecraft:constant"
+    }
+  },
+  "type": "minecraft:shulker_box"
+}

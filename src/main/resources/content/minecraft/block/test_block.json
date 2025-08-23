@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "explosion_resistance": 3600000.0,
+    "destroy_time": -1.0,
+    "map_color_provider": {
+      "value": "light_gray",
+      "type": "minecraft:constant"
+    }
+  },
+  "type": "minecraft:test"
+}

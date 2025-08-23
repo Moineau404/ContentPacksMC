@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.hanging_sign.step",
+  "place": "minecraft:block.hanging_sign.place",
+  "hit": "minecraft:block.hanging_sign.hit",
+  "fall": "minecraft:block.hanging_sign.fall",
+  "break": "minecraft:block.hanging_sign.break"
+}

@@ -1,0 +1,9 @@
+{
+  "block": "minecraft:netherite_block",
+  "properties": {
+    "minecraft:damage_resistant": {
+      "types": "#minecraft:is_fire"
+    }
+  },
+  "type": "minecraft:block"
+}

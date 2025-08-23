@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.chain.step",
+  "place": "minecraft:block.chain.place",
+  "hit": "minecraft:block.chain.hit",
+  "fall": "minecraft:block.chain.fall",
+  "break": "minecraft:block.chain.break"
+}

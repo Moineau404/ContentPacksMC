@@ -1,0 +1,10 @@
+{
+  "block": "minecraft:light",
+  "properties": {
+    "minecraft:rarity": "epic",
+    "minecraft:block_state": {
+      "level": "15"
+    }
+  },
+  "type": "minecraft:block"
+}

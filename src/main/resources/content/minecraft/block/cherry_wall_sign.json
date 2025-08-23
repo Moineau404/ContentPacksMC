@@ -1,0 +1,19 @@
+{
+  "wood_type": "minecraft:cherry",
+  "properties": {
+    "instrument": "bass",
+    "ignited_by_lava": true,
+    "force_solid": true,
+    "description": "block.minecraft.cherry_sign",
+    "occlusion": false,
+    "explosion_resistance": 1.0,
+    "destroy_time": 1.0,
+    "map_color_provider": {
+      "value": "terracotta_white",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:cherry_wood"
+  },
+  "type": "minecraft:wall_sign"
+}

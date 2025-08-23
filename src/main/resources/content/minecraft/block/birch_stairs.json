@@ -1,0 +1,17 @@
+{
+  "base_state": {
+    "Name": "minecraft:birch_planks"
+  },
+  "properties": {
+    "instrument": "bass",
+    "ignited_by_lava": true,
+    "explosion_resistance": 3.0,
+    "destroy_time": 2.0,
+    "map_color_provider": {
+      "value": "pale_yellow",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:stair"
+}

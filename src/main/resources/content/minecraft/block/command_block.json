@@ -1,0 +1,13 @@
+{
+  "automatic": false,
+  "properties": {
+    "explosion_resistance": 3600000.0,
+    "destroy_time": -1.0,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "brown",
+      "type": "minecraft:constant"
+    }
+  },
+  "type": "minecraft:command"
+}

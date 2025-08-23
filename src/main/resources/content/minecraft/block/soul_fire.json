@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "replaceable": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "light_blue",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:wool"
+  },
+  "type": "minecraft:soul_fire"
+}

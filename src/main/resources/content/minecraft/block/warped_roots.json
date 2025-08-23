@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "offset": "xz",
+    "replaceable": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "cyan",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:roots"
+  },
+  "type": "minecraft:roots"
+}

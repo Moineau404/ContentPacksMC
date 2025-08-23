@@ -1,0 +1,14 @@
+{
+  "weathering_state": "exposed",
+  "properties": {
+    "explosion_resistance": 6.0,
+    "destroy_time": 3.0,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "terracotta_light_gray",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:copper"
+  },
+  "type": "minecraft:weathering_copper_full"
+}

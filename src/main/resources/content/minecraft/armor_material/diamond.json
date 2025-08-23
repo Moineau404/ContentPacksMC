@@ -1,0 +1,16 @@
+{
+  "toughness": 2.0,
+  "knockback_resistance": 0.0,
+  "repair_items": "#minecraft:repairs_diamond_armor",
+  "asset": "minecraft:diamond",
+  "durability": 33,
+  "defense": {
+    "helmet": 3,
+    "chestplate": 8,
+    "leggings": 6,
+    "boots": 3,
+    "body": 11
+  },
+  "enchantability": 10,
+  "equip_sound": "minecraft:item.armor.equip_diamond"
+}

@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 0.4,
+    "destroy_time": 0.4,
+    "sound": "minecraft:ladder"
+  },
+  "type": "minecraft:ladder"
+}

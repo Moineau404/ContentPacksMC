@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.frogspawn.step",
+  "place": "minecraft:block.frogspawn.place",
+  "hit": "minecraft:block.frogspawn.hit",
+  "fall": "minecraft:block.frogspawn.fall",
+  "break": "minecraft:block.frogspawn.break"
+}

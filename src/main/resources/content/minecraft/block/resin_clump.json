@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "replaceable": true,
+    "ignited_by_lava": true,
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "terracotta_orange",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:resin"
+  },
+  "type": "minecraft:multiface"
+}

@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.ancient_debris.step",
+  "place": "minecraft:block.ancient_debris.place",
+  "hit": "minecraft:block.ancient_debris.hit",
+  "fall": "minecraft:block.ancient_debris.fall",
+  "break": "minecraft:block.ancient_debris.break"
+}

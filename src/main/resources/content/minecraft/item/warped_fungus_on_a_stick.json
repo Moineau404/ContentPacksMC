@@ -1,0 +1,10 @@
+{
+  "interact_with": "minecraft:strider",
+  "consume_damage": 1,
+  "properties": {
+    "minecraft:max_damage": 100,
+    "minecraft:max_stack_size": 1,
+    "minecraft:damage": 0
+  },
+  "type": "minecraft:food_on_astick"
+}

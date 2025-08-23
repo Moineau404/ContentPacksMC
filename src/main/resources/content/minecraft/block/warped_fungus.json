@@ -1,0 +1,15 @@
+{
+  "feature": "minecraft:warped_fungus_planted",
+  "grows_on": "minecraft:warped_nylium",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "cyan",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:fungus"
+  },
+  "type": "minecraft:fungus"
+}

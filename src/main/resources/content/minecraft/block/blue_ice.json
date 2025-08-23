@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "friction": 0.989,
+    "explosion_resistance": 2.8,
+    "destroy_time": 2.8,
+    "map_color_provider": {
+      "value": "pale_purple",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:glass"
+  },
+  "type": "minecraft:half_transparent"
+}

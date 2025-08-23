@@ -1,0 +1,15 @@
+{
+  "feature": "minecraft:huge_brown_mushroom",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "random_ticks": true,
+    "map_color_provider": {
+      "value": "brown",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:grass"
+  },
+  "type": "minecraft:mushroom"
+}

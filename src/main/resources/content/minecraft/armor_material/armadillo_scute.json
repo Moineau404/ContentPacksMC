@@ -1,0 +1,16 @@
+{
+  "toughness": 0.0,
+  "knockback_resistance": 0.0,
+  "repair_items": "#minecraft:repairs_wolf_armor",
+  "asset": "minecraft:armadillo_scute",
+  "durability": 4,
+  "defense": {
+    "helmet": 3,
+    "chestplate": 8,
+    "leggings": 6,
+    "boots": 3,
+    "body": 11
+  },
+  "enchantability": 10,
+  "equip_sound": "minecraft:item.armor.equip_wolf"
+}

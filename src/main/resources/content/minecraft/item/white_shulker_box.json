@@ -1,0 +1,8 @@
+{
+  "block": "minecraft:white_shulker_box",
+  "properties": {
+    "minecraft:max_stack_size": 1,
+    "minecraft:container": []
+  },
+  "type": "minecraft:block"
+}

@@ -1,0 +1,16 @@
+{
+  "toughness": 0.0,
+  "knockback_resistance": 0.0,
+  "repair_items": "#minecraft:repairs_iron_armor",
+  "asset": "minecraft:iron",
+  "durability": 15,
+  "defense": {
+    "helmet": 2,
+    "chestplate": 6,
+    "leggings": 5,
+    "boots": 2,
+    "body": 5
+  },
+  "enchantability": 9,
+  "equip_sound": "minecraft:item.armor.equip_iron"
+}

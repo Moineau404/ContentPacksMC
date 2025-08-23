@@ -1,0 +1,8 @@
+{
+  "block": "minecraft:spruce_sign",
+  "wall_block": "minecraft:spruce_wall_sign",
+  "properties": {
+    "minecraft:max_stack_size": 16
+  },
+  "type": "minecraft:sign"
+}

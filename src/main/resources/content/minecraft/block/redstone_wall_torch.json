@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "description": "block.minecraft.redstone_torch",
+    "occlusion": false,
+    "collision": false,
+    "sound": "minecraft:wood"
+  },
+  "type": "minecraft:redstone_wall_torch"
+}

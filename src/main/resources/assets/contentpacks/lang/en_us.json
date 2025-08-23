@@ -1,0 +1,11 @@
+{
+  "options.contentpacks": "Content Packs...",
+  "options.contentpacks.title": "Select Content Packs",
+  "options.contentpacks.toast": "Content packs configuration changed!",
+  "options.contentpacks.restart": "Restart the game to apply changes.",
+  "options.contentpacks.advanced": "Advanced...",
+  "options.contentpacks.advanced.title": "Advanced",
+  "options.contentpacks.debug": "Debug",
+  "options.contentpacks.output": "Output",
+  "pack.source.content": "content"
+}

@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.trial_spawner.step",
+  "place": "minecraft:block.trial_spawner.place",
+  "hit": "minecraft:block.trial_spawner.hit",
+  "fall": "minecraft:block.trial_spawner.fall",
+  "break": "minecraft:block.trial_spawner.break"
+}

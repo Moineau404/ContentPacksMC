@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 600.0,
+    "destroy_time": 22.5,
+    "map_color_provider": {
+      "value": "stone_gray",
+      "type": "minecraft:constant"
+    }
+  },
+  "type": "minecraft:ender_chest"
+}

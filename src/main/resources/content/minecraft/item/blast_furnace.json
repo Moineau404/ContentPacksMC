@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:blast_furnace",
+  "properties": {
+    "minecraft:container": []
+  },
+  "type": "minecraft:block"
+}

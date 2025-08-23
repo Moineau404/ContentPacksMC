@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.cherry_leaves.step",
+  "place": "minecraft:block.cherry_leaves.place",
+  "hit": "minecraft:block.cherry_leaves.hit",
+  "fall": "minecraft:block.cherry_leaves.fall",
+  "break": "minecraft:block.cherry_leaves.break"
+}

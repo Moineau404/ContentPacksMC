@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 6.0,
+    "destroy_time": 1.5,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "terracotta_orange",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:resin_bricks"
+  },
+  "type": "minecraft:wall"
+}

@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.suspicious_gravel.step",
+  "place": "minecraft:block.suspicious_gravel.place",
+  "hit": "minecraft:block.suspicious_gravel.hit",
+  "fall": "minecraft:block.suspicious_gravel.fall",
+  "break": "minecraft:block.suspicious_gravel.break"
+}

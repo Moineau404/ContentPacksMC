@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "explosion_resistance": 0.5,
+    "destroy_time": 0.5,
+    "collision": false
+  },
+  "type": "minecraft:lever"
+}

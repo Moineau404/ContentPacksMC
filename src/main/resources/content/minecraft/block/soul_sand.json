@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "instrument": "cow_bell",
+    "valid_spawn": {
+      "type": "minecraft:true"
+    },
+    "speed_factor": 0.4,
+    "explosion_resistance": 0.5,
+    "destroy_time": 0.5,
+    "map_color_provider": {
+      "value": "brown",
+      "type": "minecraft:constant"
+    },
+    "sound": "minecraft:soul_sand"
+  },
+  "type": "minecraft:soul_sand"
+}

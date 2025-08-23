@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "force_solid": true,
+    "occlusion": false,
+    "explosion_resistance": 6.0,
+    "destroy_time": 5.0,
+    "requires_tool": true,
+    "sound": "minecraft:chain"
+  },
+  "type": "minecraft:chain"
+}

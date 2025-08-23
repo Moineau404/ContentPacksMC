@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.nether_wood.step",
+  "place": "minecraft:block.nether_wood.place",
+  "hit": "minecraft:block.nether_wood.hit",
+  "fall": "minecraft:block.nether_wood.fall",
+  "break": "minecraft:block.nether_wood.break"
+}

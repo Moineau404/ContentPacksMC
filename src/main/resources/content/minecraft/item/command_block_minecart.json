@@ -1,0 +1,8 @@
+{
+  "entity_type": "minecraft:command_block_minecart",
+  "properties": {
+    "minecraft:max_stack_size": 1,
+    "minecraft:rarity": "epic"
+  },
+  "type": "minecraft:minecart"
+}

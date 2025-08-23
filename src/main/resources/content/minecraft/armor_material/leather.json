@@ -1,0 +1,16 @@
+{
+  "toughness": 0.0,
+  "knockback_resistance": 0.0,
+  "repair_items": "#minecraft:repairs_leather_armor",
+  "asset": "minecraft:leather",
+  "durability": 5,
+  "defense": {
+    "helmet": 1,
+    "chestplate": 3,
+    "leggings": 2,
+    "boots": 1,
+    "body": 3
+  },
+  "enchantability": 15,
+  "equip_sound": "minecraft:item.armor.equip_leather"
+}

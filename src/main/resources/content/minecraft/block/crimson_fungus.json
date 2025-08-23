@@ -1,0 +1,15 @@
+{
+  "feature": "minecraft:crimson_fungus_planted",
+  "grows_on": "minecraft:crimson_nylium",
+  "properties": {
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "dark_red",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:fungus"
+  },
+  "type": "minecraft:fungus"
+}

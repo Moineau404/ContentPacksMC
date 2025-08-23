@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:command_block",
+  "properties": {
+    "minecraft:rarity": "epic"
+  },
+  "type": "minecraft:game_master_block"
+}

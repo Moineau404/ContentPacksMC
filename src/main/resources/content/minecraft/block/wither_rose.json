@@ -1,0 +1,20 @@
+{
+  "suspicious_stew_effects": [
+    {
+      "id": "minecraft:wither",
+      "duration": 140
+    }
+  ],
+  "properties": {
+    "offset": "xz",
+    "push_reaction": "destroy",
+    "occlusion": false,
+    "map_color_provider": {
+      "value": "dark_green",
+      "type": "minecraft:constant"
+    },
+    "collision": false,
+    "sound": "minecraft:grass"
+  },
+  "type": "minecraft:wither_rose"
+}

@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "instrument": "basedrum",
+    "explosion_resistance": 1200.0,
+    "destroy_time": 5.0,
+    "requires_tool": true,
+    "map_color_provider": {
+      "value": "red",
+      "type": "minecraft:constant"
+    }
+  },
+  "type": "minecraft:enchantment_table"
+}

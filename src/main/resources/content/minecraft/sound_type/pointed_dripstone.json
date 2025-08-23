@@ -1,0 +1,7 @@
+{
+  "step": "minecraft:block.pointed_dripstone.step",
+  "place": "minecraft:block.pointed_dripstone.place",
+  "hit": "minecraft:block.pointed_dripstone.hit",
+  "fall": "minecraft:block.pointed_dripstone.fall",
+  "break": "minecraft:block.pointed_dripstone.break"
+}
