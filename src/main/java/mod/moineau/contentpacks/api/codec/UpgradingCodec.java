@@ -6,9 +6,6 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
 import org.jetbrains.annotations.ApiStatus;
 
-/**
- * Workaround to allow encoding of fucntions/predicates etc... if they are serializable, and ignore if they are not.
- */
 @ApiStatus.Internal
 public final class UpgradingCodec<O, E extends O> implements Codec<E> {
     private final Codec<O> codec;

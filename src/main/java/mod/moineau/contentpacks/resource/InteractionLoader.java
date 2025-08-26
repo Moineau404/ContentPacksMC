@@ -73,21 +73,19 @@ public class InteractionLoader<T> implements ResourceLoader {
                         Map<InteractionType<T, ?>, Interaction<T>> value = result.getPartialOrThrow(JsonParseException::new);
 
                         entries.addAll(value.values());
-                        if (result.isError()) {
-                            LOGGER.error("Partially loaded interactions for target {} from pack {}", target, resource.getPackId(), new JsonParseException(result.error().get().message()));
-                        }
+                        result.ifError(error -> ErrorTracker.print(entry.getKey(), resource, error.message()));
 
                         try {
                             reader.close();
                         } catch (Throwable ignored) {}
                     } catch (Exception e) {
-                        LOGGER.error("Failed to load interactions for target {} from pack {}", target, resource.getPackId(), e);
+                        ErrorTracker.print(entry.getKey(), resource, e.getMessage());
                     }
                 }
 
                 entries.forEach(interaction -> interaction.register(target));
             } catch (Exception e) {
-                LOGGER.error("Failed to load interactions for unkown target {}", id, e);
+                ErrorTracker.print(entry.getKey(), entry.getValue(), e.getMessage());
             }
         }
     }

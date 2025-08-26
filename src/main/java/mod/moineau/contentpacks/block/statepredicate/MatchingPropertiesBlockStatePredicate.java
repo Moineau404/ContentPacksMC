@@ -1,12 +1,20 @@
 package mod.moineau.contentpacks.block.statepredicate;
 
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
-import mod.moineau.contentpacks.block.CachingBlockPropertiesPredicate;
+import mod.moineau.contentpacks.state.PropertiesPredicate;
 import net.minecraft.block.BlockState;
+import net.minecraft.state.StateManager;
 
-public record MatchingPropertiesBlockStatePredicate(CachingBlockPropertiesPredicate predicate) implements BlockStatePredicate {
-    public static final MapCodec<MatchingPropertiesBlockStatePredicate> CODEC = CachingBlockPropertiesPredicate.CODEC.fieldOf("properties")
-            .xmap(MatchingPropertiesBlockStatePredicate::new, MatchingPropertiesBlockStatePredicate::predicate);
+public final class MatchingPropertiesBlockStatePredicate implements BlockStatePredicate {
+    public static final MapCodec<MatchingPropertiesBlockStatePredicate> CODEC = PropertiesPredicate.CODEC.fieldOf("properties")
+            .xmap(MatchingPropertiesBlockStatePredicate::new, predicate -> predicate.predicate);
+
+    private PropertiesPredicate predicate;
+
+    public MatchingPropertiesBlockStatePredicate(PropertiesPredicate unbaked) {
+        this.predicate = unbaked;
+    }
 
     @Override
     public boolean test(BlockState state) {
@@ -15,6 +23,14 @@ public record MatchingPropertiesBlockStatePredicate(CachingBlockPropertiesPredic
 
     @Override
     public BlockStatePredicateType<?> getType() {
-        return null;
+        return BlockStatePredicateType.MATCHING_PROPERTIES;
+    }
+
+    @Override
+    public DataResult<?> contentpacks$bake(StateManager<?, ?> stateManager) {
+        if (this.predicate instanceof PropertiesPredicate.Unbaked unbaked) {
+            return unbaked.bake(stateManager.getProperties()).ifSuccess(baked -> this.predicate = baked);
+        }
+        return EMPTY_RESULT;
     }
 }

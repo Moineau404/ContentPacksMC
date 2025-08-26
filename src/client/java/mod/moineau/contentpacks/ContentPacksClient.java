@@ -7,6 +7,7 @@ import mod.moineau.contentpacks.render.entity.SignRendering;
 import mod.moineau.contentpacks.resource.ClientContentManager;
 import mod.moineau.contentpacks.resource.ContentManager;
 import mod.moineau.contentpacks.resource.ContentOutput;
+import mod.moineau.contentpacks.resource.ErrorTracker;
 import mod.moineau.contentpacks.world.biome.ColorResolvers;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.resource.ResourcePackManager;
@@ -18,7 +19,6 @@ public class ContentPacksClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		bootstrap();
-		//MinecraftClient.getInstance().getResourcePackManager().providers.add(PACK_PROVIDER);
 		PACK_MANAGER.scanPacks();
 		OPTIONS.updatePackManager(PACK_MANAGER);
 		ContentManager.registerLoader(ClientContentManager::load);
@@ -26,6 +26,8 @@ public class ContentPacksClient implements ClientModInitializer {
 		if (OPTIONS.isOutputEnabled()) {
 			ContentOutput.output();
 		}
+		Test.run();
+		ErrorTracker.write();
 	}
 
 	public static void bootstrap() {

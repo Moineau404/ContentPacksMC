@@ -9,9 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ExecutionException;
 
+@Deprecated
 public class CachingBlockPropertiesPredicate extends BlockPropertiesPredicate {
-    public static final Codec<CachingBlockPropertiesPredicate> CODEC = Codec.STRING
-            .xmap(CachingBlockPropertiesPredicate::new, CachingBlockPropertiesPredicate::toString);
+    public static final Codec<BlockPropertiesPredicate> CODEC = Codec.STRING
+            .xmap(CachingBlockPropertiesPredicate::new, BlockPropertiesPredicate::toString);
 
     private final LoadingCache<BlockState, Boolean> cache = CacheBuilder.newBuilder().build(new CacheLoader<>() {
         @Override

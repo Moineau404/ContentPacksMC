@@ -10,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 
+// TODO Re-implement offsetter
 @Deprecated
 public abstract class BlockOffsetter implements AbstractBlock.Offsetter {
     public static final BlockOffsetter XZ = new BlockOffsetter() {

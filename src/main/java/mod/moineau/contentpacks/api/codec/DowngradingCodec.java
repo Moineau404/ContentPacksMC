@@ -9,7 +9,7 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.function.Function;
 
 /**
- * Workaround to allow encoding of fucntions/predicates etc... if they are serializable, and ignore if they are not.
+ * Workaround to allow encoding of functions/predicates etc... if they are serializable, and ignore if they are not.
  */
 @ApiStatus.Internal
 public final class DowngradingCodec<S, O extends S> implements Codec<S> {

@@ -5,7 +5,11 @@ import mod.moineau.contentpacks.registry.ContentRegistries;
 import net.minecraft.registry.Registry;
 
 public interface BlockStatePredicateType<P extends BlockStatePredicate> {
-
+	BlockStatePredicateType<AnyOfBlockStatePredicate> ANY_OF = () -> AnyOfBlockStatePredicate.CODEC;
+	BlockStatePredicateType<AllOfBlockStatePredicate> ALL_OF = () -> AllOfBlockStatePredicate.CODEC;
+	BlockStatePredicateType<NotBlockStatePredicate> NOT = () -> NotBlockStatePredicate.CODEC;
+	BlockStatePredicateType<AlwaysBlockStatePredicate> TRUE = () -> AlwaysBlockStatePredicate.TRUE_CODEC;
+	BlockStatePredicateType<AlwaysBlockStatePredicate> FALSE = () -> AlwaysBlockStatePredicate.FALSE_CODEC;
 	BlockStatePredicateType<MatchingPropertiesBlockStatePredicate> MATCHING_PROPERTIES = () -> MatchingPropertiesBlockStatePredicate.CODEC;
 	BlockStatePredicateType<LuminanceBlockStatePredicate> LUMINANCE = () -> LuminanceBlockStatePredicate.CODEC;
 	BlockStatePredicateType<BlocksMovementBlockStatePredicate> BLOCKS_MOVEMENT = () -> BlocksMovementBlockStatePredicate.CODEC;

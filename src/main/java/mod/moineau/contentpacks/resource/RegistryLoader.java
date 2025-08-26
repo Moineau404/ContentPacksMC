@@ -15,6 +15,7 @@ import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StrictJsonParser;
+import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ import java.io.Reader;
 import java.util.*;
 
 public class RegistryLoader<T> extends ContentLoader<RegistryEntry<T>> {
-    private final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/RegistryLoader");
+    private static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/RegistryLoader");
     private final ResourceFinder finder;
     private final Registry<T> registry;
     private final Codec<T> codec;
@@ -84,24 +85,24 @@ public class RegistryLoader<T> extends ContentLoader<RegistryEntry<T>> {
                 T value = result.getPartialOrThrow(JsonParseException::new);
 
                 entries.add(Registry.registerReference(registry, id, value));
-                result.ifError(error -> LOGGER.error("Partially loaded entry {} for registry {} from pack {}: {}",
-                        id, this.registry.getKey().getValue().toString(), resource.getPackId(), error.message()));
+                result.ifError(error -> ErrorTracker.print(entry.getKey(), resource, error.message()));
 
                 try {
                     reader.close();
                 } catch (Throwable ignored) {}
             } catch (Exception e) {
-                LOGGER.error("Failed to load entry {} for registry {} from pack {}", id, this.registry.getKey().getValue().toString(), resource.getPackId(), e);
+                ErrorTracker.print(entry.getKey(), resource, e.getMessage());
             }
         }
 
         return entries;
     }
 
-    public Map<Identifier, JsonElement> serialize() {
+    @ApiStatus.Internal
+    private Map<Identifier, JsonElement> serialize(Iterable<RegistryEntry<T>> entries) {
         Map<Identifier, JsonElement> jsonElements = new HashMap<>();
 
-        for (RegistryEntry<T> entry : getEntries()) {
+        for (RegistryEntry<T> entry : entries) {
             Identifier id = entry.getKey().orElseThrow().getValue();
             try {
                 DataResult<JsonElement> result = codec.encodeStart(JsonOps.INSTANCE, entry.value());
@@ -114,5 +115,16 @@ public class RegistryLoader<T> extends ContentLoader<RegistryEntry<T>> {
         }
 
         return jsonElements;
+    }
+
+    @ApiStatus.Internal
+    @Override
+    public Map<Identifier, JsonElement> serialize() {
+        return serialize(this.entries);
+    }
+
+    @ApiStatus.Internal
+    public Map<Identifier, JsonElement> serializeAll() {
+        return serialize(this.registry.getIndexedEntries());
     }
 }

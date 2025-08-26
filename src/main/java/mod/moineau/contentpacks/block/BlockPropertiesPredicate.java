@@ -18,6 +18,7 @@ import java.util.function.Predicate;
 /**
  * Practical encapsulation of {@link String string} block properties predicate ("property1=value1,property2=value2,...").
  */
+@Deprecated
 public class BlockPropertiesPredicate implements Predicate<BlockState> {
     private static final Splitter COMMA_SPLITTER = Splitter.on(',');
     private static final Splitter EQUAL_SIGN_SPLITTER = Splitter.on('=').limit(2);

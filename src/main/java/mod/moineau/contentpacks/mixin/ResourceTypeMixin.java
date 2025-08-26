@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Support content resource type in addition to client resources (assets) and server data
+ * Support content resource type ("content") in addition to client resources ("assets") and server data ("data")
  */
 @Mixin(ResourceType.class)
 @Unique

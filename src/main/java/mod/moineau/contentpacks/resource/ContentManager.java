@@ -4,7 +4,7 @@ import mod.moineau.contentpacks.api.util.CodecUtil;
 import mod.moineau.contentpacks.block.BlockWithEntityTypes;
 import mod.moineau.contentpacks.codec.*;
 import mod.moineau.contentpacks.entity.BoatType;
-import mod.moineau.contentpacks.event.ContentEvents;
+import mod.moineau.contentpacks.event.ContentPacksEvents;
 import mod.moineau.contentpacks.item.ItemTypes;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import net.minecraft.block.*;
@@ -43,7 +43,7 @@ public final class ContentManager {
     public static void load(ResourceManager resourceManager) {
         LOADERS.forEach(loader -> loader.load(resourceManager));
         InteractionManager.load(resourceManager);
-        ContentEvents.CONTENT_LOADED.invoker().onContentLoaded();
+        ContentPacksEvents.CONTENT_LOADED.invoker().onContentLoaded();
     }
 
     static {

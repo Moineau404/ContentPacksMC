@@ -18,7 +18,7 @@ public interface BlockContextPredicateType<P extends BlockContextPredicate> {
 	BlockContextPredicateType<NotBlockContextPredicate> NOT = () -> NotBlockContextPredicate.CODEC;
 	BlockContextPredicateType<AlwaysBlockContextPredicate> TRUE = () -> AlwaysBlockContextPredicate.TRUE_CODEC;
 	BlockContextPredicateType<AlwaysBlockContextPredicate> FALSE = () -> AlwaysBlockContextPredicate.FALSE_CODEC;
-	BlockContextPredicateType<StateBlockContextPredicate> STATE_PREDICATE = () -> StateBlockContextPredicate.CODEC;
+	BlockContextPredicateType<MatchingStateBlockContextPredicate> MATCHING_STATE = () -> MatchingStateBlockContextPredicate.CODEC;
 	BlockContextPredicateType<IsSideSolidFullCubeBlockContextPredicate> IS_SIDE_SOLID_FULL_CUBE = () -> IsSideSolidFullCubeBlockContextPredicate.CODEC;
 	BlockContextPredicateType<IsFullCubeBlockContextPredicate> IS_FULL_CUBE = () -> IsFullCubeBlockContextPredicate.CODEC;
 
@@ -37,7 +37,7 @@ public interface BlockContextPredicateType<P extends BlockContextPredicate> {
 		Registry.register(registry, "not", NOT);
 		Registry.register(registry, "true", TRUE);
 		Registry.register(registry, "false", FALSE);
-		Registry.register(registry, Identifier.of(ContentPacks.MOD_ID, "state_predicate"), STATE_PREDICATE);
+		Registry.register(registry, Identifier.of(ContentPacks.MOD_ID, "matching_state"), MATCHING_STATE);
 		Registry.register(registry, "is_side_solid_full_cube", IS_SIDE_SOLID_FULL_CUBE);
 		Registry.register(registry, "is_full_cube", IS_FULL_CUBE);
 

@@ -10,17 +10,18 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
+@Deprecated(forRemoval = true)
 public abstract class CachingBlockStateFunction<T> implements BlockStateFunction<T> {
-    protected final T defaultValue;
+    protected final T fallback;
     private final LoadingCache<BlockState, T> cache = CacheBuilder.newBuilder().build(new CacheLoader<>() {
         @Override
         public @NotNull T load(@NotNull BlockState state) {
-            return Objects.requireNonNullElse(CachingBlockStateFunction.this.load(state), CachingBlockStateFunction.this.defaultValue);
+            return Objects.requireNonNullElse(CachingBlockStateFunction.this.load(state), CachingBlockStateFunction.this.fallback);
         }
     });
 
-    protected CachingBlockStateFunction(T defaultValue) {
-        this.defaultValue = defaultValue;
+    protected CachingBlockStateFunction(T fallback) {
+        this.fallback = fallback;
     }
 
     @Override
@@ -28,7 +29,7 @@ public abstract class CachingBlockStateFunction<T> implements BlockStateFunction
         try {
             return cache.get(state);
         } catch (ExecutionException e) {
-            return defaultValue;
+            return this.fallback;
         }
     }
 

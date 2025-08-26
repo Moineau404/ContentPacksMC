@@ -1,9 +1,11 @@
 package mod.moineau.contentpacks.api.util;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import net.fabricmc.fabric.api.event.Event;
+import org.jetbrains.annotations.ApiStatus;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public final class CollectionUtil {
     public static <K, V> Map<V, Set<K>> flip(Map<K, V> map) {
@@ -22,5 +24,12 @@ public final class CollectionUtil {
             });
         }));
         return map1;
+    }
+
+    @ApiStatus.Experimental
+    public static <T, E> List<T> lazyList(Supplier<Collection<T>> supplier, Event<E> event, Function<Runnable, E> callbackAdapter) {
+        List<T> list = new ArrayList<>();
+        event.register(callbackAdapter.apply(() -> list.addAll(supplier.get())));
+        return list;
     }
 }

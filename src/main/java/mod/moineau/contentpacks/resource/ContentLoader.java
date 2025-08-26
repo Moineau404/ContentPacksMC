@@ -1,16 +1,18 @@
 package mod.moineau.contentpacks.resource;
 
 import com.google.common.collect.ImmutableList;
+import com.google.gson.JsonElement;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class ContentLoader<T> implements ResourceLoader {
-    private ImmutableList<T> entries;
+    protected ImmutableList<T> entries;
     private final Event<ContentLoaded<T>> event = EventFactory.createArrayBacked(ContentLoaded.class, callbacks -> (entries) -> {
         for (ContentLoaded<T> callback : callbacks) {
             callback.onContentLoaded(entries);
@@ -23,16 +25,19 @@ public abstract class ContentLoader<T> implements ResourceLoader {
         this.event.invoker().onContentLoaded(this.entries);
     }
 
-    @ApiStatus.OverrideOnly
     protected abstract List<T> contents(ResourceManager resourceManager);
 
-    @Unmodifiable
-    public final List<T> getEntries() {
+    public final ImmutableList<T> getEntries() {
         return this.entries;
     }
 
     public final void registerListener(ContentLoaded<T> listener) {
         this.event.register(listener);
+    }
+
+    @ApiStatus.Internal
+    public Map<Identifier, JsonElement> serialize() {
+        return Map.of();
     }
 
     @FunctionalInterface

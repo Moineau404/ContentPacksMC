@@ -6,7 +6,7 @@ import net.minecraft.block.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public record ConstantBlockStateFunction<T>(T value) implements BlockStateFunction<T> {
-    public static <T> MapCodec<ConstantBlockStateFunction<T>> createCodec(Codec<T> elementCodec, T defaultValue) {
+    public static <T> MapCodec<ConstantBlockStateFunction<T>> createCodec(Codec<T> elementCodec, T fallback) {
         return elementCodec.xmap(ConstantBlockStateFunction::new, ConstantBlockStateFunction::value).fieldOf("value");
     }
 

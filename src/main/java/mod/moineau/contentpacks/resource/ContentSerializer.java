@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
 
+@Deprecated
 @ApiStatus.Internal
 public final class ContentSerializer {
     private static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Serialization");

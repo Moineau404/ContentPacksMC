@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.mixin.block;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import mod.moineau.contentpacks.block.ContentBlockSettings;
-import mod.moineau.contentpacks.block.statefunction.ConstantBlockStateFunction;
+import mod.moineau.contentpacks.block.statefunction.BlockStateFunction;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -79,24 +79,22 @@ public abstract class AbstractBlockSettingsMixin implements ContentBlockSettings
     }
 
     /**
-     * @author
-     * @reason
+     * @author Moineau
+     * @reason Serializable map color providers
      */
-    @Deprecated
     @Overwrite
     public AbstractBlock.Settings mapColor(DyeColor color) {
-        this.mapColorProvider = new ConstantBlockStateFunction<>(color.getMapColor());
+        this.mapColorProvider = BlockStateFunction.constant(color.getMapColor());
         return ((AbstractBlock.Settings) (Object) this);
     }
 
     /**
-     * @author
-     * @reason
+     * @author Moineau
+     * @reason Serializable map color providers
      */
-    @Deprecated
     @Overwrite
     public AbstractBlock.Settings mapColor(MapColor color) {
-        this.mapColorProvider = new ConstantBlockStateFunction<>(color);
+        this.mapColorProvider = BlockStateFunction.constant(color);
         return ((AbstractBlock.Settings) (Object) this);
     }
 

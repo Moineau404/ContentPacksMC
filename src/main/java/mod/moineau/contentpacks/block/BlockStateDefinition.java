@@ -23,7 +23,7 @@ import java.util.function.Function;
  * Method {@link #bake(StateManager) bake} returns a {@link Baked baked} copy of this block state definition which directly binds a {@link BlockState block state} to a value.
  * @param <T> Type of values
  */
-@Unmodifiable
+@Deprecated
 public sealed class BlockStateDefinition<T> extends AbstractMap<BlockState, T> {
     public static final BlockStateDefinition<?> EMPTY = new BlockStateDefinition<>(Map.of());
 

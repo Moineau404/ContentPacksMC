@@ -11,7 +11,7 @@ public record EnumCodec<E extends Enum<E>>(Class<E> enumClass) implements Codec<
     public <T> DataResult<Pair<E, T>> decode(DynamicOps<T> ops, T input) {
         return ops.getStringValue(input).flatMap(DataResult.partialGet(
                 string -> EnumUtils.getEnumIgnoreCase(enumClass, string),
-                () -> "No value in enum: " + enumClass.getName() + " with name: "
+                () -> "No value in enum " + enumClass.getName() + " with name "
         )).map(r -> Pair.of(r, ops.empty()));
     }
 

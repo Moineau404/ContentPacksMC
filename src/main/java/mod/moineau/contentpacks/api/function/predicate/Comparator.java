@@ -1,68 +1,77 @@
 package mod.moineau.contentpacks.api.function.predicate;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.dynamic.Codecs;
+import com.mojang.serialization.DataResult;
+import it.unimi.dsi.fastutil.objects.Object2ReferenceArrayMap;
+import mod.moineau.contentpacks.api.util.CodecUtil;
 
-public sealed abstract class Comparator {
-    public static final Comparator EQUAL = new Equal();
-    public static final Comparator NOT_EQUAL = new NotEqual();
-    public static final Comparator MORE = new More();
-    public static final Comparator MORE_OR_EQUAL = new MoreOrEqual();
-    public static final Comparator LESS = new Less();
-    public static final Comparator LESS_OR_EQUAL = new LessOrEqual();
-    private static final Codecs.IdMapper<String, Comparator> ID_MAPPER = new Codecs.IdMapper<>();
-    public static final Codec<Comparator> CODEC = ID_MAPPER.getCodec(Codec.STRING);
+import java.util.Map;
 
-    public abstract <T> boolean compare(Comparable<T> x, T y);
-
-    static {
-        ID_MAPPER.put("=", EQUAL);
-        ID_MAPPER.put("!=", NOT_EQUAL);
-        ID_MAPPER.put(">", MORE);
-        ID_MAPPER.put(">=", MORE_OR_EQUAL);
-        ID_MAPPER.put("<", LESS);
-        ID_MAPPER.put("<=", LESS_OR_EQUAL);
-    }
-
-    private static final class Equal extends Comparator {
+public enum Comparator {
+    EQUAL("=") {
         @Override
-        public <T> boolean compare(Comparable<T> x, T y) {
+        public <T extends Comparable<T>> boolean compare(T x, T y) {
             return x.compareTo(y) == 0;
         }
-    }
-
-    private static final class NotEqual extends Comparator {
+    },
+    NOT_EQUAL("!=") {
         @Override
-        public <T> boolean compare(Comparable<T> x, T y) {
+        public <T extends Comparable<T>> boolean compare(T x, T y) {
             return x.compareTo(y) != 0;
         }
-    }
-
-    private static final class More extends Comparator {
+    },
+    GREATER(">") {
         @Override
-        public <T> boolean compare(Comparable<T> x, T y) {
+        public <T extends Comparable<T>> boolean compare(T x, T y) {
             return x.compareTo(y) > 0;
         }
-    }
-
-    private static final class MoreOrEqual extends Comparator {
+    },
+    GREATER_OR_EQUAL(">=") {
         @Override
-        public <T> boolean compare(Comparable<T> x, T y) {
+        public <T extends Comparable<T>> boolean compare(T x, T y) {
             return x.compareTo(y) >= 0;
         }
-    }
-
-    private static final class Less extends Comparator {
+    },
+    LESS("<") {
         @Override
-        public <T> boolean compare(Comparable<T> x, T y) {
+        public <T extends Comparable<T>> boolean compare(T x, T y) {
             return x.compareTo(y) < 0;
         }
-    }
-
-    private static final class LessOrEqual extends Comparator {
+    },
+    LESS_OR_EQUAL("<=") {
         @Override
-        public <T> boolean compare(Comparable<T> x, T y) {
+        public <T extends Comparable<T>> boolean compare(T x, T y) {
             return x.compareTo(y) <= 0;
         }
+    };
+
+    private static final Map<String, Comparator> SYMBOLS = new Object2ReferenceArrayMap<>() {{
+        for (Comparator comparator : Comparator.values()) {
+            this.put(comparator.symbol, comparator);
+        }
+    }};
+    public static final Codec<Comparator> SYMBOL_CODEC = Codec.STRING.xmap(SYMBOLS::get, Comparator::toString);
+    public static final Codec<Comparator> NAME_CODEC = CodecUtil.enumByName(Comparator.class);
+    private final String symbol;
+
+    public static DataResult<Comparator> parse(String symbol) {
+        return DataResult.partialGet(SYMBOLS::get, () -> "Unkown symbol \"" + symbol + "\";").apply(symbol);
+    }
+
+    Comparator(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public <T extends Comparable<T>> boolean compare(T x, T y) {
+        throw new IllegalStateException();
+    }
+
+    @Override
+    public String toString() {
+        return this.symbol;
+    }
+
+    public String getName() {
+        return this.name().toLowerCase();
     }
 }
