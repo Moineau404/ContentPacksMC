@@ -14,6 +14,7 @@ import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.StrictJsonParser;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
@@ -65,6 +66,7 @@ public class RegistryLoader<T> extends ContentLoader<RegistryEntry<T>> {
     protected List<RegistryEntry<T>> contents(ResourceManager resourceManager) {
         Map<Identifier, Resource> resourceMap = finder.findResources(resourceManager);
         List<RegistryEntry<T>> entries = new LinkedList<>();
+        Map<Identifier, Pair<Resource, JsonElement>> lateEntries = new HashMap<>();
 
         for (Map.Entry<Identifier, Resource> entry : resourceMap.entrySet()) {
             Identifier id = finder.toResourceId(entry.getKey());
@@ -96,6 +98,11 @@ public class RegistryLoader<T> extends ContentLoader<RegistryEntry<T>> {
         }
 
         return entries;
+    }
+
+    @Override
+    public int getPriority() {
+        return 100;
     }
 
     @ApiStatus.Internal

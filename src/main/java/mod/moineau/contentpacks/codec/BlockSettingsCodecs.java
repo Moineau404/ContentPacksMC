@@ -6,11 +6,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mod.moineau.contentpacks.api.datafixers.ContentProducts;
 import mod.moineau.contentpacks.api.util.CodecUtil;
 import mod.moineau.contentpacks.block.ContentBlockSettings;
-import mod.moineau.contentpacks.block.MapColors;
+import mod.moineau.contentpacks.block.LuminanceProvider;
+import mod.moineau.contentpacks.block.MapColorProvider;
 import mod.moineau.contentpacks.block.contextpredicate.BlockContextPredicate;
 import mod.moineau.contentpacks.block.contextpredicate.entitytyped.EntityTypedBlockContextPredicate;
-import mod.moineau.contentpacks.block.statefunction.BlockStateFunction;
-import mod.moineau.contentpacks.block.statefunction.BlockStateToIntFunction;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -31,13 +30,13 @@ import java.util.function.ToIntFunction;
 
 public final class BlockSettingsCodecs {
         public static final Codec<AbstractBlock.Settings> BASE_CODEC = RecordCodecBuilder.create(instance -> ContentProducts.P31.group(instance,
-                BlockStateFunction.createDowngradedCodec(MapColors.CODEC, MapColor.CLEAR).optionalFieldOf("map_color_provider", ContentBlockSettings.DEFAULT_MAP_COLOR_PROVIDER)
+                MapColorProvider.DOWNGRADED_CODEC.optionalFieldOf("map_color", ContentBlockSettings.DEFAULT_MAP_COLOR_PROVIDER)
                         .forGetter(settings -> settings.mapColorProvider),
                 Codec.BOOL.optionalFieldOf("collision", true)
                         .forGetter(settings -> settings.collidable),
                 ContentRegistries.BLOCK_SOUND_GROUP.getCodec().optionalFieldOf("sound", BlockSoundGroup.STONE)
                         .forGetter(settings -> settings.soundGroup),
-                BlockStateToIntFunction.createDowngradedCodec(0, 15).optionalFieldOf("light_level", ContentBlockSettings.DEFAULT_LUMINANCE_PROVIDER)
+                LuminanceProvider.DOWNGRADED_CODEC.optionalFieldOf("light_level", ContentBlockSettings.DEFAULT_LUMINANCE_PROVIDER)
                         .forGetter(settings -> settings.luminance),
                 Codec.FLOAT.optionalFieldOf("explosion_resistance", 0.0F)
                         .forGetter(settings -> settings.resistance),

@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.block.contextpredicate.BlockContextPredicateType;
 import mod.moineau.contentpacks.block.contextpredicate.entitytyped.EntityTypedBlockContextPredicateType;
-import mod.moineau.contentpacks.block.statepredicate.BlockStatePredicateType;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.SaplingGenerator;
 import net.minecraft.block.WoodType;
@@ -14,10 +13,11 @@ import net.minecraft.item.equipment.ArmorMaterial;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 
 public final class ContentRegistryKeys {
-    public static final RegistryKey<Registry<BlockStatePredicateType<?>>> BLOCK_STATE_PREDICATE_TYPE = of("block_state_predicate_type");
+    public static final RegistryKey<Registry<Property<?>>> PROPERTIES = of("properties");
     public static final RegistryKey<Registry<BlockContextPredicateType<?>>> BLOCK_CONTEXT_PREDICATE_TYPE = of("block_context_predicate_type");
     public static final RegistryKey<Registry<EntityTypedBlockContextPredicateType<?>>> ENTITY_TYPED_BLOCK_CONTEXT_PREDICATE_TYPE = of("entity_typed_block_context_predicate_type");
     public static final RegistryKey<Registry<BlockSoundGroup>> BLOCK_SOUND_GROUP = ofVanilla("sound_type");

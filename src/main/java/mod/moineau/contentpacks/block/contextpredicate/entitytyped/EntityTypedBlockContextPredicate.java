@@ -1,29 +1,29 @@
 package mod.moineau.contentpacks.block.contextpredicate.entitytyped;
 
 import com.mojang.serialization.Codec;
+import mod.moineau.contentpacks.api.math.Comparison;
 import mod.moineau.contentpacks.api.util.CodecUtil;
 import mod.moineau.contentpacks.api.util.Workaround;
-import mod.moineau.contentpacks.block.Bakeable;
 import mod.moineau.contentpacks.block.contextpredicate.BlockContextPredicate;
-import mod.moineau.contentpacks.block.statepredicate.BlockStatePredicate;
+import mod.moineau.contentpacks.event.ContentPacksEvents;
 import mod.moineau.contentpacks.registry.ContentRegistries;
-import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.state.property.Property;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+import java.util.Map;
 import java.util.function.Supplier;
 
-public interface EntityTypedBlockContextPredicate extends AbstractBlock.TypedContextPredicate<EntityType<?>>, Bakeable {
+public interface EntityTypedBlockContextPredicate extends AbstractBlock.TypedContextPredicate<EntityType<?>> {
 	Codec<EntityTypedBlockContextPredicate> BASE_CODEC = ContentRegistries.ENTITY_TYPED_BLOCK_CONTEXT_PREDICATE_TYPE.getCodec()
 			.dispatch(EntityTypedBlockContextPredicate::getType, EntityTypedBlockContextPredicateType::codec);
 	Codec<EntityTypedBlockContextPredicate> EXTENDED_CODEC = Codec.withAlternative(BASE_CODEC,
@@ -145,8 +145,36 @@ public interface EntityTypedBlockContextPredicate extends AbstractBlock.TypedCon
 		return AlwaysEntityTypedBlockContextPredicate.TRUE;
 	}
 
-	static EntityTypedBlockContextPredicate matchingState(BlockStatePredicate predicate) {
-		return delegate(BlockContextPredicate.matchingState(predicate));
+	static EntityTypedBlockContextPredicate matchingProperties(Vec3i offset, Map<Property<?>, Comparison<?>> propertyMap) {
+		return delegate(BlockContextPredicate.matchingProperties(offset, propertyMap));
+	}
+
+	static EntityTypedBlockContextPredicate matchingProperties(Map<Property<?>, Comparison<?>> propertyMap) {
+		return matchingProperties(Vec3i.ZERO, propertyMap);
+	}
+
+	static <T extends Comparable<T>> EntityTypedBlockContextPredicate matchingProperties(Vec3i offset, Property<T> property, Comparison<T> comparison) {
+		return matchingProperties(offset, Map.of(property, comparison));
+	}
+
+	static <T extends Comparable<T>> EntityTypedBlockContextPredicate matchingProperties(Property<T> property, Comparison<T> comparison) {
+		return matchingProperties(Map.of(property, comparison));
+	}
+
+	static <T1 extends Comparable<T1>, T2 extends Comparable<T2>> EntityTypedBlockContextPredicate matchingProperties(Vec3i offset, Property<T1> property1, Comparison<T1> comparison1, Property<T2> property2, Comparison<T2> comparison2) {
+		return matchingProperties(offset, Map.of(property1, comparison1, property2, comparison2));
+	}
+
+	static <T1 extends Comparable<T1>, T2 extends Comparable<T2>> EntityTypedBlockContextPredicate matchingProperties(Property<T1> property1, Comparison<T1> comparison1, Property<T2> property2, Comparison<T2> comparison2) {
+		return matchingProperties(Map.of(property1, comparison1, property2, comparison2));
+	}
+
+	static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>> EntityTypedBlockContextPredicate matchingProperties(Vec3i offset, Property<T1> property1, Comparison<T1> comparison1, Property<T2> property2, Comparison<T2> comparison2, Property<T3> property3, Comparison<T3> comparison3) {
+		return matchingProperties(offset, Map.of(property1, comparison1, property2, comparison2, property3, comparison3));
+	}
+
+	static <T1 extends Comparable<T1>, T2 extends Comparable<T2>, T3 extends Comparable<T3>> EntityTypedBlockContextPredicate matchingProperties(Property<T1> property1, Comparison<T1> comparison1, Property<T2> property2, Comparison<T2> comparison2, Property<T3> property3, Comparison<T3> comparison3) {
+		return matchingProperties(Map.of(property1, comparison1, property2, comparison2, property3, comparison3));
 	}
 
 	static EntityTypedBlockContextPredicate isFullCube() {
@@ -157,8 +185,24 @@ public interface EntityTypedBlockContextPredicate extends AbstractBlock.TypedCon
 		return delegate(BlockContextPredicate.isSideSolidFullCube(direction));
 	}
 
+	static EntityTypedBlockContextPredicate luminance(Comparison<Integer> predicate) {
+		return luminance(Vec3i.ZERO, predicate);
+	}
+
+	static EntityTypedBlockContextPredicate luminance(Vec3i offset, Comparison<Integer> predicate) {
+		return delegate(BlockContextPredicate.luminance(offset, predicate));
+	}
+
+	static EntityTypedBlockContextPredicate blocksMovement() {
+		return blocksMovement(Vec3i.ZERO);
+	}
+
+	static EntityTypedBlockContextPredicate blocksMovement(Vec3i offset) {
+		return delegate(BlockContextPredicate.blocksMovement(offset));
+	}
+
 	/**
-	 * @deprecated Use {@link #whitelist(Supplier, Event, Function)} instead.
+	 * @deprecated Use {@link #whitelist(Supplier)} instead.
 	 * This is because Entity Types are loaded after blocks.
 	 */
 	@Deprecated
@@ -167,7 +211,7 @@ public interface EntityTypedBlockContextPredicate extends AbstractBlock.TypedCon
 	}
 
 	/**
-	 * @deprecated Use {@link #whitelist(Supplier, Event, Function)} instead.
+	 * @deprecated Use {@link #whitelist(Supplier)} instead.
 	 * This is because Entity Types are loaded after blocks.
 	 */
 	@Deprecated
@@ -177,9 +221,9 @@ public interface EntityTypedBlockContextPredicate extends AbstractBlock.TypedCon
 
 	@Workaround
 	@ApiStatus.Internal
-	static <E> EntityTypedBlockContextPredicate whitelist(Supplier<List<EntityType<?>>> types, Event<E> event, Function<Runnable, E> callbackAdapter) {
+	static EntityTypedBlockContextPredicate whitelist(Supplier<List<EntityType<?>>> types) {
 		WhitelistEntityTypedBlockContextPredicate predicate = new WhitelistEntityTypedBlockContextPredicate(new ArrayList<>());
-		event.register(callbackAdapter.apply(() -> predicate.list().addAll(types.get())));
+		ContentPacksEvents.REGISTRIES_LOADED.register(() -> predicate.list().addAll(types.get()));
 		return predicate;
 	}
 

@@ -26,7 +26,6 @@ public class ContentPacksClient implements ClientModInitializer {
 		if (OPTIONS.isOutputEnabled()) {
 			ContentOutput.output();
 		}
-		Test.run();
 		ErrorTracker.write();
 	}
 

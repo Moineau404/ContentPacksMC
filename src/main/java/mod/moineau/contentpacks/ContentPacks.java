@@ -1,13 +1,8 @@
 package mod.moineau.contentpacks;
 
 import mod.moineau.contentpacks.block.MapColors;
-import mod.moineau.contentpacks.block.statefunction.BlockStateFunctionType;
-import mod.moineau.contentpacks.integration.ContentPacksAddon;
-import mod.moineau.contentpacks.interaction.block.BlockInteractionTypes;
-import mod.moineau.contentpacks.interaction.blockentitytype.BlockEntityTypeInteractionTypes;
-import mod.moineau.contentpacks.interaction.blocktag.BlockTagInteractionTypes;
-import mod.moineau.contentpacks.interaction.item.ItemInteractionTypes;
-import mod.moineau.contentpacks.interaction.itemtag.ItemTagInteractionTypes;
+import mod.moineau.contentpacks.integration.ContentPacksExtension;
+import mod.moineau.contentpacks.interaction.InteractionType;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import mod.moineau.contentpacks.resource.ContentManager;
 import net.fabricmc.api.ModInitializer;
@@ -25,7 +20,7 @@ import java.util.List;
 public final class ContentPacks implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks");
     public static final String MOD_ID = "contentpacks";
-    public static final int PACK_VERSION = 6;
+    public static final int PACK_VERSION = 7;
     public static final Path PATH = FabricLoader.getInstance().getGameDir().resolve("contentpacks");
     public static final ResourceType RESOURCE_TYPE = ResourceType.valueOf("CONTENT");
     public static final ResourcePackSource PACK_SOURCE = new ResourcePackSource() {
@@ -54,9 +49,11 @@ public final class ContentPacks implements ModInitializer {
     public static void load(List<ResourcePack> packs) {
         if (!hasLoaded) {
             LOGGER.info("Loading content...");
-            FabricLoader.getInstance().getEntrypointContainers("contentpacks", ContentPacksAddon.class)
+            FabricLoader.getInstance().getEntrypointContainers("contentpacks", ContentPacksExtension.class)
                     .forEach(entrypoint -> entrypoint.getEntrypoint().beforeContentLoaded());
             ContentManager.load(new LifecycledResourceManagerImpl(RESOURCE_TYPE, packs));
+            FabricLoader.getInstance().getEntrypointContainers("contentpacks", ContentPacksExtension.class)
+                    .forEach(entrypoint -> entrypoint.getEntrypoint().afterContentLoaded());
             LOGGER.info("Content loaded!");
             hasLoaded = true;
         }
@@ -65,11 +62,6 @@ public final class ContentPacks implements ModInitializer {
     private static void bootstrap() {
         ContentRegistries.bootstrap();
         MapColors.bootstrap();
-        BlockStateFunctionType.bootstrap();
-        BlockInteractionTypes.bootstrap();
-        ItemInteractionTypes.bootstrap();
-        BlockTagInteractionTypes.bootstrap();
-        ItemTagInteractionTypes.bootstrap();
-        BlockEntityTypeInteractionTypes.bootstrap();
+        InteractionType.bootstrap();
     }
 }

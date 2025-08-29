@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.mixin.block;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import mod.moineau.contentpacks.block.ContentBlockSettings;
-import mod.moineau.contentpacks.block.statefunction.BlockStateFunction;
+import mod.moineau.contentpacks.block.MapColorProvider;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -84,7 +84,7 @@ public abstract class AbstractBlockSettingsMixin implements ContentBlockSettings
      */
     @Overwrite
     public AbstractBlock.Settings mapColor(DyeColor color) {
-        this.mapColorProvider = BlockStateFunction.constant(color.getMapColor());
+        this.mapColorProvider = MapColorProvider.of(color.getMapColor());
         return ((AbstractBlock.Settings) (Object) this);
     }
 
@@ -94,7 +94,7 @@ public abstract class AbstractBlockSettingsMixin implements ContentBlockSettings
      */
     @Overwrite
     public AbstractBlock.Settings mapColor(MapColor color) {
-        this.mapColorProvider = BlockStateFunction.constant(color);
+        this.mapColorProvider = MapColorProvider.of(color);
         return ((AbstractBlock.Settings) (Object) this);
     }
 

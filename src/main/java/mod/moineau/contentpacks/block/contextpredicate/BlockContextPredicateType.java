@@ -16,11 +16,13 @@ public interface BlockContextPredicateType<P extends BlockContextPredicate> {
 	BlockContextPredicateType<AnyOfBlockContextPredicate> ANY_OF = () -> AnyOfBlockContextPredicate.CODEC;
 	BlockContextPredicateType<AllOfBlockContextPredicate> ALL_OF = () -> AllOfBlockContextPredicate.CODEC;
 	BlockContextPredicateType<NotBlockContextPredicate> NOT = () -> NotBlockContextPredicate.CODEC;
-	BlockContextPredicateType<AlwaysBlockContextPredicate> TRUE = () -> AlwaysBlockContextPredicate.TRUE_CODEC;
-	BlockContextPredicateType<AlwaysBlockContextPredicate> FALSE = () -> AlwaysBlockContextPredicate.FALSE_CODEC;
-	BlockContextPredicateType<MatchingStateBlockContextPredicate> MATCHING_STATE = () -> MatchingStateBlockContextPredicate.CODEC;
+	BlockContextPredicateType<AlwaysBlockContextPredicate> TRUE = AlwaysBlockContextPredicate.TRUE;
+	BlockContextPredicateType<AlwaysBlockContextPredicate> FALSE = AlwaysBlockContextPredicate.FALSE;
+	BlockContextPredicateType<MatchingPropertiesBlockContextPredicate> MATCHING_PROPERTIES = () -> MatchingPropertiesBlockContextPredicate.CODEC;
 	BlockContextPredicateType<IsSideSolidFullCubeBlockContextPredicate> IS_SIDE_SOLID_FULL_CUBE = () -> IsSideSolidFullCubeBlockContextPredicate.CODEC;
 	BlockContextPredicateType<IsFullCubeBlockContextPredicate> IS_FULL_CUBE = () -> IsFullCubeBlockContextPredicate.CODEC;
+	BlockContextPredicateType<BlocksMovementBlockContextPredicate> BLOCKS_MOVEMENT = () -> BlocksMovementBlockContextPredicate.CODEC;
+	BlockContextPredicateType<BlocksMovementBlockContextPredicate> LUMINANCE = () -> BlocksMovementBlockContextPredicate.CODEC;
 
 	MapCodec<P> codec();
 
@@ -37,9 +39,11 @@ public interface BlockContextPredicateType<P extends BlockContextPredicate> {
 		Registry.register(registry, "not", NOT);
 		Registry.register(registry, "true", TRUE);
 		Registry.register(registry, "false", FALSE);
-		Registry.register(registry, Identifier.of(ContentPacks.MOD_ID, "matching_state"), MATCHING_STATE);
+		Registry.register(registry, Identifier.of(ContentPacks.MOD_ID, "matching_properties"), MATCHING_PROPERTIES);
 		Registry.register(registry, "is_side_solid_full_cube", IS_SIDE_SOLID_FULL_CUBE);
 		Registry.register(registry, "is_full_cube", IS_FULL_CUBE);
+		Registry.register(registry, "blocks_movement", BLOCKS_MOVEMENT);
+		Registry.register(registry, "luminance", LUMINANCE);
 
 	}
 }

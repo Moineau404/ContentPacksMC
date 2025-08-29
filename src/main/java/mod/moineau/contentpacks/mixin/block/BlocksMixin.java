@@ -1,7 +1,6 @@
 package mod.moineau.contentpacks.mixin.block;
 
 import mod.moineau.contentpacks.block.contextpredicate.entitytyped.EntityTypedBlockContextPredicate;
-import mod.moineau.contentpacks.event.ContentPacksEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -20,12 +19,12 @@ public class BlocksMixin {
 
     @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;allowsSpawning(Lnet/minecraft/block/AbstractBlock$TypedContextPredicate;)Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 1))
     private static AbstractBlock.TypedContextPredicate<EntityType<?>> inject$allowsSpawning_CHERRY_LEAVES(AbstractBlock.TypedContextPredicate<EntityType<?>> predicate) {
-        return EntityTypedBlockContextPredicate.whitelist(() -> List.of(EntityType.OCELOT, EntityType.PARROT), ContentPacksEvents.REGISTRIES_LOADED, runnable -> runnable::run);
+        return EntityTypedBlockContextPredicate.whitelist(() -> List.of(EntityType.OCELOT, EntityType.PARROT));
     }
 
     @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;allowsSpawning(Lnet/minecraft/block/AbstractBlock$TypedContextPredicate;)Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 2))
     private static AbstractBlock.TypedContextPredicate<EntityType<?>> inject$allowsSpawning_PALE_OAK_LEAVES(AbstractBlock.TypedContextPredicate<EntityType<?>> predicate) {
-        return EntityTypedBlockContextPredicate.whitelist(() -> List.of(EntityType.OCELOT, EntityType.PARROT), ContentPacksEvents.REGISTRIES_LOADED, runnable -> runnable::run);
+        return EntityTypedBlockContextPredicate.whitelist(() -> List.of(EntityType.OCELOT, EntityType.PARROT));
     }
 
     @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;allowsSpawning(Lnet/minecraft/block/AbstractBlock$TypedContextPredicate;)Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 3))
@@ -35,7 +34,7 @@ public class BlocksMixin {
 
     @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;allowsSpawning(Lnet/minecraft/block/AbstractBlock$TypedContextPredicate;)Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 4))
     private static AbstractBlock.TypedContextPredicate<EntityType<?>> inject$allowsSpawning_ICE(AbstractBlock.TypedContextPredicate<EntityType<?>> predicate) {
-        return EntityTypedBlockContextPredicate.whitelist(() -> List.of(EntityType.POLAR_BEAR), ContentPacksEvents.REGISTRIES_LOADED, runnable -> runnable::run);
+        return EntityTypedBlockContextPredicate.whitelist(() -> List.of(EntityType.POLAR_BEAR));
     }
 
     @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;allowsSpawning(Lnet/minecraft/block/AbstractBlock$TypedContextPredicate;)Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 5))
@@ -125,7 +124,7 @@ public class BlocksMixin {
 
     @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;allowsSpawning(Lnet/minecraft/block/AbstractBlock$TypedContextPredicate;)Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 22))
     private static AbstractBlock.TypedContextPredicate<EntityType<?>> inject$allowsSpawning_FROSTED_ICE(AbstractBlock.TypedContextPredicate<EntityType<?>> predicate) {
-        return EntityTypedBlockContextPredicate.whitelist(() -> List.of(EntityType.POLAR_BEAR), ContentPacksEvents.REGISTRIES_LOADED, runnable -> runnable::run);
+        return EntityTypedBlockContextPredicate.whitelist(() -> List.of(EntityType.POLAR_BEAR));
     }
 
     @ModifyArg(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;allowsSpawning(Lnet/minecraft/block/AbstractBlock$TypedContextPredicate;)Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 23))

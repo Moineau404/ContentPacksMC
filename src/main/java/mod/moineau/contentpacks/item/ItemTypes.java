@@ -198,7 +198,7 @@ public final class ItemTypes {
     }
 
     public static void register(Class<? extends Item> itemClass, MapCodec<? extends Item> codec) {
-        CLASS2CODEC.put(itemClass, codec);
+        CLASS2CODEC.putIfAbsent(itemClass, codec);
     }
 
     public static MapCodec<? extends Item> get(Item item) {

@@ -95,9 +95,6 @@ accessible field net/minecraft/block/SaplingGenerator rareBeesVariant Ljava/util
 #ShovelItem
 accessible field net/minecraft/item/ShovelItem PATH_STATES Ljava/util/Map;
 
-#State
-accessible field net/minecraft/state/State owner Ljava/lang/Object;
-
 #WoodType
 accessible method net/minecraft/block/WoodType register (Lnet/minecraft/block/WoodType;)Lnet/minecraft/block/WoodType;
 accessible field net/minecraft/block/WoodType VALUES Ljava/util/Map;

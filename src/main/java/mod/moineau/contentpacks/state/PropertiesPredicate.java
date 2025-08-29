@@ -1,9 +1,7 @@
 package mod.moineau.contentpacks.state;
 
 import com.google.common.base.Splitter;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import net.minecraft.state.State;
@@ -18,25 +16,19 @@ import java.util.stream.Collectors;
 public sealed abstract class PropertiesPredicate implements Predicate<State<?, ?>> {
     private static final Splitter SPLITTER = Splitter.on(',');
     public static final Codec<PropertiesPredicate> CODEC = Codec.STRING.comapFlatMap(PropertiesPredicate::parse, PropertiesPredicate::toString);
-    public static final Codec<PropertiesPredicate> CACHING_CODEC = Codec.STRING.comapFlatMap(PropertiesPredicate::parseCaching, PropertiesPredicate::toString);
 
-    public static PropertiesPredicate.Unbaked of(PropertyPredicate.Unbaked... predicates) {
-        return new Unbaked(List.of(predicates));
-    }
-
-    public static PropertiesPredicate.Baked of(PropertyPredicate.Baked<?>... predicates) {
+    public static Baked of(PropertyPredicate.Baked<?>... predicates) {
         return new Baked(List.of(predicates));
     }
 
-    public static DataResult<PropertiesPredicate.Unbaked> parse(String statements) {
-        return parseList(statements).map(Unbaked::new);
+    public static Baked empty() {
+        return new Baked(List.of());
     }
 
-    public static DataResult<PropertiesPredicate.Caching> parseCaching(String statements) {
-        return parseList(statements).map(Caching::new);
-    }
-
-    private static DataResult<List<PropertyPredicate.Unbaked>> parseList(String statements) {
+    private static DataResult<PropertiesPredicate> parse(String statements) {
+        if (statements.isEmpty()) {
+            return DataResult.success(empty());
+        }
         DataResult<List<PropertyPredicate.Unbaked>> predicates = DataResult.success(new ArrayList<>());
         for (String statement : SPLITTER.split(statements)) {
             predicates = predicates.apply2stable((list, predicate) -> {
@@ -44,17 +36,7 @@ public sealed abstract class PropertiesPredicate implements Predicate<State<?, ?
                 return list;
             }, PropertyPredicate.parse(statement));
         }
-        return predicates.mapError(error -> "Failed to parse properties predicate \"" + statements + "\": " + error);
-    }
-
-    @Override
-    public boolean test(State<?, ?> state) {
-        for (PropertyPredicate predicate : this.getPredicates()) {
-            if (!predicate.test(state)) {
-                return false;
-            }
-        }
-        return true;
+        return predicates.mapError(error -> "Failed to parse properties predicate '" + statements + "': " + error).map(Unbaked::new);
     }
 
     @Override
@@ -64,11 +46,16 @@ public sealed abstract class PropertiesPredicate implements Predicate<State<?, ?
 
     protected abstract List<? extends PropertyPredicate> getPredicates();
 
-    public static non-sealed class Unbaked extends PropertiesPredicate {
-        private final List<PropertyPredicate.Unbaked> predicates;
+    public static final class Unbaked extends PropertiesPredicate {
+        private final ImmutableList<PropertyPredicate.Unbaked> predicates;
 
         private Unbaked(List<PropertyPredicate.Unbaked> predicates) {
-            this.predicates = predicates;
+            this.predicates = ImmutableList.copyOf(predicates);
+        }
+
+        @Override
+        public boolean test(State<?, ?> state) {
+            throw new UnsupportedOperationException();
         }
 
         @Override
@@ -88,28 +75,21 @@ public sealed abstract class PropertiesPredicate implements Predicate<State<?, ?
         }
     }
 
-    public static final class Caching extends Unbaked {
-        private final LoadingCache<State<?, ?>, Boolean> cache = CacheBuilder.newBuilder().build(CacheLoader.from(super::test));
-
-        private Caching(List<PropertyPredicate.Unbaked> predicates) {
-            super(predicates);
-        }
-
-        @Override
-        public boolean test(State<?, ?> state) {
-            try {
-                return this.cache.get(state);
-            } catch (Exception e) {
-                return false;
-            }
-        }
-    }
-
     public static final class Baked extends PropertiesPredicate {
         private final List<PropertyPredicate.Baked<?>> predicates;
 
         private Baked(List<PropertyPredicate.Baked<?>> predicates) {
             this.predicates = predicates;
+        }
+
+        @Override
+        public boolean test(State<?, ?> state) {
+            for (PropertyPredicate.Baked<?> predicate : this.getPredicates()) {
+                if (!predicate.test(state)) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         @Override

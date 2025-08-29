@@ -43,6 +43,14 @@ public final class CodecUtil {
         return (Encoder<T>) EMPTY;
     }
 
+    public static <T> Codec<T> withAlternative(Codec<T> first, Codec<T> second, Predicate<T> firstCondition) {
+        return new AlternativeCodec<>(first, second, firstCondition);
+    }
+
+    public static <T> Codec<T> withAlternative(Codec<T> first, Codec<T> second) {
+        return new AlternativeCodec<>(first, second);
+    }
+
     public static <O, S, T extends S> RecordCodecBuilder<O, S> unilateral(MapDecoder<T> decoder) {
         return MapCodec.<S>of(Encoder.empty(), decoder.map(Function.identity())).forGetter(o -> null);
     }
@@ -100,54 +108,6 @@ public final class CodecUtil {
 
     public static <E extends Enum<E>, V> MapCodec<Map<E, V>> enumMap(Class<E> enumClass, Codec<V> elementCodec) {
         return new EnumMapCodec<>(enumClass, elementCodec, false);
-    }
-
-    //----------------------------------------------------------------
-    // DATA VALIDATION
-
-    public static <O, T> Function<O, DataResult<T>> validate(Function<O, T> function, Supplier<String> message) {
-        return from -> {
-            try {
-                T to = function.apply(from);
-                return validate(to);
-            } catch (RuntimeException e) {
-                return DataResult.error(message);
-            }
-        };
-    }
-
-    public static <O, T> Function<O, DataResult<T>> validate(Function<O, T> function) {
-        return validate(function, () -> "Error serializing");
-    }
-
-    public static <T> DataResult<T> validate(T value) {
-        if (value != null) {
-            return DataResult.success(value);
-        }
-        return DataResult.error(() -> "Error serializing");
-    }
-
-    public static <O, T> DataResult<T> fail(O object) {
-        return DataResult.error(() -> "Not serializable");
-    }
-
-    public static <T> DataResult<T> validate(T value, Predicate<T> predicate) {
-        if (predicate.test(value)) return DataResult.success(value);
-        return DataResult.error(() -> "");
-    }
-
-    public static <T> DataResult<T> validate(T value, boolean condition) {
-        if (condition) return DataResult.success(value);
-        return DataResult.error(() -> "");
-    }
-
-    public static <T> DataResult<T> validate(Optional<T> value) {
-        return value.map(DataResult::success).orElseGet(() -> DataResult.error(() -> "Error serializing"));
-    }
-
-    public static <O, T extends O> DataResult<O> validate(O object, Class<T> type) {
-        if (type.isInstance(object)) return DataResult.success(object);
-        return DataResult.error(() -> "Error serializing : wrong type");
     }
 
     //

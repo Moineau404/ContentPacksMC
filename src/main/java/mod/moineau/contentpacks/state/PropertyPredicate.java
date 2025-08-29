@@ -2,12 +2,11 @@ package mod.moineau.contentpacks.state;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import mod.moineau.contentpacks.api.function.predicate.Comparator;
+import mod.moineau.contentpacks.api.math.Comparator;
 import net.minecraft.state.State;
 import net.minecraft.state.property.Property;
 
 import java.util.Collection;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -16,25 +15,32 @@ public sealed abstract class PropertyPredicate implements Predicate<State<?, ?>>
     public static final Codec<PropertyPredicate> CODEC = Codec.STRING.comapFlatMap(PropertyPredicate::parse, PropertyPredicate::toString);
     protected final Comparator comparator;
 
-    protected PropertyPredicate(Comparator comparator) {
-        this.comparator = comparator;
-    }
-
-    public static <T extends Comparable<T>> PropertyPredicate.Baked<T> of(Property<T> property, Comparator comparator, T value) {
+    public static <T extends Comparable<T>> Baked<T> of(Property<T> property, Comparator comparator, T value) {
         return new Baked<>(property, comparator, value);
     }
 
-    public static DataResult<PropertyPredicate.Unbaked> parse(String statement) {
+    public static <T extends Comparable<T>> Baked<T> of(Property<T> property, T value) {
+        return of(property, Comparator.EQUAL_TO, value);
+    }
+
+    public static DataResult<Unbaked> parse(String statement) {
         return DataResult.success(PATTERN.matcher(statement)).flatMap(matcher -> {
             if (matcher.matches()) {
                 String property = matcher.group(1);
                 String symbol = matcher.group(2);
                 String value = matcher.group(3);
-                return mod.moineau.contentpacks.api.function.predicate.Comparator.parse(symbol).map(comparator -> new Unbaked(property, comparator, value));
+                return Comparator.parse(symbol).map(comparator -> new Unbaked(property, comparator, value));
             }
             return DataResult.error(() -> "Not a statement;");
-        }).mapError(error -> "Failed to parse property predicate \"" + statement + "\": " + error);
+        }).mapError(error -> "Failed to parse property predicate '" + statement + "': " + error);
     }
+
+    protected PropertyPredicate(Comparator comparator) {
+        this.comparator = comparator;
+    }
+
+    @Override
+    public abstract String toString();
 
     public static final class Unbaked extends PropertyPredicate {
         private final String property;
@@ -48,21 +54,7 @@ public sealed abstract class PropertyPredicate implements Predicate<State<?, ?>>
 
         @Override
         public boolean test(State<?, ?> state) {
-            return parse(state.getProperties()).flatMap(property -> test(state, property)).orElse(false);
-        }
-
-        private Optional<Property<?>> parse(Collection<Property<?>> properties) {
-            for (Property<?> property : properties) {
-                if (this.property.equals(property.getName())) {
-                    return Optional.of(property);
-                }
-            }
-            return Optional.empty();
-        }
-
-        private <T extends Comparable<T>> Optional<Boolean> test(State<?, ?> state, Property<T> property) {
-            return property.parse(this.value).flatMap(value -> state.getOrEmpty(property)
-                    .map(value2 -> this.comparator.compare(value2, value)));
+            throw new UnsupportedOperationException();
         }
 
         @Override
@@ -113,7 +105,4 @@ public sealed abstract class PropertyPredicate implements Predicate<State<?, ?>>
             return property.getName() + this.comparator + property.name(this.value);
         }
     }
-
-    @Override
-    public abstract String toString();
 }

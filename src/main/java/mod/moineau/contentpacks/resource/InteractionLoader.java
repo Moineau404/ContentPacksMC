@@ -16,6 +16,7 @@ import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StrictJsonParser;
+import net.minecraft.util.dynamic.Codecs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,12 +42,24 @@ public class InteractionLoader<T> implements ResourceLoader {
         return new InteractionLoader<>(directoryName, codec, resolver);
     }
 
+    public static <T> InteractionLoader<T> create(String directoryName, Codecs.IdMapper<Identifier, InteractionType<T, ?>> idMapper, Function<Identifier, T> resolver) {
+        return create(directoryName, idMapper.getCodec(Identifier.CODEC), resolver);
+    }
+
     public static <T> InteractionLoader<T> create(Registry<T> registry, Codec<InteractionType<T, ?>> codec) {
-        return new InteractionLoader<>(registry.getKey().getValue().getPath(), codec, registry::get);
+        return create(registry.getKey().getValue().getPath(), codec, registry::get);
+    }
+
+    public static <T> InteractionLoader<T> create(Registry<T> registry, Codecs.IdMapper<Identifier, InteractionType<T, ?>> idMapper) {
+        return create(registry, idMapper.getCodec(Identifier.CODEC));
     }
 
     public static <T> InteractionLoader<TagKey<T>> create(RegistryKey<? extends Registry<T>> registryRef, Codec<InteractionType<TagKey<T>, ?>> codec) {
         return create("tag/" + registryRef.getValue().getPath(), codec, id -> TagKey.of(registryRef, id));
+    }
+
+    public static <T> InteractionLoader<TagKey<T>> create(RegistryKey<? extends Registry<T>> registryRef, Codecs.IdMapper<Identifier, InteractionType<TagKey<T>, ?>> idMapper) {
+        return create(registryRef, idMapper);
     }
 
     @Override
