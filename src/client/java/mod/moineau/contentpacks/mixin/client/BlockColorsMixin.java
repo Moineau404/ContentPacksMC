@@ -1,17 +1,15 @@
 package mod.moineau.contentpacks.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import mod.moineau.contentpacks.render.block.DynamicBlockColorProviders;
 import mod.moineau.contentpacks.render.block.DynamicBlockColors;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.block.BlockColors;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -21,18 +19,7 @@ import java.util.Map;
 @Mixin(BlockColors.class)
 public abstract class BlockColorsMixin implements DynamicBlockColors {
     @Unique
-    private final Map<BlockState, BlockColorProvider> contentpacks$dynamicProviders = new IdentityHashMap<>();
-
-    @Deprecated
-    @Inject(method = "create", at = @At("RETURN"))
-    private static void injected$create(CallbackInfoReturnable<BlockColors> info) {
-        BlockColors blockColors = info.getReturnValue();
-        DynamicBlockColorProviders.setup(
-                blockColors,
-                ((DynamicBlockColors) blockColors)::contentpacks$addProvider,
-                ((DynamicBlockColors) blockColors)::contentpacks$clearProviders
-        );
-    }
+    private final Map<Block, BlockColorProvider> contentpacks$dynamicProviders = new IdentityHashMap<>();
 
     @ModifyVariable(method = "getParticleColor", at = @At("STORE"))
     private BlockColorProvider injected$getParticleColor(BlockColorProvider blockColorProvider, @Local(argsOnly = true) BlockState state) {
@@ -46,14 +33,14 @@ public abstract class BlockColorsMixin implements DynamicBlockColors {
 
     @Unique
     private BlockColorProvider contentpacks$getProvider(BlockState state, BlockColorProvider vanilla) {
-        BlockColorProvider blockColorProvider = this.contentpacks$dynamicProviders.get(state);
+        BlockColorProvider blockColorProvider = this.contentpacks$dynamicProviders.get(state.getBlock());
         return blockColorProvider != null ? blockColorProvider : vanilla;
     }
 
     @Unique
     @Override
-    public void contentpacks$addProvider(BlockState state, BlockColorProvider provider) {
-        this.contentpacks$dynamicProviders.put(state, provider);
+    public void contentpacks$addProvider(Block block, BlockColorProvider provider) {
+        this.contentpacks$dynamicProviders.put(block, provider);
     }
 
     @Unique

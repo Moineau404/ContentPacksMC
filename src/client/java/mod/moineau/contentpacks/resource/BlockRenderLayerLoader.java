@@ -6,18 +6,16 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.codec.VanillaClientCodecs;
-import mod.moineau.contentpacks.block.BlockStateDefinition;
-import mod.moineau.contentpacks.mixin.client.BlockStateManagersAccessor;
 import mod.moineau.contentpacks.render.block.DynamicBlockRenderLayers;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.render.BlockRenderLayer;
+import net.minecraft.registry.Registries;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceReloader;
-import net.minecraft.state.StateManager;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.StrictJsonParser;
 import net.minecraft.util.Util;
 
@@ -28,30 +26,27 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import java.util.function.Function;
 
-// TODO Maybe find a way to inject it directly in model variants.
 public class BlockRenderLayerLoader implements ResourceReloader {
     private static final ResourceFinder FINDER = ResourceFinder.json("blockstates");
     private static final Codec<Optional<BlockRenderLayer>> CODEC = VanillaClientCodecs.BLOCK_RENDER_LAYER.optionalFieldOf("render").codec();
 
     @Override
     public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) {
-        Function<Identifier, StateManager<Block, BlockState>> id2Manager = BlockStateManagersAccessor.createIdToManagerMapper();
-
         return CompletableFuture.supplyAsync(
                 () -> FINDER.findResources(manager),
                 prepareExecutor
         ).thenCompose(resourceMap -> {
-            List<CompletableFuture<BlockStateDefinition.Baked<BlockRenderLayer>>> list = new ArrayList<>(resourceMap.size());
+            List<CompletableFuture<Pair<Block, BlockRenderLayer>>> list = new ArrayList<>(resourceMap.size());
 
             for (Map.Entry<Identifier, Resource> entry : resourceMap.entrySet()) {
                 list.add(CompletableFuture.supplyAsync(() -> {
                     Identifier identifier = FINDER.toResourceId(entry.getKey());
-                    StateManager<Block, BlockState> stateManager = id2Manager.apply(identifier);
+                    Block block = Registries.BLOCK.get(identifier);
 
-                    if (stateManager == null) {
-                        ContentPacks.LOGGER.debug("Discovered unknown block render layer definition {}, ignoring", identifier);
+                    // TODO Clean + error tracking
+                    if (block == null) {
+                        ContentPacks.LOGGER.debug("Discovered unknown block render layer {}, ignoring", identifier);
                         return null;
                     } else {
                         Resource resource = entry.getValue();
@@ -61,13 +56,13 @@ public class BlockRenderLayerLoader implements ResourceReloader {
 
                             try {
                                 JsonElement jsonElement = StrictJsonParser.parse(reader);
-                                Optional<BlockRenderLayer> layer = CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(JsonParseException::new);
+                                Optional<BlockRenderLayer> layerResult = CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(JsonParseException::new);
 
                                 if (reader != null) {
                                     reader.close();
                                 }
 
-                                return layer.map(BlockStateDefinition::unit).map(value -> value.bake(stateManager)).orElse(null);
+                                return layerResult.map(layer -> new Pair<>(block, layer)).orElse(null);
                             } catch (Throwable var13) {
                                 if (reader != null) {
                                     try {
@@ -80,19 +75,19 @@ public class BlockRenderLayerLoader implements ResourceReloader {
                                 throw var13;
                             }
                         } catch (Exception var14) {
-                            ContentPacks.LOGGER.error("Failed to load block render layer definition {} from pack {}", identifier, resource.getPackId(), var14);
+                            ContentPacks.LOGGER.error("Failed to load block render layer {} from pack {}", identifier, resource.getPackId(), var14);
                             return null;
                         }
                     }
                 }, prepareExecutor));
             }
 
-            return Util.combineSafe(list).thenAcceptAsync(definitions -> {
+            return Util.combineSafe(list).thenAcceptAsync(entries -> {
                 DynamicBlockRenderLayers.clear();
 
-                for (BlockStateDefinition.Baked<BlockRenderLayer> definition : definitions) {
-                    if (definition != null) {
-                        definition.forEach(DynamicBlockRenderLayers::putBlock);
+                for (Pair<Block, BlockRenderLayer> entry : entries) {
+                    if (entry != null) {
+                        DynamicBlockRenderLayers.putBlock(entry.getLeft(), entry.getRight());
                     }
                 }
             });

@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO Create a new format of block model definition ("assets/blocks" like "assets/items") like item model definition
+// TODO Create a new format of block model variants ("assets/blocks" like "assets/items") like item model variants
 public sealed abstract class VariantMap<T> {
     public static <T> Codec<VariantMap<T>> createCodec(Codec<T> elementCodec) {
         return Codec.unboundedMap(PropertiesPredicate.CODEC, elementCodec)
