@@ -35,6 +35,7 @@ public class MatchingPropertiesBlockContextPredicate extends OffsetContextPredic
         this(vec3i, propertyMap, false);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean test(BlockState state) {
         for (var entry : propertyMap.entrySet()) {

@@ -31,16 +31,16 @@ public abstract class OptionsScreenMixin extends Screen {
     @SuppressWarnings("DataFlowIssue")
     @Unique
     private void contentpacks$refreshContentPacks(ResourcePackManager resourcePackManager) {
-//        ContentPacks.OPTIONS.updateContentPacks(resourcePackManager);
 //        if (ContentPacksClient.OPTIONS.refreshPacks(resourcePackManager)) {
-//            this.client.setScreen(new PopupScreen.Builder(this, Text.translatable("options.contentpacks.restart"))
+//            this.client.setScreen(new PopupScreen.Builder(this, Text.translatable("options.contentpacks.changed.title"))
+//                            .message(Text.translatable("options.contentpacks.changed.description"))
 //                    .button(Text.translatable("gui.ok"), PopupScreen::close).build());
 //        } else {
 //            this.client.setScreen(this);
 //        }
         if (ContentPacksClient.OPTIONS.refreshPacks(resourcePackManager)) {
-            this.client.getToastManager().add(SystemToast.create(this.client, SystemToast.Type.NARRATOR_TOGGLE,
-                    Text.translatable("options.contentpacks.toast"), Text.translatable("options.contentpacks.restart")));
+            this.client.getToastManager().add(SystemToast.create(this.client, ContentPacksClient.CONTENT_CHANGED,
+                    Text.translatable("options.contentpacks.changed.title"), Text.translatable("options.contentpacks.changed.description")));
         }
         this.client.setScreen(this);
     }

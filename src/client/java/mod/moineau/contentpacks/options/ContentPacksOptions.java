@@ -21,10 +21,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+// TODO Fix disabled list
 public final class ContentPacksOptions {
     private static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Options");
     private static final Gson GSON = new GsonBuilder().setFormattingStyle(FormattingStyle.PRETTY).create();
-    private static final File FILE = FabricLoader.getInstance().getConfigDir().resolve(ContentPacks.MOD_ID + ".json").toFile();
+    private static final File FILE = FabricLoader.getInstance().getConfigDir().resolve(ContentPacks.MOD_ID).resolve(ContentPacks.MOD_ID + ".json").toFile();
     private static final Codec<ContentPacksOptions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.listOf().fieldOf("enabled").forGetter(ContentPacksOptions::getEnabledContentPacks),
             Codec.STRING.listOf().fieldOf("disabled").forGetter(ContentPacksOptions::getDisabledContentPacks),
@@ -73,6 +74,7 @@ public final class ContentPacksOptions {
             }
         } else {
             try {
+                FILE.getParentFile().mkdirs();
                 FILE.createNewFile();
                 ContentPacksOptions empty = empty();
                 empty.write();

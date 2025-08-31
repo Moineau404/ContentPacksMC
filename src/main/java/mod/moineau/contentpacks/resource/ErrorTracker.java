@@ -25,11 +25,11 @@ public final class ErrorTracker {
     }
 
     public static void print(Identifier id, Resource resource, String error) {
-        print("(" + resource.getPackId() + "//" + id + ") " + error);
+        print("[(" + resource.getPackId() + ") " + id + "] " + error);
     }
 
     public static void print(Identifier id, List<Resource> resources, String error) {
-        print("(" + resources.stream().map(Resource::getPackId).collect(Collectors.joining("|")) + "//" + id + ") " + error);
+        print("[(" + resources.stream().map(Resource::getPackId).collect(Collectors.joining(" | ")) + ") " + id + "] " + error);
     }
 
     public static void write() {
@@ -44,5 +44,9 @@ public final class ErrorTracker {
         } catch (IOException e) {
             LOGGER.error("Failed to write error file {}", FILE);
         }
+    }
+
+    public static boolean hasErrors() {
+        return !ERRORS.isEmpty();
     }
 }

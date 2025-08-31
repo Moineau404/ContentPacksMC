@@ -1,8 +1,10 @@
 {
   "options.contentpacks": "Content Packs...",
   "options.contentpacks.title": "Select Content Packs",
-  "options.contentpacks.toast": "Content packs configuration changed!",
-  "options.contentpacks.restart": "Restart the game to apply changes.",
+  "options.contentpacks.changed.title": "Content packs configuration changed!",
+  "options.contentpacks.changed.description": "Restart the game to apply changes.",
+  "options.contentpacks.errors.title": "Errors occured while loading content!",
+  "options.contentpacks.errors.description": "Check errors output file.",
   "options.contentpacks.advanced": "Advanced...",
   "options.contentpacks.advanced.title": "Advanced",
   "options.contentpacks.debug": "Debug",
