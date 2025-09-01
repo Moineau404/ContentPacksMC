@@ -1,8 +1,0 @@
-{
-  "properties": {
-    "push_reaction": "destroy",
-    "occlusion": false,
-    "collision": false
-  },
-  "type": "minecraft:redstone_wire"
-}

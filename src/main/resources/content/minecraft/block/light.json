@@ -1,9 +1,0 @@
-{
-  "properties": {
-    "replaceable": true,
-    "occlusion": false,
-    "explosion_resistance": 3600000.8,
-    "destroy_time": -1.0
-  },
-  "type": "minecraft:light"
-}

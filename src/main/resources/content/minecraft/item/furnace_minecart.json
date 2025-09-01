@@ -1,7 +1,0 @@
-{
-  "entity_type": "minecraft:furnace_minecart",
-  "properties": {
-    "minecraft:max_stack_size": 1
-  },
-  "type": "minecraft:minecart"
-}

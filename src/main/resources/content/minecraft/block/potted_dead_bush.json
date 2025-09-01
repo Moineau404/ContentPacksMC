@@ -1,8 +1,0 @@
-{
-  "potted": "minecraft:dead_bush",
-  "properties": {
-    "push_reaction": "destroy",
-    "occlusion": false
-  },
-  "type": "minecraft:flower_pot"
-}

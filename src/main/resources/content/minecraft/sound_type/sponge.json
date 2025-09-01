@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.sponge.step",
-  "place": "minecraft:block.sponge.place",
-  "hit": "minecraft:block.sponge.hit",
-  "fall": "minecraft:block.sponge.fall",
-  "break": "minecraft:block.sponge.break"
-}

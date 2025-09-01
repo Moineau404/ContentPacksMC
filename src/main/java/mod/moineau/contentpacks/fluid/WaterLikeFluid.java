@@ -2,17 +2,15 @@ package mod.moineau.contentpacks.fluid;
 
 import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mod.moineau.contentpacks.api.util.CodecUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.CollisionEvent;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCollisionHandler;
-import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.WaterFluid;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
@@ -22,24 +20,28 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
+import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 // TODO Finish
 @ApiStatus.Experimental
-public abstract class WaterLikeFluid extends FlowableFluid {
-	final Block block;
-	final Item bucketItem;
+public abstract class WaterLikeFluid extends WaterFluid implements ContentFluid {
+	protected Supplier<Fluid> still;
+	protected Supplier<Fluid> flowing;
+	final Supplier<Block> block;
+	final Supplier<Item> bucketItem;
 	final SoundEvent ambientSound;
 	final Optional<SoundEvent> bucketFillSound;
 	final ParticleType<?> particle;
@@ -52,8 +54,8 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 	final float blastResistance;
 
 	protected WaterLikeFluid(
-			Block block,
-			Item bucketItem,
+			Supplier<Block> block,
+			Supplier<Item> bucketItem,
 			SoundEvent ambientSound,
 			Optional<SoundEvent> bucketFillSound,
 			ParticleType<?> particle,
@@ -79,10 +81,10 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 		this.blastResistance = blastResistance;
 	}
 
-	private static <F extends WaterLikeFluid> Products.P13<
+	protected static <F extends WaterLikeFluid> Products.P13<
 			RecordCodecBuilder.Mu<F>,
-			Block,
-			Item,
+			Supplier<Block>,
+			Supplier<Item>,
 			SoundEvent,
 			Optional<SoundEvent>,
 			ParticleType<?>,
@@ -93,34 +95,45 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 			Integer,
 			TagKey<Fluid>,
 			Float,
-			Fluid
-			> fillFields(RecordCodecBuilder.Instance<F> instance, RecordCodecBuilder<F, Fluid> builder) {
+			Supplier<Fluid>
+			> fillFields(RecordCodecBuilder.Instance<F> instance, RecordCodecBuilder<F, Supplier<Fluid>> builder) {
 		return instance.group(
-				Registries.BLOCK.getCodec().fieldOf("block").forGetter(fluid -> fluid.block),
-				Registries.ITEM.getCodec().fieldOf("bucket_item").forGetter(fluid -> fluid.bucketItem),
-				Registries.SOUND_EVENT.getCodec().fieldOf("ambient_sound").forGetter(fluid -> fluid.ambientSound),
-				Registries.SOUND_EVENT.getCodec().optionalFieldOf("bucket_fill_sound").forGetter(fluid -> fluid.bucketFillSound),
+				CodecUtil.lazy(Registries.BLOCK).fieldOf("block").forGetter(fluid -> fluid.block),
+				CodecUtil.lazy(Registries.ITEM).fieldOf("bucket_item").forGetter(fluid -> fluid.bucketItem),
+				Registries.SOUND_EVENT.getCodec().optionalFieldOf("ambient_sound", SoundEvents.BLOCK_WATER_AMBIENT).forGetter(fluid -> fluid.ambientSound),
+				CodecUtil.intentionallyOptional(Registries.SOUND_EVENT.getCodec()).optionalFieldOf("bucket_fill_sound", Optional.of(SoundEvents.ITEM_BUCKET_FILL)).forGetter(fluid -> fluid.bucketFillSound),
 				Registries.PARTICLE_TYPE.getCodec().fieldOf("particle").forGetter(fluid -> fluid.particle),
 				Registries.PARTICLE_TYPE.getCodec().fieldOf("underwater_particle").forGetter(fluid -> fluid.underwaterParticle),
-				Codec.BOOL.fieldOf("infinite").forGetter(fluid -> fluid.infinite),
-				Codec.INT.fieldOf("max_flow_distance").forGetter(fluid -> fluid.maxFlowDistance),
-				Codec.INT.fieldOf("level_decrease_per_block").forGetter(fluid -> fluid.levelDecreasePerBlock),
-				Codec.INT.fieldOf("tick_rate").forGetter(fluid -> fluid.tickRate),
-				TagKey.codec(RegistryKeys.FLUID).fieldOf("tag").forGetter(fluid -> fluid.tag),
-				Codec.FLOAT.fieldOf("blast_resistance").forGetter(fluid -> fluid.blastResistance),
+				// TODO Create a predicate for #isInfinite(ServerWorld)
+				Codec.BOOL.optionalFieldOf("infinite", true).forGetter(fluid -> fluid.infinite),
+				Codecs.NON_NEGATIVE_INT.optionalFieldOf("max_flow_distance", 4).forGetter(fluid -> fluid.maxFlowDistance),
+				Codecs.NON_NEGATIVE_INT.optionalFieldOf("level_decrease_per_block", 1).forGetter(fluid -> fluid.levelDecreasePerBlock),
+				Codecs.NON_NEGATIVE_INT.optionalFieldOf("tick_rate", 5).forGetter(fluid -> fluid.tickRate),
+				TagKey.unprefixedCodec(RegistryKeys.FLUID).fieldOf("tag").forGetter(fluid -> fluid.tag),
+				Codecs.NON_NEGATIVE_FLOAT.optionalFieldOf("blast_resistance", 100.0F).forGetter(fluid -> fluid.blastResistance),
 				builder
 		);
 	}
 
 	@Override
+	public Fluid getFlowing() {
+		return flowing.get();
+	}
+
+	@Override
+	public Fluid getStill() {
+		return still.get();
+	}
+
+	@Override
 	public Item getBucketItem() {
-		return bucketItem;
+		return bucketItem.get();
 	}
 
 	// TODO
 	@Override
 	public void randomDisplayTick(World world, BlockPos pos, FluidState state, Random random) {
-		if (!state.isStill() && !(Boolean)state.get(FALLING)) {
+		if (!state.isStill() && !state.get(FALLING)) {
 			if (random.nextInt(64) == 0) {
 				world.playSoundClient(
 						pos.getX() + 0.5,
@@ -151,17 +164,7 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 		return infinite;
 	}
 
-	@Override
-	protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
-		BlockEntity blockEntity = state.hasBlockEntity() ? world.getBlockEntity(pos) : null;
-		Block.dropStacks(state, world, pos, blockEntity);
-	}
-
-	// TODO ?
-	@Override
-	protected void onEntityCollision(World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
-		handler.addEvent(CollisionEvent.EXTINGUISH);
-	}
+	// TODO : #onEntityCollision
 
 	@Override
 	public int getMaxFlowDistance(WorldView world) {
@@ -170,7 +173,12 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 
 	@Override
 	public BlockState toBlockState(FluidState state) {
-		return block.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
+		return block.get().getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
+	}
+
+	@Override
+	public boolean matchesType(Fluid fluid) {
+		return fluid == getStill() || fluid == getFlowing();
 	}
 
 	@Override
@@ -199,15 +207,13 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 	}
 
 	public static class Flowing extends WaterLikeFluid {
-		private final Fluid still;
-
-		public static final Codec<Flowing> CODEC = RecordCodecBuilder.create(instance -> WaterLikeFluid.fillFields(instance,
-				Registries.FLUID.getCodec().fieldOf("still").forGetter(flowing -> flowing.still)
-		).apply(instance, Flowing::new));
+		public static final MapCodec<WaterLikeFluid.Flowing> CODEC = RecordCodecBuilder.mapCodec(instance -> fillFields(instance,
+				CodecUtil.lazy(Registries.FLUID).fieldOf("still").forGetter(flowing -> flowing.still)
+		).apply(instance, WaterLikeFluid.Flowing::new));
 
 		protected Flowing(
-				Block block,
-				Item bucketItem,
+				Supplier<Block> block,
+				Supplier<Item> bucketItem,
 				SoundEvent ambientSound,
 				Optional<SoundEvent> bucketFillSound,
 				ParticleType<?> particle,
@@ -218,7 +224,7 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 				int tickRate,
 				TagKey<Fluid> tag,
 				float blastResistance,
-				Fluid still
+				Supplier<Fluid> still
 		) {
 			super(
 					block,
@@ -235,16 +241,7 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 					blastResistance
 			);
 			this.still = still;
-		}
-
-		@Override
-		public Fluid getFlowing() {
-			return this;
-		}
-
-		@Override
-		public Fluid getStill() {
-			return still;
+			this.flowing = () -> this;
 		}
 
 		@Override
@@ -264,21 +261,19 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 		}
 
 		@Override
-		public boolean matchesType(Fluid fluid) {
-			return fluid == still || fluid == this;
+		public MapCodec<? extends ContentFluid> getCodec() {
+			return CODEC;
 		}
 	}
 
 	public static class Still extends WaterLikeFluid {
-		private final Fluid flowing;
-
-		public static final Codec<Still> CODEC = RecordCodecBuilder.create(instance -> WaterLikeFluid.fillFields(instance,
-				Registries.FLUID.getCodec().fieldOf("flowing").forGetter(still -> still.flowing)
-		).apply(instance, Still::new));
+		public static final MapCodec<WaterLikeFluid.Still> CODEC = RecordCodecBuilder.mapCodec(instance -> fillFields(instance,
+				CodecUtil.lazy(Registries.FLUID).fieldOf("flowing").forGetter(still -> still.flowing)
+		).apply(instance, WaterLikeFluid.Still::new));
 
 		protected Still(
-				Block block,
-				Item bucketItem,
+				Supplier<Block> block,
+				Supplier<Item> bucketItem,
 				SoundEvent ambientSound,
 				Optional<SoundEvent> bucketFillSound,
 				ParticleType<?> particle,
@@ -289,7 +284,7 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 				int tickRate,
 				TagKey<Fluid> tag,
 				float blastResistance,
-				Fluid flowing
+				Supplier<Fluid> flowing
 		) {
 			super(
 					block,
@@ -305,17 +300,8 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 					tag,
 					blastResistance
 			);
+			this.still = () -> this;
 			this.flowing = flowing;
-		}
-
-		@Override
-		public Fluid getFlowing() {
-			return flowing;
-		}
-
-		@Override
-		public Fluid getStill() {
-			return this;
 		}
 
 		@Override
@@ -329,8 +315,8 @@ public abstract class WaterLikeFluid extends FlowableFluid {
 		}
 
 		@Override
-		public boolean matchesType(Fluid fluid) {
-			return fluid == this || fluid == flowing;
+		public MapCodec<? extends ContentFluid> getCodec() {
+			return CODEC;
 		}
 	}
 }

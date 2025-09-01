@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.chiseled_bookshelf.step",
-  "place": "minecraft:block.chiseled_bookshelf.place",
-  "hit": "minecraft:block.chiseled_bookshelf.hit",
-  "fall": "minecraft:block.chiseled_bookshelf.fall",
-  "break": "minecraft:block.chiseled_bookshelf.break"
-}

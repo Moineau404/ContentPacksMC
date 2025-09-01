@@ -1,9 +1,0 @@
-{
-  "block": "minecraft:green_banner",
-  "wall_block": "minecraft:green_wall_banner",
-  "properties": {
-    "minecraft:max_stack_size": 16,
-    "minecraft:banner_patterns": []
-  },
-  "type": "minecraft:banner"
-}

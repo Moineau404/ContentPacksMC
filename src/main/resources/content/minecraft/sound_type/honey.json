@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.honey_block.step",
-  "place": "minecraft:block.honey_block.place",
-  "hit": "minecraft:block.honey_block.hit",
-  "fall": "minecraft:block.honey_block.fall",
-  "break": "minecraft:block.honey_block.break"
-}

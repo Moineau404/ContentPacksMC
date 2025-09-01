@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:soul_campfire",
-  "properties": {
-    "minecraft:container": []
-  },
-  "type": "minecraft:block"
-}

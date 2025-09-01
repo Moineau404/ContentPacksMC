@@ -1,7 +1,0 @@
-{
-  "properties": {
-    "minecraft:max_stack_size": 1,
-    "minecraft:writable_book_content": {}
-  },
-  "type": "minecraft:writable_book"
-}

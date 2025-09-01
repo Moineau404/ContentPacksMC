@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:intentionally_empty",
-  "place": "minecraft:block.cactus_flower.place",
-  "hit": "minecraft:intentionally_empty",
-  "fall": "minecraft:intentionally_empty",
-  "break": "minecraft:block.cactus_flower.break"
-}

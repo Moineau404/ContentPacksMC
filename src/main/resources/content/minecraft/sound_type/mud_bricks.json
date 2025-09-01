@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.mud_bricks.step",
-  "place": "minecraft:block.mud_bricks.place",
-  "hit": "minecraft:block.mud_bricks.hit",
-  "fall": "minecraft:block.mud_bricks.fall",
-  "break": "minecraft:block.mud_bricks.break"
-}

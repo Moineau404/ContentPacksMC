@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.sculk_sensor.step",
-  "place": "minecraft:block.sculk_sensor.place",
-  "hit": "minecraft:block.sculk_sensor.hit",
-  "fall": "minecraft:block.sculk_sensor.fall",
-  "break": "minecraft:block.sculk_sensor.break"
-}

@@ -1,9 +1,0 @@
-{
-  "properties": {
-    "minecraft:max_stack_size": 1,
-    "minecraft:rarity": "uncommon",
-    "minecraft:stored_enchantments": {},
-    "minecraft:enchantment_glint_override": true
-  },
-  "type": "minecraft:item"
-}

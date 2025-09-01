@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.azalea_leaves.step",
-  "place": "minecraft:block.azalea_leaves.place",
-  "hit": "minecraft:block.azalea_leaves.hit",
-  "fall": "minecraft:block.azalea_leaves.fall",
-  "break": "minecraft:block.azalea_leaves.break"
-}

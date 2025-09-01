@@ -1,7 +1,0 @@
-{
-  "properties": {
-    "minecraft:max_stack_size": 16,
-    "minecraft:chicken/variant": "minecraft:warm"
-  },
-  "type": "minecraft:egg"
-}

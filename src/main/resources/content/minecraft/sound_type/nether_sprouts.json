@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.nether_sprouts.step",
-  "place": "minecraft:block.nether_sprouts.place",
-  "hit": "minecraft:block.nether_sprouts.hit",
-  "fall": "minecraft:block.nether_sprouts.fall",
-  "break": "minecraft:block.nether_sprouts.break"
-}

@@ -1,7 +1,0 @@
-{
-  "properties": {
-    "occlusion": false,
-    "sound": "minecraft:wood"
-  },
-  "type": "minecraft:end_rod"
-}

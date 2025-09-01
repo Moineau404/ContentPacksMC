@@ -5,12 +5,11 @@ import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import mod.moineau.contentpacks.ContentPacks;
-import mod.moineau.contentpacks.codec.VanillaClientCodecs;
 import mod.moineau.contentpacks.mixin.client.FluidBlockAccessor;
-import mod.moineau.contentpacks.render.block.DynamicBlockRenderLayers;
+import mod.moineau.contentpacks.render.fluid.FluidAsset;
 import net.minecraft.block.Block;
 import net.minecraft.block.FluidBlock;
-import net.minecraft.client.render.BlockRenderLayer;
+import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.registry.Registries;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceFinder;
@@ -30,9 +29,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 // TODO Clean/update
-public class BlockRenderLayerLoader implements ResourceReloader {
+public class FluidAssetLoader implements ResourceReloader {
     private static final ResourceFinder FINDER = ResourceFinder.json("blockstates");
-    private static final Codec<Optional<BlockRenderLayer>> CODEC = VanillaClientCodecs.BLOCK_RENDER_LAYER.optionalFieldOf("render").codec();
+    private static final Codec<Optional<FluidAsset>> CODEC = FluidAsset.CODEC.optionalFieldOf("fluid").codec();
 
     @Override
     public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) {
@@ -40,7 +39,7 @@ public class BlockRenderLayerLoader implements ResourceReloader {
                 () -> FINDER.findResources(manager),
                 prepareExecutor
         ).thenCompose(resourceMap -> {
-            List<CompletableFuture<Pair<Block, BlockRenderLayer>>> list = new ArrayList<>(resourceMap.size());
+            List<CompletableFuture<Pair<FlowableFluid, FluidAsset>>> list = new ArrayList<>(resourceMap.size());
 
             for (Map.Entry<Identifier, Resource> entry : resourceMap.entrySet()) {
                 list.add(CompletableFuture.supplyAsync(() -> {
@@ -48,10 +47,7 @@ public class BlockRenderLayerLoader implements ResourceReloader {
                     Block block = Registries.BLOCK.get(identifier);
 
                     // TODO Clean + error tracking
-                    if (block == null) {
-                        ContentPacks.LOGGER.debug("Discovered unknown block render layer {}, ignoring", identifier);
-                        return null;
-                    } else {
+                    if (block instanceof FluidBlock fluidBlock) {
                         Resource resource = entry.getValue();
 
                         try {
@@ -59,14 +55,15 @@ public class BlockRenderLayerLoader implements ResourceReloader {
 
                             try {
                                 JsonElement jsonElement = StrictJsonParser.parse(reader);
-                                Optional<BlockRenderLayer> layerResult = CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(JsonParseException::new);
+                                Optional<FluidAsset> fluidAsset = CODEC.parse(JsonOps.INSTANCE, jsonElement).getOrThrow(JsonParseException::new);
 
                                 if (reader != null) {
                                     reader.close();
                                 }
 
-                                return layerResult.map(layer -> new Pair<>(block, layer)).orElse(null);
+                                return fluidAsset.map(tints -> new Pair<>(((FluidBlockAccessor) fluidBlock).getFluid(), tints)).orElse(null);
                             } catch (Throwable var13) {
+                                ContentPacks.LOGGER.error("Failed to load fluid asset {} from pack {}", identifier, resource.getPackId(), var13);
                                 if (reader != null) {
                                     try {
                                         reader.close();
@@ -78,26 +75,20 @@ public class BlockRenderLayerLoader implements ResourceReloader {
                                 throw var13;
                             }
                         } catch (Exception var14) {
-                            ContentPacks.LOGGER.error("Failed to load block render layer {} from pack {}", identifier, resource.getPackId(), var14);
+                            ContentPacks.LOGGER.error("Failed to load fluid asset {} from pack {}", identifier, resource.getPackId(), var14);
                             return null;
                         }
+                    } else {
+                        ContentPacks.LOGGER.debug("Discovered unknown fluid asset {}, ignoring", identifier);
+                        return null;
                     }
                 }, prepareExecutor));
             }
 
             return Util.combineSafe(list).thenAcceptAsync(entries -> {
-                DynamicBlockRenderLayers.clear();
-
-                for (Pair<Block, BlockRenderLayer> entry : entries) {
+                for (Pair<FlowableFluid, FluidAsset> entry : entries) {
                     if (entry != null) {
-                        var block = entry.getLeft();
-                        var layer = entry.getRight();
-                        DynamicBlockRenderLayers.putBlock(block, layer);
-                        if (block instanceof FluidBlock fluidBlock) {
-                            var fluid = ((FluidBlockAccessor) fluidBlock).getFluid();
-                            DynamicBlockRenderLayers.putFluid(fluid.getStill(), layer);
-                            DynamicBlockRenderLayers.putFluid(fluid.getFlowing(), layer);
-                        }
+                        entry.getRight().register(entry.getLeft()).getOrThrow();
                     }
                 }
             });

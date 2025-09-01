@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.tuff_bricks.step",
-  "place": "minecraft:block.tuff_bricks.place",
-  "hit": "minecraft:block.tuff_bricks.hit",
-  "fall": "minecraft:block.tuff_bricks.fall",
-  "break": "minecraft:block.tuff_bricks.break"
-}

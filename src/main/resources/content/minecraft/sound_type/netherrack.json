@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.netherrack.step",
-  "place": "minecraft:block.netherrack.place",
-  "hit": "minecraft:block.netherrack.hit",
-  "fall": "minecraft:block.netherrack.fall",
-  "break": "minecraft:block.netherrack.break"
-}

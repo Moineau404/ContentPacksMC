@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.packed_mud.step",
-  "place": "minecraft:block.packed_mud.place",
-  "hit": "minecraft:block.packed_mud.hit",
-  "fall": "minecraft:block.packed_mud.fall",
-  "break": "minecraft:block.packed_mud.break"
-}

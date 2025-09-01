@@ -2,10 +2,7 @@ package mod.moineau.contentpacks.mixin.client;
 
 import mod.moineau.contentpacks.ContentPacksClient;
 import mod.moineau.contentpacks.options.ContentPacksOptions;
-import mod.moineau.contentpacks.resource.BlockColorLoader;
-import mod.moineau.contentpacks.resource.BlockRenderLayerLoader;
-import mod.moineau.contentpacks.resource.ColorMapLoader;
-import mod.moineau.contentpacks.resource.ErrorTracker;
+import mod.moineau.contentpacks.resource.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.RunArgs;
 import net.minecraft.client.color.block.BlockColors;
@@ -33,6 +30,9 @@ public abstract class MinecraftClientMixin {
     @Unique
     private BlockRenderLayerLoader contentpacks$blockRenderLayerLoader;
 
+    @Unique
+    private FluidAssetLoader contentpacks$fluidAssetLoader;
+
     @Shadow
     @Final
     private ReloadableResourceManagerImpl resourceManager;
@@ -51,6 +51,8 @@ public abstract class MinecraftClientMixin {
         this.resourceManager.registerReloader(this.contentpacks$blockColorLoader);
         this.contentpacks$blockRenderLayerLoader = new BlockRenderLayerLoader();
         this.resourceManager.registerReloader(this.contentpacks$blockRenderLayerLoader);
+        this.contentpacks$fluidAssetLoader = new FluidAssetLoader();
+        this.resourceManager.registerReloader(this.contentpacks$fluidAssetLoader);
     }
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))

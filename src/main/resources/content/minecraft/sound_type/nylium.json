@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.nylium.step",
-  "place": "minecraft:block.nylium.place",
-  "hit": "minecraft:block.nylium.hit",
-  "fall": "minecraft:block.nylium.fall",
-  "break": "minecraft:block.nylium.break"
-}

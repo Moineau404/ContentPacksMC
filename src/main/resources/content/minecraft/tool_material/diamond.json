@@ -1,8 +1,0 @@
-{
-  "attack_damage": 3.0,
-  "enchantability": 10,
-  "repair_items": "#minecraft:diamond_tool_materials",
-  "incorrect_blocks": "#minecraft:incorrect_for_diamond_tool",
-  "durability": 1561,
-  "mining_speed": 8.0
-}

@@ -1,7 +1,0 @@
-{
-  "properties": {
-    "minecraft:rarity": "uncommon",
-    "minecraft:enchantment_glint_override": true
-  },
-  "type": "minecraft:experience_bottle"
-}

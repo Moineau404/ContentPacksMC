@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.dried_ghast.step",
-  "place": "minecraft:intentionally_empty",
-  "hit": "minecraft:intentionally_empty",
-  "fall": "minecraft:block.dried_ghast.fall",
-  "break": "minecraft:block.dried_ghast.break"
-}

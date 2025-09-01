@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.netherite_block.step",
-  "place": "minecraft:block.netherite_block.place",
-  "hit": "minecraft:block.netherite_block.hit",
-  "fall": "minecraft:block.netherite_block.fall",
-  "break": "minecraft:block.netherite_block.break"
-}

@@ -1,7 +1,0 @@
-{
-  "fluid": "minecraft:empty",
-  "properties": {
-    "minecraft:max_stack_size": 16
-  },
-  "type": "minecraft:bucket"
-}

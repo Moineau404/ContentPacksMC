@@ -1,8 +1,0 @@
-{
-  "special": true,
-  "background_texture": "minecraft:textures/gui/container/creative_inventory/tab_item_search.png",
-  "title": {
-    "translate": "itemGroup.search"
-  },
-  "icon": "minecraft:compass"
-}

@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.scaffolding.step",
-  "place": "minecraft:block.scaffolding.place",
-  "hit": "minecraft:block.scaffolding.hit",
-  "fall": "minecraft:block.scaffolding.fall",
-  "break": "minecraft:block.scaffolding.break"
-}

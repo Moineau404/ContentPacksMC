@@ -5,10 +5,13 @@ import mod.moineau.contentpacks.block.BlockWithEntityTypes;
 import mod.moineau.contentpacks.codec.*;
 import mod.moineau.contentpacks.entity.BoatType;
 import mod.moineau.contentpacks.event.ContentPacksEvents;
+import mod.moineau.contentpacks.fluid.ContentFluid;
 import mod.moineau.contentpacks.item.ItemTypes;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import net.minecraft.block.*;
 import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ToolMaterial;
@@ -28,6 +31,7 @@ public final class ContentManager {
     public static final RegistryLoader<BlockSetType> BLOCK_SET_TYPES = new RegistryLoader<>(ContentRegistries.BLOCK_SET_TYPE, BlockSetTypeCodecs.CODEC, true);
     public static final RegistryLoader<WoodType> WOOD_TYPES = new RegistryLoader<>(ContentRegistries.WOOD_TYPE, WoodTypeCodecs.CODEC, true);
     public static final RegistryLoader<SaplingGenerator> SAPLING_GENERATORS = new RegistryLoader<>(ContentRegistries.SAPLING_GENERATOR, SaplingGeneratorCodecs.CODEC, true);
+    public static final RegistryLoader<Fluid> FLUIDS = new RegistryLoader<>(Registries.FLUID, ContentFluid.DOWNGRADED_CODEC);
     public static final RegistryLoader<Block> BLOCKS = new RegistryLoader<>(Registries.BLOCK, BlockTypes.CODEC.codec(), true);
     // TODO boat_type -> entity_type
     public static final RegistryLoader<EntityType<?>> BOAT_TYPES = new RegistryLoader<>(Registries.ENTITY_TYPE, CodecUtil.downgrade(BoatType.CODEC), true, "boat_type");
@@ -50,6 +54,11 @@ public final class ContentManager {
     static {
         BLOCK_SET_TYPES.registerListener(entries -> entries.forEach(entry -> BlockSetType.register(entry.value())));
         WOOD_TYPES.registerListener(entries -> entries.forEach(entry -> WoodType.register(entry.value())));
+        FLUIDS.registerListener(entries -> entries.forEach(entry -> {
+            for (FluidState fluidState : entry.value().getStateManager().getStates()) {
+                Fluid.STATE_IDS.add(fluidState);
+            }
+        }));
         BLOCKS.registerListener(entries -> entries.forEach(entry -> {
             Block block = entry.value();
             if (block instanceof BlockEntityProvider) {
@@ -60,6 +69,7 @@ public final class ContentManager {
         registerLoader(BLOCK_SET_TYPES);
         registerLoader(WOOD_TYPES);
         registerLoader(SAPLING_GENERATORS);
+        registerLoader(FLUIDS);
         registerLoader(BLOCKS);
         registerLoader(BOAT_TYPES);
         registerLoader(TOOL_MATERIALS);

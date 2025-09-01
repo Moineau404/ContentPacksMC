@@ -1,7 +1,0 @@
-{
-  "hanging_sign_sound_type": "minecraft:hanging_sign",
-  "fence_gate_close": "minecraft:block.fence_gate.close",
-  "fence_gate_open": "minecraft:block.fence_gate.open",
-  "block_set_type": "minecraft:spruce",
-  "sound_type": "minecraft:wood"
-}

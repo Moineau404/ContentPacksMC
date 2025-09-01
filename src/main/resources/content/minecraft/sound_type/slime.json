@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.slime_block.step",
-  "place": "minecraft:block.slime_block.place",
-  "hit": "minecraft:block.slime_block.hit",
-  "fall": "minecraft:block.slime_block.fall",
-  "break": "minecraft:block.slime_block.break"
-}

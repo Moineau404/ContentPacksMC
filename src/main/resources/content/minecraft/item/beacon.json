@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:beacon",
-  "properties": {
-    "minecraft:rarity": "rare"
-  },
-  "type": "minecraft:block"
-}

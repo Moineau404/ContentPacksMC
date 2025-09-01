@@ -1,8 +1,0 @@
-{
-  "properties": {
-    "minecraft:max_stack_size": 1,
-    "minecraft:potion_contents": {},
-    "minecraft:potion_duration_scale": 0.25
-  },
-  "type": "minecraft:lingering_potion"
-}

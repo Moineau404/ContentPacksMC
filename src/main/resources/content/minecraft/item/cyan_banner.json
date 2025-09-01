@@ -1,9 +1,0 @@
-{
-  "block": "minecraft:cyan_banner",
-  "wall_block": "minecraft:cyan_wall_banner",
-  "properties": {
-    "minecraft:max_stack_size": 16,
-    "minecraft:banner_patterns": []
-  },
-  "type": "minecraft:banner"
-}

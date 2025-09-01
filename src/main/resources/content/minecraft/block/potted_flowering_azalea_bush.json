@@ -1,8 +1,0 @@
-{
-  "potted": "minecraft:flowering_azalea",
-  "properties": {
-    "push_reaction": "destroy",
-    "occlusion": false
-  },
-  "type": "minecraft:flower_pot"
-}

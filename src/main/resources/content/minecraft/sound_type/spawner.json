@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.spawner.step",
-  "place": "minecraft:block.spawner.place",
-  "hit": "minecraft:block.spawner.hit",
-  "fall": "minecraft:block.spawner.fall",
-  "break": "minecraft:block.spawner.break"
-}

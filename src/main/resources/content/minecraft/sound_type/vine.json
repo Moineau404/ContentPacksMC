@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.vine.step",
-  "place": "minecraft:block.vine.place",
-  "hit": "minecraft:block.vine.hit",
-  "fall": "minecraft:block.vine.fall",
-  "break": "minecraft:block.vine.break"
-}

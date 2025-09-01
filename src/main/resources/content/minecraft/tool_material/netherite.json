@@ -1,8 +1,0 @@
-{
-  "attack_damage": 4.0,
-  "enchantability": 15,
-  "repair_items": "#minecraft:netherite_tool_materials",
-  "incorrect_blocks": "#minecraft:incorrect_for_netherite_tool",
-  "durability": 2031,
-  "mining_speed": 9.0
-}

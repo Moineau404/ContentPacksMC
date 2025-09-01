@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.wool.step",
-  "place": "minecraft:block.wool.place",
-  "hit": "minecraft:block.wool.hit",
-  "fall": "minecraft:block.wool.fall",
-  "break": "minecraft:block.wool.break"
-}

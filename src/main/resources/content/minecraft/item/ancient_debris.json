@@ -1,9 +1,0 @@
-{
-  "block": "minecraft:ancient_debris",
-  "properties": {
-    "minecraft:damage_resistant": {
-      "types": "#minecraft:is_fire"
-    }
-  },
-  "type": "minecraft:block"
-}

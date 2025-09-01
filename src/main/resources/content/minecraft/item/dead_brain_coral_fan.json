@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:dead_brain_coral_fan",
-  "wall_block": "minecraft:dead_brain_coral_wall_fan",
-  "direction": "down",
-  "properties": {},
-  "type": "minecraft:standing_and_wall_block"
-}

@@ -1,8 +1,0 @@
-{
-  "block": "minecraft:acacia_sign",
-  "wall_block": "minecraft:acacia_wall_sign",
-  "properties": {
-    "minecraft:max_stack_size": 16
-  },
-  "type": "minecraft:sign"
-}

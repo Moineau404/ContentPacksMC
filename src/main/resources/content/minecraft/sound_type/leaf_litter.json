@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.leaf_litter.step",
-  "place": "minecraft:block.leaf_litter.place",
-  "hit": "minecraft:block.leaf_litter.hit",
-  "fall": "minecraft:block.leaf_litter.fall",
-  "break": "minecraft:block.leaf_litter.break"
-}

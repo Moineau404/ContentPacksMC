@@ -1,8 +1,0 @@
-{
-  "potted": "minecraft:cherry_sapling",
-  "properties": {
-    "push_reaction": "destroy",
-    "occlusion": false
-  },
-  "type": "minecraft:flower_pot"
-}

@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.dripstone_block.step",
-  "place": "minecraft:block.dripstone_block.place",
-  "hit": "minecraft:block.dripstone_block.hit",
-  "fall": "minecraft:block.dripstone_block.fall",
-  "break": "minecraft:block.dripstone_block.break"
-}

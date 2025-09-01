@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.hanging_roots.step",
-  "place": "minecraft:block.hanging_roots.place",
-  "hit": "minecraft:block.hanging_roots.hit",
-  "fall": "minecraft:block.hanging_roots.fall",
-  "break": "minecraft:block.hanging_roots.break"
-}

@@ -1,6 +1,0 @@
-{
-  "properties": {
-    "minecraft:provides_trim_material": "minecraft:diamond"
-  },
-  "type": "minecraft:item"
-}

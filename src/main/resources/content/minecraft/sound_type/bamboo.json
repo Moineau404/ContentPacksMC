@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.bamboo.step",
-  "place": "minecraft:block.bamboo.place",
-  "hit": "minecraft:block.bamboo.hit",
-  "fall": "minecraft:block.bamboo.fall",
-  "break": "minecraft:block.bamboo.break"
-}
