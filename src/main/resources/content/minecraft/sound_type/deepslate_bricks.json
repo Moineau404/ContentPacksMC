@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.deepslate_bricks.step",
-  "place": "minecraft:block.deepslate_bricks.place",
-  "hit": "minecraft:block.deepslate_bricks.hit",
-  "fall": "minecraft:block.deepslate_bricks.fall",
-  "break": "minecraft:block.deepslate_bricks.break"
-}

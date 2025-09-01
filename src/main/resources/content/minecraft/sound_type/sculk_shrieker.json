@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.sculk_shrieker.step",
-  "place": "minecraft:block.sculk_shrieker.place",
-  "hit": "minecraft:block.sculk_shrieker.hit",
-  "fall": "minecraft:block.sculk_shrieker.fall",
-  "break": "minecraft:block.sculk_shrieker.break"
-}

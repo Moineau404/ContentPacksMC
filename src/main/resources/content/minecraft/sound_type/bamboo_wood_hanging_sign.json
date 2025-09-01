@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.bamboo_wood_hanging_sign.step",
-  "place": "minecraft:block.bamboo_wood_hanging_sign.place",
-  "hit": "minecraft:block.bamboo_wood_hanging_sign.hit",
-  "fall": "minecraft:block.bamboo_wood_hanging_sign.fall",
-  "break": "minecraft:block.bamboo_wood_hanging_sign.break"
-}

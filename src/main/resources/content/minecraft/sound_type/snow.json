@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.snow.step",
-  "place": "minecraft:block.snow.place",
-  "hit": "minecraft:block.snow.hit",
-  "fall": "minecraft:block.snow.fall",
-  "break": "minecraft:block.snow.break"
-}

@@ -1,9 +1,0 @@
-{
-  "properties": {
-    "instrument": "wither_skeleton",
-    "push_reaction": "destroy",
-    "explosion_resistance": 1.0,
-    "destroy_time": 1.0
-  },
-  "type": "minecraft:wither_skull"
-}

@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.tuff.step",
-  "place": "minecraft:block.tuff.place",
-  "hit": "minecraft:block.tuff.hit",
-  "fall": "minecraft:block.tuff.fall",
-  "break": "minecraft:block.tuff.break"
-}

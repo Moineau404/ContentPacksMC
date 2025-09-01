@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:soul_torch",
-  "wall_block": "minecraft:soul_wall_torch",
-  "direction": "down",
-  "properties": {},
-  "type": "minecraft:standing_and_wall_block"
-}

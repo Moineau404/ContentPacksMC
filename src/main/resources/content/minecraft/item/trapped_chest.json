@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:trapped_chest",
-  "properties": {
-    "minecraft:container": []
-  },
-  "type": "minecraft:block"
-}

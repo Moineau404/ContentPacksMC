@@ -1,7 +1,0 @@
-{
-  "tree": "minecraft:oak",
-  "secondary_tree": "minecraft:fancy_oak",
-  "flowers": "minecraft:oak_bees_005",
-  "secondary_flowers": "minecraft:fancy_oak_bees_005",
-  "secondary_chance": 0.1
-}

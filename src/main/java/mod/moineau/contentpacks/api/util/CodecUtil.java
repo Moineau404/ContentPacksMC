@@ -7,6 +7,8 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mod.moineau.contentpacks.api.codec.*;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 
 import java.util.Map;
@@ -74,6 +76,10 @@ public final class CodecUtil {
      */
     public static <T, A> Codec<Supplier<T>> lazy(Decoder<A> decoder, Encoder<T> encoder, Function<A, T> converter) {
         return of(decoder.map(a -> Suppliers.memoize(() -> converter.apply(a))), encoder.comap(Supplier::get));
+    }
+
+    public static <T> Codec<Supplier<T>> lazy(Registry<T> registry) {
+        return lazy(RegistryKey.createCodec(registry.getKey()), registry.getCodec(), registry::get);
     }
 
     @Workaround

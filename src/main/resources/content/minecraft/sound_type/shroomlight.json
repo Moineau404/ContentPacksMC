@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.shroomlight.step",
-  "place": "minecraft:block.shroomlight.place",
-  "hit": "minecraft:block.shroomlight.hit",
-  "fall": "minecraft:block.shroomlight.fall",
-  "break": "minecraft:block.shroomlight.break"
-}

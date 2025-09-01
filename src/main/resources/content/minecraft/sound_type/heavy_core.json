@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.heavy_core.step",
-  "place": "minecraft:block.heavy_core.place",
-  "hit": "minecraft:block.heavy_core.hit",
-  "fall": "minecraft:block.heavy_core.fall",
-  "break": "minecraft:block.heavy_core.break"
-}

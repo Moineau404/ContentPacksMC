@@ -1,9 +1,0 @@
-{
-  "properties": {
-    "push_reaction": "destroy",
-    "description": "block.minecraft.wither_skeleton_skull",
-    "explosion_resistance": 1.0,
-    "destroy_time": 1.0
-  },
-  "type": "minecraft:wither_wall_skull"
-}

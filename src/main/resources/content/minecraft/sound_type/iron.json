@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.iron.step",
-  "place": "minecraft:block.iron.place",
-  "hit": "minecraft:block.iron.hit",
-  "fall": "minecraft:block.iron.fall",
-  "break": "minecraft:block.iron.break"
-}

@@ -1,8 +1,0 @@
-{
-  "step": "minecraft:block.anvil.step",
-  "place": "minecraft:block.anvil.place",
-  "hit": "minecraft:block.anvil.hit",
-  "fall": "minecraft:block.anvil.fall",
-  "volume": 0.3,
-  "break": "minecraft:block.anvil.break"
-}

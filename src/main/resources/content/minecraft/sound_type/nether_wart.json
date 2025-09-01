@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.stone.step",
-  "place": "minecraft:item.nether_wart.plant",
-  "hit": "minecraft:block.stone.hit",
-  "fall": "minecraft:block.stone.fall",
-  "break": "minecraft:block.nether_wart.break"
-}

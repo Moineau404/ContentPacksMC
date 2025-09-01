@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.glass.step",
-  "place": "minecraft:block.glass.place",
-  "hit": "minecraft:block.glass.hit",
-  "fall": "minecraft:block.glass.fall",
-  "break": "minecraft:block.glass.break"
-}

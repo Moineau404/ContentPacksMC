@@ -1,9 +1,0 @@
-{
-  "properties": {
-    "minecraft:damage_resistant": {
-      "types": "#minecraft:is_fire"
-    },
-    "minecraft:provides_trim_material": "minecraft:netherite"
-  },
-  "type": "minecraft:item"
-}

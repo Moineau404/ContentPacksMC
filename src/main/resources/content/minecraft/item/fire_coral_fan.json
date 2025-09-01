@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:fire_coral_fan",
-  "wall_block": "minecraft:fire_coral_wall_fan",
-  "direction": "down",
-  "properties": {},
-  "type": "minecraft:standing_and_wall_block"
-}

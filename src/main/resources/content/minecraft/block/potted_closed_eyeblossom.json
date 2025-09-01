@@ -1,9 +1,0 @@
-{
-  "potted": "minecraft:closed_eyeblossom",
-  "properties": {
-    "push_reaction": "destroy",
-    "occlusion": false,
-    "random_ticks": true
-  },
-  "type": "minecraft:flower_pot"
-}

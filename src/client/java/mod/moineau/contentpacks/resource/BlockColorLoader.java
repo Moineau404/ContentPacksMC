@@ -27,6 +27,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
+// TODO Clean/update
 public class BlockColorLoader implements ResourceReloader {
     private static final ResourceFinder FINDER = ResourceFinder.json("blockstates");
     private static final Codec<Optional<BlockTints>> CODEC = BlockTints.CODEC.optionalFieldOf("tints").codec();

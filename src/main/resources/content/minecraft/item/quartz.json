@@ -1,6 +1,0 @@
-{
-  "properties": {
-    "minecraft:provides_trim_material": "minecraft:quartz"
-  },
-  "type": "minecraft:item"
-}

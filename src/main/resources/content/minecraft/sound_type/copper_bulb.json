@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.copper_bulb.step",
-  "place": "minecraft:block.copper_bulb.place",
-  "hit": "minecraft:block.copper_bulb.hit",
-  "fall": "minecraft:block.copper_bulb.fall",
-  "break": "minecraft:block.copper_bulb.break"
-}

@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.lodestone.step",
-  "place": "minecraft:block.lodestone.place",
-  "hit": "minecraft:block.lodestone.hit",
-  "fall": "minecraft:block.lodestone.fall",
-  "break": "minecraft:block.lodestone.break"
-}

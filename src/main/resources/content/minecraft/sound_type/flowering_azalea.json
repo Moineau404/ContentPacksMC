@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.flowering_azalea.step",
-  "place": "minecraft:block.flowering_azalea.place",
-  "hit": "minecraft:block.flowering_azalea.hit",
-  "fall": "minecraft:block.flowering_azalea.fall",
-  "break": "minecraft:block.flowering_azalea.break"
-}

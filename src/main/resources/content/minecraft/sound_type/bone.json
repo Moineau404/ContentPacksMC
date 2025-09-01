@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.bone_block.step",
-  "place": "minecraft:block.bone_block.place",
-  "hit": "minecraft:block.bone_block.hit",
-  "fall": "minecraft:block.bone_block.fall",
-  "break": "minecraft:block.bone_block.break"
-}

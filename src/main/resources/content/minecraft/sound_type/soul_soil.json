@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.soul_soil.step",
-  "place": "minecraft:block.soul_soil.place",
-  "hit": "minecraft:block.soul_soil.hit",
-  "fall": "minecraft:block.soul_soil.fall",
-  "break": "minecraft:block.soul_soil.break"
-}

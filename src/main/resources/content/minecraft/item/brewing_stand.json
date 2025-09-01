@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:brewing_stand",
-  "properties": {
-    "minecraft:container": []
-  },
-  "type": "minecraft:block"
-}

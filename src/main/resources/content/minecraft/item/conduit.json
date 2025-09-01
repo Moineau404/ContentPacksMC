@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:conduit",
-  "properties": {
-    "minecraft:rarity": "uncommon"
-  },
-  "type": "minecraft:block"
-}

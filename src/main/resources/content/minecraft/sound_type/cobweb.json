@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.cobweb.step",
-  "place": "minecraft:block.cobweb.place",
-  "hit": "minecraft:block.cobweb.hit",
-  "fall": "minecraft:block.cobweb.fall",
-  "break": "minecraft:block.cobweb.break"
-}

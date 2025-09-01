@@ -1,9 +1,0 @@
-{
-  "properties": {
-    "push_reaction": "destroy",
-    "description": "block.minecraft.piglin_head",
-    "explosion_resistance": 1.0,
-    "destroy_time": 1.0
-  },
-  "type": "minecraft:piglinwallskull"
-}

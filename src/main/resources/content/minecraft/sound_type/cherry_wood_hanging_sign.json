@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.cherry_wood_hanging_sign.step",
-  "place": "minecraft:block.cherry_wood_hanging_sign.place",
-  "hit": "minecraft:block.cherry_wood_hanging_sign.hit",
-  "fall": "minecraft:block.cherry_wood_hanging_sign.fall",
-  "break": "minecraft:block.cherry_wood_hanging_sign.break"
-}

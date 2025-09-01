@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.deepslate.step",
-  "place": "minecraft:block.deepslate.place",
-  "hit": "minecraft:block.deepslate.hit",
-  "fall": "minecraft:block.deepslate.fall",
-  "break": "minecraft:block.deepslate.break"
-}

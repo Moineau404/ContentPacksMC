@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.moss.step",
-  "place": "minecraft:block.moss.place",
-  "hit": "minecraft:block.moss.hit",
-  "fall": "minecraft:block.moss.fall",
-  "break": "minecraft:block.moss.break"
-}

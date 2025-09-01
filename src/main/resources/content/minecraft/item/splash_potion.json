@@ -1,7 +1,0 @@
-{
-  "properties": {
-    "minecraft:max_stack_size": 1,
-    "minecraft:potion_contents": {}
-  },
-  "type": "minecraft:splash_potion"
-}

@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:barrel",
-  "properties": {
-    "minecraft:container": []
-  },
-  "type": "minecraft:block"
-}

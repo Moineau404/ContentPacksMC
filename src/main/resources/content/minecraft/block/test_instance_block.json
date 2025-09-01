@@ -1,8 +1,0 @@
-{
-  "properties": {
-    "occlusion": false,
-    "explosion_resistance": 3600000.0,
-    "destroy_time": -1.0
-  },
-  "type": "minecraft:test_instance"
-}

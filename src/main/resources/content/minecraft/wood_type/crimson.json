@@ -1,7 +1,0 @@
-{
-  "hanging_sign_sound_type": "minecraft:nether_wood_hanging_sign",
-  "fence_gate_close": "minecraft:block.nether_wood_fence_gate.close",
-  "fence_gate_open": "minecraft:block.nether_wood_fence_gate.open",
-  "block_set_type": "minecraft:crimson",
-  "sound_type": "minecraft:nether_wood"
-}

@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.basalt.step",
-  "place": "minecraft:block.basalt.place",
-  "hit": "minecraft:block.basalt.hit",
-  "fall": "minecraft:block.basalt.fall",
-  "break": "minecraft:block.basalt.break"
-}

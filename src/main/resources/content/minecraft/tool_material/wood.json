@@ -1,8 +1,0 @@
-{
-  "attack_damage": 0.0,
-  "enchantability": 15,
-  "repair_items": "#minecraft:wooden_tool_materials",
-  "incorrect_blocks": "#minecraft:incorrect_for_wooden_tool",
-  "durability": 59,
-  "mining_speed": 2.0
-}

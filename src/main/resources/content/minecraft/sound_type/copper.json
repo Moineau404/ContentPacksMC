@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.copper.step",
-  "place": "minecraft:block.copper.place",
-  "hit": "minecraft:block.copper.hit",
-  "fall": "minecraft:block.copper.fall",
-  "break": "minecraft:block.copper.break"
-}

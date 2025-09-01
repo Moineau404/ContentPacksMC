@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.copper_grate.step",
-  "place": "minecraft:block.copper_grate.place",
-  "hit": "minecraft:block.copper_grate.hit",
-  "fall": "minecraft:block.copper_grate.fall",
-  "break": "minecraft:block.copper_grate.break"
-}

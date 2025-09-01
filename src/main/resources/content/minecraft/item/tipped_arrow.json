@@ -1,7 +1,0 @@
-{
-  "properties": {
-    "minecraft:potion_contents": {},
-    "minecraft:potion_duration_scale": 0.125
-  },
-  "type": "minecraft:tipped_arrow"
-}

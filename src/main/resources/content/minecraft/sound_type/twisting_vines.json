@@ -1,8 +1,0 @@
-{
-  "step": "minecraft:block.weeping_vines.step",
-  "place": "minecraft:block.weeping_vines.place",
-  "hit": "minecraft:block.weeping_vines.hit",
-  "fall": "minecraft:block.weeping_vines.fall",
-  "pitch": 0.5,
-  "break": "minecraft:block.weeping_vines.break"
-}

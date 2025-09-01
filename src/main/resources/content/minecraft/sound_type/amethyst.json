@@ -1,7 +1,0 @@
-{
-  "step": "minecraft:block.amethyst_block.step",
-  "place": "minecraft:block.amethyst_block.place",
-  "hit": "minecraft:block.amethyst_block.hit",
-  "fall": "minecraft:block.amethyst_block.fall",
-  "break": "minecraft:block.amethyst_block.break"
-}

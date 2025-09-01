@@ -1,7 +1,0 @@
-{
-  "block": "minecraft:chest",
-  "properties": {
-    "minecraft:container": []
-  },
-  "type": "minecraft:block"
-}
