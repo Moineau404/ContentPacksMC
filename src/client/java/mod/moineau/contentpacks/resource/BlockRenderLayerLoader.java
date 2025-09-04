@@ -5,7 +5,7 @@ import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import mod.moineau.contentpacks.ContentPacks;
-import mod.moineau.contentpacks.codec.VanillaClientCodecs;
+import mod.moineau.contentpacks.api.util.CodecUtil;
 import mod.moineau.contentpacks.mixin.client.FluidBlockAccessor;
 import mod.moineau.contentpacks.render.block.DynamicBlockRenderLayers;
 import net.minecraft.block.Block;
@@ -32,7 +32,7 @@ import java.util.concurrent.Executor;
 // TODO Clean/update
 public class BlockRenderLayerLoader implements ResourceReloader {
     private static final ResourceFinder FINDER = ResourceFinder.json("blockstates");
-    private static final Codec<Optional<BlockRenderLayer>> CODEC = VanillaClientCodecs.BLOCK_RENDER_LAYER.optionalFieldOf("render").codec();
+    private static final Codec<Optional<BlockRenderLayer>> CODEC = CodecUtil.enumByName(BlockRenderLayer.class).optionalFieldOf("render").codec();
 
     @Override
     public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) {

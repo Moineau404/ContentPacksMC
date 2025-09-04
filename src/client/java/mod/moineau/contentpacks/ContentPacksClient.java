@@ -21,23 +21,21 @@ public class ContentPacksClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		bootstrap();
+		ColorResolvers.bootstrap();
+		BlockTintSourceTypes.bootstrap();
+		BoatTypeRendering.bootstrap();
+		SignRendering.bootstrap();
+
 		PACK_MANAGER.scanPacks();
 		OPTIONS.updatePackManager(PACK_MANAGER);
 		ContentManager.registerLoader(ClientContentManager::load);
 		ContentPacks.load(PACK_MANAGER.createResourcePacks());
+
 		if (OPTIONS.isDebugEnabled()) {
 			ErrorTracker.write();
 		}
 		if (OPTIONS.isOutputEnabled()) {
 			ContentOutput.output();
 		}
-	}
-
-	public static void bootstrap() {
-		ColorResolvers.bootstrap();
-		BlockTintSourceTypes.bootstrap();
-		BoatTypeRendering.bootstrap();
-		SignRendering.bootstrap();
 	}
 }

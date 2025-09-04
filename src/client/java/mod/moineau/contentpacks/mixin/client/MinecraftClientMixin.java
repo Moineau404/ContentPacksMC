@@ -60,7 +60,7 @@ public abstract class MinecraftClientMixin {
         if (ContentPacksOptions.read().isDebugEnabled() && ErrorTracker.hasErrors()) {
             // TODO Find why translatable "options.contentpacks.errors.description" does not work
             this.getToastManager().add(SystemToast.create(((MinecraftClient) (Object) this), ContentPacksClient.CONTENT_LOAD_FAILURE,
-                    Text.translatable("options.contentpacks.errors.title").withColor(Colors.LIGHT_RED), Text.translatableWithFallback("options.contentpacks.errors.description", "Check errors output file.").withColor(Colors.LIGHT_RED)));
+                    Text.translatable("options.contentpacks.errors.title", ErrorTracker.errorCount()).withColor(Colors.LIGHT_RED), Text.translatableWithFallback("options.contentpacks.errors.description", "Check errors output file.").withColor(Colors.LIGHT_RED)));
         }
     }
 }

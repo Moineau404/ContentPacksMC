@@ -129,6 +129,7 @@ public final class ContentPacksOptions {
     public boolean refreshPacks(ResourcePackManager packManager) {
         List<String> old = ImmutableList.copyOf(this.enabledContentPacks);
         this.enabledContentPacks.clear();
+        this.disabledContentPacks.clear();
         for (ResourcePackProfile profile : packManager.getEnabledProfiles()) {
             if (!profile.isPinned()) {
                 this.enabledContentPacks.add(profile.getId());
@@ -155,15 +156,7 @@ public final class ContentPacksOptions {
         return debug;
     }
 
-    public void setDebugEnabled(boolean value) {
-        debug = value;
-    }
-
     public boolean isOutputEnabled() {
         return output;
-    }
-
-    public void setOutputEnabled(boolean value) {
-        output = value;
     }
 }

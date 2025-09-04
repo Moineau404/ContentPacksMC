@@ -40,28 +40,23 @@ public final class ContentPacks implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        //Mappings.load();
-        bootstrap();
+        ContentRegistries.bootstrap();
+        MapColors.bootstrap();
+        InteractionType.bootstrap();
     }
 
     // TODO Implementation of an error monitoring system with debug file where all errors are written by pack
     // TODO Make loading of content packs to occure after all mods are initialized
     public static void load(List<ResourcePack> packs) {
-        if (!hasLoaded) {
-            LOGGER.info("Loading content...");
-            FabricLoader.getInstance().getEntrypointContainers("contentpacks", ContentPacksExtension.class)
-                    .forEach(entrypoint -> entrypoint.getEntrypoint().beforeContentLoaded());
-            ContentManager.load(new LifecycledResourceManagerImpl(RESOURCE_TYPE, packs));
-            FabricLoader.getInstance().getEntrypointContainers("contentpacks", ContentPacksExtension.class)
-                    .forEach(entrypoint -> entrypoint.getEntrypoint().afterContentLoaded());
-            LOGGER.info("Content loaded!");
-            hasLoaded = true;
+        if (hasLoaded) {
+            throw new IllegalStateException("Cannot load content twice!");
         }
-    }
-
-    private static void bootstrap() {
-        ContentRegistries.bootstrap();
-        MapColors.bootstrap();
-        InteractionType.bootstrap();
+        List<ContentPacksExtension> extensions = FabricLoader.getInstance().getEntrypoints("contentpacks", ContentPacksExtension.class);
+        extensions.forEach(ContentPacksExtension::beforeContentLoaded);
+        LOGGER.info("Loading content...");
+        ContentManager.load(new LifecycledResourceManagerImpl(RESOURCE_TYPE, packs));
+        LOGGER.info("Content loaded!");
+        hasLoaded = true;
+        extensions.forEach(ContentPacksExtension::afterContentLoaded);
     }
 }

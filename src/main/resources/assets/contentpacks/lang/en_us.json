@@ -3,7 +3,7 @@
   "options.contentpacks.title": "Select Content Packs",
   "options.contentpacks.changed.title": "Content packs configuration changed!",
   "options.contentpacks.changed.description": "Restart the game to apply changes.",
-  "options.contentpacks.errors.title": "Errors occured while loading content!",
+  "options.contentpacks.errors.title": "%s errors occured while loading content!",
   "options.contentpacks.errors.description": "Check errors output file.",
   "options.contentpacks.advanced": "Advanced...",
   "options.contentpacks.advanced.title": "Advanced",

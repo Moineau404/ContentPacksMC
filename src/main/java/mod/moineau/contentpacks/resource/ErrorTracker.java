@@ -16,12 +16,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class ErrorTracker {
-    private static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/ErrorTracker");
+    private static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Errors");
     private static final File FILE = FabricLoader.getInstance().getConfigDir().resolve(ContentPacks.MOD_ID).resolve("errors.txt").toFile();
     private static final List<String> ERRORS = new LinkedList<>();
 
     public static void print(String error) {
         ERRORS.add(error);
+        LOGGER.error(error);
     }
 
     public static void print(Identifier id, Resource resource, String error) {
@@ -48,5 +49,9 @@ public final class ErrorTracker {
 
     public static boolean hasErrors() {
         return !ERRORS.isEmpty();
+    }
+
+    public static int errorCount() {
+        return ERRORS.size();
     }
 }
