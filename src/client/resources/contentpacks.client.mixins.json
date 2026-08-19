@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "package": "mod.moineau.contentpacks.client.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "MinecraftMixin",
+    "OptionsScreenMixin",
+    "SheetsMixin",
+    "WorldOpenFlowsMixin",
+    "block.BlockColorsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "mixins": [
+    "ChestRendererMixin",
+    "LiquidBlockAccessor",
+    "block.BlockEntityMixin",
+    "block.BlockEntityRenderStateMixin",
+    "block.ChestBlockMixin",
+    "block.EnderChestBlockMixin",
+    "block.TrappedChestBlockMixin"
+  ]
+}

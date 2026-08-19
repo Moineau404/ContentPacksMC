@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "contentpacks",
+	"version": "${version}",
+	"name": "Content Packs",
+	"description": "Finally! JSON blocks, items and more...",
+	"authors": [
+		"Moineau"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/contentpacks/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"mod.moineau.contentpacks.ContentPacks"
+		],
+		"client": [
+			"mod.moineau.contentpacks.client.ContentPacksClient"
+		],
+		"packrepos": [
+			"mod.moineau.contentpacks.packs.ContentPacksRepositorySource"
+		]
+	},
+	"mixins": [
+		"contentpacks.mixins.json",
+		{
+			"config": "contentpacks.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"accessWidener" : "contentpacks.accesswidener"
+}

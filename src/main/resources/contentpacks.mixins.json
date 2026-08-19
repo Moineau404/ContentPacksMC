@@ -1,0 +1,38 @@
+{
+  "required": true,
+  "package": "mod.moineau.contentpacks.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "BuiltInRegistriesMixin",
+    "EntityAttachmentsAccessor",
+    "OverlayMetadataSectionMixin",
+    "PackFormatMixin",
+    "PackMetadataSectionMixin",
+    "PackTypeMixin",
+    "WorldVersionSimpleMixin",
+    "block.AbstractChestBlockMixin",
+    "block.BlockBehaviourAccessor",
+    "block.BlockBehaviourMixin",
+    "block.BlockBehaviourPropertiesMixin",
+    "block.BlockSetTypeMixin",
+    "block.BlocksMixin",
+    "block.ChestBlockMixin",
+    "block.EnderChestBlockMixin",
+    "block.OxidizableStairsBlockMixin",
+    "block.StairsBlockMixin",
+    "block.TrappedChestBlockMixin",
+    "block.TreeGrowerMixin",
+    "block.WoodTypeMixin",
+    "item.AxeItemMixin",
+    "item.ItemMixin",
+    "item.ItemPropertiesAccessor",
+    "item.ItemPropertiesMixin",
+    "item.ShovelItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}
