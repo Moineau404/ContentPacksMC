@@ -62,6 +62,8 @@ public class WritingLogger {
         } catch (IOException e) {
             if (logger != null) this.logger.error("Failed to write log file {}: {}", file, e);
         }
+
+        this.clear();
     }
 
     public void clear() {

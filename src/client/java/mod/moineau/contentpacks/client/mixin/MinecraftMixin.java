@@ -58,8 +58,12 @@ public abstract class MinecraftMixin {
     @Inject(method = "onGameLoadFinished", at = @At(value = "TAIL"))
     private void inject$onGameLoadFinished_popup(GameLoadCookie cookie, CallbackInfo ci) {
         if (ErrorLogger.LOAD.count() > 0) {
-            SystemToast.add(gui.toastManager(), ContentPacksClient.CONTENT_LOAD_FAILURE,
-                    Component.translatable("options.contentpacks.errors.title", ErrorLogger.LOAD.count()).withColor(CommonColors.SOFT_RED), Component.translatable("options.contentpacks.errors.description").withColor(CommonColors.SOFT_RED));
+            SystemToast.add(
+                    gui.toastManager(),
+                    ContentPacksClient.TOAST_LOAD_FAILURE,
+                    Component.translatable("options.contentpacks.toast.errors.title", ErrorLogger.LOAD.count()).withColor(CommonColors.SOFT_RED),
+                    Component.translatable("options.contentpacks.toast.errors.description").withColor(CommonColors.SOFT_RED)
+            );
         }
     }
 }

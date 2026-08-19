@@ -8,7 +8,6 @@ import mod.moineau.contentpacks.client.render.entity.ChestRendering;
 import mod.moineau.contentpacks.client.resource.ClientContentManager;
 import mod.moineau.contentpacks.client.world.biome.ColorResolvers;
 import mod.moineau.contentpacks.resource.ContentManager;
-import mod.moineau.contentpacks.resource.ContentOutput;
 import mod.moineau.contentpacks.util.ErrorLogger;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.gui.components.toasts.SystemToast;
@@ -23,8 +22,9 @@ public class ContentPacksClient implements ClientModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Client");
 	public static final PackRepository PACK_REPOSITORY = new PackRepository(ContentPacks.REPOSITORY_SOURCE);
 	public static final ContentPacksOptions OPTIONS = ContentPacksOptions.read();
-	public static final SystemToast.SystemToastId CONTENT_LOAD_FAILURE = new SystemToast.SystemToastId(10000L);
-	public static final SystemToast.SystemToastId CONTENT_CHANGED = new SystemToast.SystemToastId();
+	public static final SystemToast.SystemToastId TOAST_LOAD_FAILURE = new SystemToast.SystemToastId(10000L);
+	public static final SystemToast.SystemToastId TOAST_CHANGED = new SystemToast.SystemToastId();
+	public static final SystemToast.SystemToastId TOAST_OUTPUT = new SystemToast.SystemToastId();
 
 	@Override
 	public void onInitializeClient() {
@@ -34,10 +34,6 @@ public class ContentPacksClient implements ClientModInitializer {
 		ContentPacks.loadRepository(PACK_REPOSITORY);
 
 		ErrorLogger.LOAD.flush();
-		if (OPTIONS.isOutputEnabled()) {
-			ContentOutput.output();
-			ErrorLogger.OUTPUT.flush();
-		}
 
 		ColorResolvers.bootStrap();
 		BlockTintSourceTypes.bootStrap();

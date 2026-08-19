@@ -2,11 +2,12 @@ package mod.moineau.contentpacks.util;
 
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.api.util.WritingLogger;
-import mod.moineau.contentpacks.resource.ContentOutput;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,15 +16,17 @@ public class ErrorLogger extends WritingLogger {
     public static final ErrorLogger LOAD = new ErrorLogger("errors") {
         @Override
         public void flush() {
-            super.flush();
             if (this.count() > 0) ContentPacks.LOGGER.error("{} errors encountered while loading content!", this.count());
+            super.flush();
         }
     };
     public static final ErrorLogger OUTPUT = new ErrorLogger("output_errors") {
+        public static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Output");
+
         @Override
         public void flush() {
+            if (this.count() > 0) LOGGER.warn("{} errors encountered while outputing content!", this.count());
             super.flush();
-            if (this.count() > 0) ContentOutput.LOGGER.warn("{} errors encountered while outputing content!", this.count());
         }
     };
 

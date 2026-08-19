@@ -68,7 +68,7 @@ public final class ContentPacks implements ModInitializer {
     }
 
     // TODO Make loading of content packs to occure after all mods are initialized
-    public static void load(List<PackResources> packResources) {
+    private static void load(List<PackResources> packResources) {
         if (hasLoaded) {
             throw new IllegalStateException("Cannot load content twice!");
         }

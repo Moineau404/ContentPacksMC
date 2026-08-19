@@ -30,16 +30,13 @@ public abstract class OptionsScreenMixin extends Screen {
 
     @Unique
     private void contentpacks$refreshContentPacks(PackRepository packRepository) {
-//        if (ContentPacksClient.OPTIONS.refreshPacks(packRepository)) {
-//            this.client.setScreen(new PopupScreen.Builder(this, Text.translatable("options.contentpacks.changed.title"))
-//                            .message(Text.translatable("options.contentpacks.changed.description"))
-//                    .button(Text.translatable("gui.ok"), PopupScreen::close).build());
-//        } else {
-//            this.client.setScreen(this);
-//        }
         if (ContentPacksClient.OPTIONS.refreshPacks(packRepository)) {
-            SystemToast.add(this.minecraft.gui.toastManager(), ContentPacksClient.CONTENT_CHANGED,
-                    Component.translatable("options.contentpacks.changed.title"), Component.translatable("options.contentpacks.changed.description"));
+            SystemToast.add(
+                    this.minecraft.gui.toastManager(),
+                    ContentPacksClient.TOAST_CHANGED,
+                    Component.translatable("options.contentpacks.toast.changed.title"),
+                    Component.translatable("options.contentpacks.toast.changed.description")
+            );
         }
         this.minecraft.setScreenAndShow(this);
     }

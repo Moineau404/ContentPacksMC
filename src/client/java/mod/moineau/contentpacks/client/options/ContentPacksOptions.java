@@ -27,28 +27,24 @@ public final class ContentPacksOptions {
     private static final File FILE = FabricLoader.getInstance().getConfigDir().resolve(ContentPacks.MOD_ID + ".json").toFile();
     private static final Codec<ContentPacksOptions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.listOf().fieldOf("enabled").forGetter(ContentPacksOptions::getEnabledContentPacks),
-            Codec.STRING.listOf().fieldOf("disabled").forGetter(ContentPacksOptions::getDisabledContentPacks),
-            Codec.BOOL.fieldOf("output").forGetter(ContentPacksOptions::isOutputEnabled)
+            Codec.STRING.listOf().fieldOf("disabled").forGetter(ContentPacksOptions::getDisabledContentPacks)
     ).apply(instance, ContentPacksOptions::new));
     private final List<String> enabledContentPacks = new ArrayList<>();
     private final List<String> disabledContentPacks = new ArrayList<>();
-    private boolean output;
 
     private ContentPacksOptions(
             List<String> enabledContentPacks,
-            List<String> disabledContentPacks,
-            boolean output
+            List<String> disabledContentPacks
     ) {
         this.enabledContentPacks.addAll(enabledContentPacks);
         this.disabledContentPacks.addAll(disabledContentPacks);
-        this.output = output;
     }
 
     /**
      * Return new empty instance
      */
     private static ContentPacksOptions empty() {
-        return new ContentPacksOptions(new ArrayList<>(), new ArrayList<>(), false);
+        return new ContentPacksOptions(new ArrayList<>(), new ArrayList<>());
     }
 
     /**
@@ -145,13 +141,5 @@ public final class ContentPacksOptions {
 
     public List<String> getDisabledContentPacks() {
         return disabledContentPacks;
-    }
-
-    public boolean isOutputEnabled() {
-        return output;
-    }
-
-    public void setOutputEnabled(boolean value) {
-        this.output = value;
     }
 }

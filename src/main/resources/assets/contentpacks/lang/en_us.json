@@ -1,13 +1,17 @@
 {
   "options.contentpacks": "Content Packs...",
   "options.contentpacks.title": "Select Content Packs",
-  "options.contentpacks.changed.title": "Content packs configuration changed!",
-  "options.contentpacks.changed.description": "Restart the game to apply changes.",
-  "options.contentpacks.errors.title": "%s errors occured while loading content!",
-  "options.contentpacks.errors.description": "Check errors output file.",
   "options.contentpacks.advanced": "Advanced...",
   "options.contentpacks.advanced.title": "Advanced",
   "options.contentpacks.output": "Output",
-  "options.contentpacks.output.tooltip": "Output all game content at game start in §a<game_dir>/.contentpacks.out§r.",
+  "options.contentpacks.output.tooltip": "Output game content",
+  "options.contentpacks.output.loading.tooltip": "Outputing game content...",
+  "options.contentpacks.toast.changed.title": "Content packs configuration changed!",
+  "options.contentpacks.toast.changed.description": "Restart the game to apply changes.",
+  "options.contentpacks.toast.errors.title": "%s errors while loading content!",
+  "options.contentpacks.toast.errors.description": "Check error logs.",
+  "options.contentpacks.toast.output.title": "Finished outputing content!",
+  "options.contentpacks.toast.output.description": "Check output directory.",
+  "options.contentpacks.output.dialog": "Select an output directory...",
   "pack.source.content": "content"
 }
