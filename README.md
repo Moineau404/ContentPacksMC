@@ -268,6 +268,8 @@ Content packs are located in the ```<game_dir>/contentpacks``` folder, and can b
 ```
 </details>
 
+_You may want to download the [test pack](https://raw.githubusercontent.com/Moineau404/ContentPacksMC/master/.assets/test/willow-wood-9.0.zip) shown in the gallery._
+
 # Known limitations
 
 - **Content is loaded at game start : reload means game restart.** (hard limitation!)
