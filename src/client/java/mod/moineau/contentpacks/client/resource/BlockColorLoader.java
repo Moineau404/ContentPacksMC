@@ -70,7 +70,7 @@ public class BlockColorLoader implements PreparableReloadListener {
 
                             return tintsResult.map(tints -> new Pair<>(block, tints)).orElse(null);
                         } catch (Exception e) {
-                            ContentPacksClient.LOGGER.error("Failed to load block tints for block {} from pack {}", id, resource.sourcePackId(), e);
+                            ContentPacksClient.LOGGER.error("Failed to load block tints for block {} from pack {}: {}", id, resource.sourcePackId(), e);
                             return null;
                         }
                     }

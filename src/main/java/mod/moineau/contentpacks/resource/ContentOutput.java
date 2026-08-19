@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+//TODO : Make output just a button in the content packs screen showing a file popup asking for a directory to extract all content in. Make a loading screen using CompletableFuture etc...
 public class ContentOutput {
     public static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Output");
     private static final Gson GSON = new GsonBuilder().setFormattingStyle(FormattingStyle.PRETTY).disableHtmlEscaping().create();

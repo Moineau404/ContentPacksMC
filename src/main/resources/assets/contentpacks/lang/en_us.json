@@ -7,7 +7,7 @@
   "options.contentpacks.errors.description": "Check errors output file.",
   "options.contentpacks.advanced": "Advanced...",
   "options.contentpacks.advanced.title": "Advanced",
-  "options.contentpacks.debug": "Debug",
   "options.contentpacks.output": "Output",
+  "options.contentpacks.output.tooltip": "Output all game content at game start in §a<game_dir>/.contentpacks.out§r.",
   "pack.source.content": "content"
 }

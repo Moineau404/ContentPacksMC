@@ -150,4 +150,8 @@ public final class ContentPacksOptions {
     public boolean isOutputEnabled() {
         return output;
     }
+
+    public void setOutputEnabled(boolean value) {
+        this.output = value;
+    }
 }
