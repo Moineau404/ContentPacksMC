@@ -8,9 +8,11 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mod.moineau.contentpacks.api.codec.*;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -18,6 +20,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public final class CodecUtil {
+    public static final String INJECT_ID_KEY = "@id";
     private static final Encoder<?> EMPTY = new Encoder<>() {
         @Override
         public <T1> DataResult<T1> encode(Object input, DynamicOps<T1> ops, T1 prefix) {
@@ -60,8 +63,27 @@ public final class CodecUtil {
         return new AlternativeMapCodec<>(first, second);
     }
 
+    public static <T> Codec<T> withDecodingOnlyAlternative(Codec<T> primary, Decoder<T> alternative) {
+        return new DecodingOnlyAlternativeCodec<>(primary, alternative);
+    }
+
+    public static <T> MapCodec<T> mapWithDecodingOnlyAlternative(MapCodec<T> primary, MapDecoder<T> alternative) {
+        return new DecodingOnlyAlternativeMapCodec<>(primary, alternative);
+    }
+
     public static <O, S, T extends S> RecordCodecBuilder<O, S> unilateral(MapDecoder<T> decoder) {
         return MapCodec.<S>of(Encoder.empty(), decoder.map(Function.identity())).forGetter(o -> null);
+    }
+
+    public static <T> MapCodec<T> optional(Codec<T> codec, String name, Supplier<T> defaultSupplier, boolean lenient) {
+        return Codec.optionalField(name, codec, lenient).xmap(
+                o -> o.orElseGet(defaultSupplier),
+                a -> Objects.equals(a, defaultSupplier.get()) ? Optional.empty() : Optional.of(a)
+        );
+    }
+
+    public static <T> MapCodec<T> optional(Codec<T> codec, String name, Supplier<T> defaultSupplier) {
+        return optional(codec, name, defaultSupplier, false);
     }
 
     public static <T> Codec<Optional<T>> intentionallyOptional(Codec<T> codec) {
@@ -135,7 +157,7 @@ public final class CodecUtil {
     public static JsonElement jsonInjectId(JsonElement jsonElement, Identifier id) {
         if (jsonElement.isJsonObject()) {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            jsonObject.addProperty("$id", id.toString());
+            jsonObject.addProperty(INJECT_ID_KEY, id.toString());
             return jsonObject;
         }
         return jsonElement;

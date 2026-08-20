@@ -10,6 +10,8 @@ import net.minecraft.client.model.object.boat.RaftModel;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +29,16 @@ public class BoatTypeRendering {
             ModelLayerRegistry.registerModelLayer(modelId, () -> layerDefinition);
             EntityRendererProvider<? extends AbstractBoat> provider = context -> new BoatRenderer(context, modelId);
             ENTITY_RENDER_PROVIDERS.put(boatType, provider);
+            //noinspection unchecked,rawtypes
+            EntityRenderers.register(boatType, (EntityRendererProvider) provider);
+        });
+
+        BuiltInRegistries.ENTITY_TYPE.getOptional(Identifier.fromNamespaceAndPath("moineau", "willow_boat")).ifPresent((boatType) -> {
+            Identifier id = Identifier.fromNamespaceAndPath("moineau", "boat/willow");
+            ModelLayerLocation modelId =  new ModelLayerLocation(id, "main");
+            LayerDefinition layerDefinition = BoatModel.createBoatModel();
+            ModelLayerRegistry.registerModelLayer(modelId, () -> layerDefinition);
+            EntityRendererProvider<? extends AbstractBoat> provider = context -> new BoatRenderer(context, modelId);
             //noinspection unchecked,rawtypes
             EntityRenderers.register(boatType, (EntityRendererProvider) provider);
         });

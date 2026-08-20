@@ -8,6 +8,7 @@ import mod.moineau.contentpacks.fluid.ContentFluid;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorMaterial;
@@ -29,6 +30,7 @@ public final class ContentRegistryKeys {
     public static final ResourceKey<Registry<ToolMaterial>> TOOL_MATERIAL = ofVanilla("tool_material");
     public static final ResourceKey<Registry<ArmorMaterial>> ARMOR_MATERIAL = ofVanilla("armor_material");
     public static final ResourceKey<Registry<MapCodec<? extends Item>>> ITEM_TYPE = of("item_type");
+    public static final ResourceKey<Registry<MapCodec<? extends EntityType.EntityFactory<?>>>> ENTITY_FACTORY = of("entity_factory");
 
     private static <T> ResourceKey<Registry<T>> of(String id) {
         return ResourceKey.createRegistryKey(Identifier.fromNamespaceAndPath(ContentPacks.MOD_ID, id));

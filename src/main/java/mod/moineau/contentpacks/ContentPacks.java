@@ -67,21 +67,19 @@ public final class ContentPacks implements ModInitializer {
         load(packResources);
     }
 
-    // TODO Make loading of content packs to occure after all mods are initialized
     private static void load(List<PackResources> packResources) {
         if (hasLoaded) {
             throw new IllegalStateException("Cannot load content twice!");
         }
 
         List<ContentPacksExtension> extensions = FabricLoader.getInstance().getEntrypoints("contentpacks", ContentPacksExtension.class);
-        extensions.forEach(ContentPacksExtension::beforeContentLoaded);
 
+        extensions.forEach(ContentPacksExtension::beforeContentLoaded);
         LOGGER.info("Loading content...");
         MultiPackResourceManager packManager = new MultiPackResourceManager(PACK_TYPE, packResources);
         ContentManager.load(packManager);
         InteractionManager.load(packManager);
         LOGGER.info("Content loaded!");
-
         extensions.forEach(ContentPacksExtension::afterContentLoaded);
 
         hasLoaded = true;

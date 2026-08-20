@@ -13,6 +13,7 @@ import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorMaterial;
@@ -42,6 +43,7 @@ public final class ContentRegistries {
     public static final Registry<ToolMaterial> TOOL_MATERIAL = create(ContentRegistryKeys.TOOL_MATERIAL, VanillaToolMaterials::initialize);
     public static final Registry<ArmorMaterial> ARMOR_MATERIAL = create(ContentRegistryKeys.ARMOR_MATERIAL, VanillaArmorMaterials::initialize);
     public static final Registry<MapCodec<? extends Item>> ITEM_TYPE = create(ContentRegistryKeys.ITEM_TYPE, ItemTypes::initialize);
+    public static final Registry<MapCodec<? extends EntityType.EntityFactory<?>>> ENTITY_FACTORY = create(ContentRegistryKeys.ENTITY_FACTORY, VanillaEntityFactories::initialize);
 
     private static <T> MappedRegistry<T> create(ResourceKey<Registry<T>> resourceKey) {
         LOGGER.debug("Creating registry: {}", resourceKey);

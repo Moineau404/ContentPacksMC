@@ -3,6 +3,7 @@ accessWidener v2 official
 #BlockBehaviour???
 accessible method net/minecraft/world/level/block/state/BlockBehaviour getMaxHorizontalOffset ()F
 accessible method net/minecraft/world/level/block/state/BlockBehaviour getMaxVerticalOffset ()F
+
 #BlockBehaviour$Properties
 accessible field net/minecraft/world/level/block/state/BlockBehaviour$Properties mapColor Ljava/util/function/Function;
 accessible field net/minecraft/world/level/block/state/BlockBehaviour$Properties hasCollision Z
@@ -62,14 +63,10 @@ accessible method net/minecraft/world/level/block/state/properties/BlockSetType 
 #EntityAttachments
 accessible method net/minecraft/world/entity/EntityAttachments <init> (Ljava/util/Map;)V
 
-#FolderRepositorySource
-#extendable method net/minecraft/server/packs/repository/FolderRepositorySource createDiscoveredFilePackInfo (Ljava/nio/file/Path;)Lnet/minecraft/server/packs/PackLocationInfo;
-#accessible field net/minecraft/server/packs/repository/FolderRepositorySource folder Ljava/nio/file/Path;
-#accessible method net/minecraft/server/packs/repository/FolderRepositorySource nameFromPath (Ljava/nio/file/Path;)Ljava/lang/String;
-#accessible field net/minecraft/server/packs/repository/FolderRepositorySource packSource Lnet/minecraft/server/packs/repository/PackSource;
-#accessible field net/minecraft/server/packs/repository/FolderRepositorySource packType Lnet/minecraft/server/packs/PackType;
-#accessible field net/minecraft/server/packs/repository/FolderRepositorySource validator Lnet/minecraft/world/level/validation/DirectoryValidator;
-
+#EntityType
+accessible field net/minecraft/world/entity/EntityType factory Lnet/minecraft/world/entity/EntityType$EntityFactory;
+accessible field net/minecraft/world/entity/EntityType immuneTo Lnet/minecraft/tags/TagKey;
+accessible field net/minecraft/world/entity/EntityType spawnDimensionsScale F
 
 #Item$Properties
 accessible field net/minecraft/world/item/Item$Properties componentInitializer Lnet/minecraft/core/component/DataComponentInitializers$Initializer;
@@ -113,9 +110,6 @@ accessible method net/minecraft/server/packs/metadata/pack/PackMetadataSection c
 #PackRepository
 accessible field net/minecraft/server/packs/repository/PackRepository sources Ljava/util/Set;
 mutable field net/minecraft/server/packs/repository/PackRepository sources Ljava/util/Set;
-
-#PackSource
-#accessible method net/minecraft/server/packs/repository/PackSource decorateWithSource (Ljava/lang/String;)Ljava/util/function/UnaryOperator;
 
 #ReloadableResourceManager
 accessible field net/minecraft/server/packs/resources/ReloadableResourceManager resources Lnet/minecraft/server/packs/resources/CloseableResourceManager;

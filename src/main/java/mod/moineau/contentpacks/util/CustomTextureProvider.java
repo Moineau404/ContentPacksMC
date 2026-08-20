@@ -8,6 +8,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public interface CustomTextureProvider {
@@ -28,11 +29,18 @@ public interface CustomTextureProvider {
     }
 
     static <T> MapCodec<T> createCodec(MapCodec<T> codec) {
+        return createCodec(codec, _ -> {});
+    }
+
+    static <T> MapCodec<T> createCodec(MapCodec<T> codec, Consumer<T> listener) {
         return RecordCodecBuilder.mapCodec(instance -> instance.group(
                 codec.forGetter(Function.identity()),
                 Identifier.CODEC.optionalFieldOf("texture").forGetter(CustomTextureProvider::getCustomTexture)
         ).apply(instance, (object, textureId) -> {
-            textureId.ifPresent(texture -> setCustomTexture(object, texture));
+            textureId.ifPresent(texture -> {
+                setCustomTexture(object, texture);
+                listener.accept(object);
+            });
             return object;
         }));
     }
