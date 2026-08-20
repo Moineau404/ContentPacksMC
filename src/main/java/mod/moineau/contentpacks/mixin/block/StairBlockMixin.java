@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(StairBlock.class)
-public class StairsBlockMixin extends Block {
+public class StairBlockMixin extends Block {
     @Shadow
     public static final MapCodec<StairBlock> CODEC = simpleCodec(settings -> new StairBlock(null, settings));
 
@@ -50,7 +50,7 @@ public class StairsBlockMixin extends Block {
         }
     }
 
-    public StairsBlockMixin(BlockBehaviour.Properties settings) {
+    public StairBlockMixin(BlockBehaviour.Properties settings) {
         super(settings);
     }
 }

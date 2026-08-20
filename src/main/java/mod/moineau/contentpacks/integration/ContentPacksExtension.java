@@ -1,5 +1,6 @@
 package mod.moineau.contentpacks.integration;
 
+import com.mojang.serialization.MapCodec;
 import mod.moineau.contentpacks.interaction.InteractionType;
 import mod.moineau.contentpacks.interaction.block.BlockInteractionTypes;
 import mod.moineau.contentpacks.interaction.blockentitytype.BlockEntityTypeInteractionTypes;
@@ -9,8 +10,11 @@ import mod.moineau.contentpacks.interaction.fluid.FluidInteractionTypes;
 import mod.moineau.contentpacks.interaction.fluidtag.FluidTagInteractionTypes;
 import mod.moineau.contentpacks.interaction.item.ItemInteractionTypes;
 import mod.moineau.contentpacks.interaction.itemtag.ItemTagInteractionTypes;
+import mod.moineau.contentpacks.registry.ContentRegistries;
 import mod.moineau.contentpacks.resource.ContentManager;
 import mod.moineau.contentpacks.resource.ResourceLoader;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
@@ -42,6 +46,14 @@ public abstract class ContentPacksExtension {
                 return priority;
             }
         });
+    }
+
+    protected static void registerBlockType(Identifier id, MapCodec<? extends Block> type) {
+        Registry.register(BuiltInRegistries.BLOCK_TYPE, id, type);
+    }
+
+    protected static void registerItemType(Identifier id, MapCodec<? extends Item> type) {
+        Registry.register(ContentRegistries.ITEM_TYPE, id, type);
     }
 
     protected static void registerBlockInteraction(Identifier id, InteractionType<Block, ?> type) {

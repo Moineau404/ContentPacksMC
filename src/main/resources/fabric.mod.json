@@ -21,6 +21,9 @@
 		"client": [
 			"mod.moineau.contentpacks.client.ContentPacksClient"
 		],
+		"contentpacks": [
+			"mod.moineau.contentpacks.integration.ContentPacksAPI"
+		],
 		"packrepos": [
 			"mod.moineau.contentpacks.packs.ContentPacksRepositorySource"
 		]
