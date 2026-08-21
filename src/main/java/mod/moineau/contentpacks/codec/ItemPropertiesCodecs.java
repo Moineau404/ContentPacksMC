@@ -28,7 +28,6 @@ public final class ItemPropertiesCodecs {
             Codec.STRING.optionalFieldOf("description")
                     .forGetter(properties -> Optional.ofNullable(((ContentItemPropertiesAccessor) properties).contentpacks$getDescriptionIdOverride()))
     ).apply(instance, ItemPropertiesCodecs::create));
-    
     public static final MapCodec<Item.Properties> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BASE_CODEC.optionalFieldOf("properties")
                     .xmap(optional -> optional.orElseGet(Item.Properties::new), Optional::of).forGetter(Function.identity()),

@@ -1,9 +1,6 @@
 package mod.moineau.contentpacks.client.mixin;
 
 import mod.moineau.contentpacks.client.ContentPacksClient;
-import mod.moineau.contentpacks.client.resource.BlockColorLoader;
-import mod.moineau.contentpacks.client.resource.ColorMapReloadListener;
-import mod.moineau.contentpacks.client.resource.FluidModelLoader;
 import mod.moineau.contentpacks.util.ErrorLogger;
 import net.minecraft.client.GameLoadCookie;
 import net.minecraft.client.Minecraft;
@@ -17,22 +14,12 @@ import net.minecraft.util.CommonColors;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftMixin {
-    @Unique
-    private ColorMapReloadListener contentpacks$colorMapReloadListener;
-
-    @Unique
-    private BlockColorLoader contentpacks$blockColorLoader;
-
-    @Unique
-    private FluidModelLoader contentpacks$fluidModelLoader;
-
     @Shadow
     @Final
     public Gui gui;
@@ -47,12 +34,7 @@ public abstract class MinecraftMixin {
 
     @Inject(method = "<init>", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;blockColors:Lnet/minecraft/client/color/block/BlockColors;", shift = At.Shift.AFTER))
     private void inject$init_loaders(GameConfig gameConfig, CallbackInfo ci) {
-        this.contentpacks$colorMapReloadListener = new ColorMapReloadListener();
-        this.resourceManager.registerReloadListener(this.contentpacks$colorMapReloadListener);
-        this.contentpacks$blockColorLoader = new BlockColorLoader(this.blockColors);
-        this.resourceManager.registerReloadListener(this.contentpacks$blockColorLoader);
-        this.contentpacks$fluidModelLoader = new FluidModelLoader();
-        this.resourceManager.registerReloadListener(this.contentpacks$fluidModelLoader);
+        ContentPacksClient.getInstance().registerReloadListeners(this.resourceManager, this.blockColors);
     }
 
     @Inject(method = "onGameLoadFinished", at = @At(value = "TAIL"))

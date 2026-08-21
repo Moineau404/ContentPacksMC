@@ -11,10 +11,20 @@ import java.util.List;
  * On server, all content packs present in the directory are loaded, there is no selection.
  */
 public class ContentPacksServer implements DedicatedServerModInitializer {
+    private static ContentPacksServer INSTANCE;
+
+    public ContentPacksServer() {
+        INSTANCE = this;
+    }
+
     @Override
     public void onInitializeServer() {
         List<Pack> packs = new ArrayList<>();
-        ContentPacks.REPOSITORY_SOURCE.loadPacks(packs::add);
-        ContentPacks.loadPacks(packs);
+        ContentPacks.getRepositorySource().loadPacks(packs::add);
+        ContentPacks.getInstance().loadPacks(packs);
+    }
+
+    public static ContentPacksServer getInstance() {
+        return INSTANCE;
     }
 }

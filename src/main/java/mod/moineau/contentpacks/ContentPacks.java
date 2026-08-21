@@ -31,6 +31,7 @@ import java.util.List;
  * Main class of Content Packs mod.
  */
 public final class ContentPacks implements ModInitializer {
+    private static ContentPacks INSTANCE;
     public static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks");
     public static final String MOD_ID = "contentpacks";
     public static final Path PATH = FabricLoader.getInstance().getGameDir().resolve("contentpacks");
@@ -39,35 +40,37 @@ public final class ContentPacks implements ModInitializer {
     public static final PackType PACK_TYPE = PackType.valueOf("CONTENTPACKS_CONTENT");
     public static final MetadataSectionType<PackMetadataSection> PACK_METADATA_SECTION_TYPE = new MetadataSectionType<>("pack", PackMetadataSection.codecForPackType(PACK_TYPE));
     public static final MetadataSectionType<OverlayMetadataSection> PACK_OVERLAY_METADATA_SECTION_TYPE = new MetadataSectionType<>("overlays", OverlayMetadataSection.codecForPackType(PACK_TYPE));
-    public static final PackSource PACK_SOURCE = PackSource.create(
-            packDescription -> Component.translatable("pack.nameAndSource", packDescription, Component.translatable("pack.source.content")).withStyle(ChatFormatting.GRAY),
-            false
-    );
-    public static final RepositorySource REPOSITORY_SOURCE = new FolderRepositorySource(
-            PATH, PACK_TYPE, PACK_SOURCE, new DirectoryValidator(_ -> true));
-    private static boolean hasLoaded;
-    public static Collection<Pack> ACTIVE_PACKS;
+    public static final PackSource PACK_SOURCE = PackSource.create(packDescription -> Component.translatable("pack.nameAndSource", packDescription, Component.translatable("pack.source.content")).withStyle(ChatFormatting.GRAY), false);
+    private RepositorySource repositorySource;
+    private Collection<Pack> activePacks;
+    private boolean hasLoaded;
+
+    public ContentPacks() {
+        INSTANCE = this;
+    }
 
     @Override
     public void onInitialize() {
         ContentRegistries.bootStrap();
         MapColors.bootStrap();
         InteractionType.bootStrap();
+
+        repositorySource = new FolderRepositorySource(PATH, PACK_TYPE, PACK_SOURCE, new DirectoryValidator(_ -> true));
     }
 
-    public static void loadRepository(PackRepository packRepository) {
-        ACTIVE_PACKS = packRepository.getSelectedPacks();
+    public void loadRepository(PackRepository packRepository) {
+        activePacks = packRepository.getSelectedPacks();
         load(packRepository.openAllSelected());
     }
 
-    public static void loadPacks(List<Pack> packs) {
-        ACTIVE_PACKS = packs;
+    public void loadPacks(List<Pack> packs) {
+        activePacks = packs;
         List<PackResources> packResources = new ArrayList<>();
         packs.forEach(pack -> packResources.add(pack.open()));
         load(packResources);
     }
 
-    private static void load(List<PackResources> packResources) {
+    private void load(List<PackResources> packResources) {
         if (hasLoaded) {
             throw new IllegalStateException("Cannot load content twice!");
         }
@@ -85,7 +88,22 @@ public final class ContentPacks implements ModInitializer {
         hasLoaded = true;
     }
 
+    public static ContentPacks getInstance() {
+        if (INSTANCE == null) {
+            throw new IllegalStateException("Content Packs has not been initialized!");
+        }
+        return INSTANCE;
+    }
+
+    public static RepositorySource getRepositorySource() {
+        return getInstance().repositorySource;
+    }
+
     public static Collection<Pack> getActivePacks() {
-        return ACTIVE_PACKS;
+        return getInstance().activePacks;
+    }
+
+    public static boolean hasLoaded() {
+        return INSTANCE != null && INSTANCE.hasLoaded;
     }
 }

@@ -30,7 +30,7 @@ public abstract class OptionsScreenMixin extends Screen {
 
     @Unique
     private void contentpacks$refreshContentPacks(PackRepository packRepository) {
-        if (ContentPacksClient.OPTIONS.refreshPacks(packRepository)) {
+        if (ContentPacksClient.getOptions().refreshPacks(packRepository)) {
             SystemToast.add(
                     this.minecraft.gui.toastManager(),
                     ContentPacksClient.TOAST_CHANGED,

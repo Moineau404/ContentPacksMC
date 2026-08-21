@@ -20,7 +20,8 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public final class CodecUtil {
-    public static final String INJECT_ID_KEY = "@id";
+    public static final String INJECT_ID_KEY = "#id";
+    public static final String INJECT_LOCATION_KEY = "#location";
     private static final Encoder<?> EMPTY = new Encoder<>() {
         @Override
         public <T1> DataResult<T1> encode(Object input, DynamicOps<T1> ops, T1 prefix) {
@@ -73,6 +74,10 @@ public final class CodecUtil {
 
     public static <O, S, T extends S> RecordCodecBuilder<O, S> unilateral(MapDecoder<T> decoder) {
         return MapCodec.<S>of(Encoder.empty(), decoder.map(Function.identity())).forGetter(o -> null);
+    }
+
+    public static <S, T extends S> MapCodec<S> unilateralMap(MapDecoder<T> decoder) {
+        return MapCodec.of(Encoder.empty(), decoder.map(Function.identity()));
     }
 
     public static <T> MapCodec<T> optional(Codec<T> codec, String name, Supplier<T> defaultSupplier, boolean lenient) {

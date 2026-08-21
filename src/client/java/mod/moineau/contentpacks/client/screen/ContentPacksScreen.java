@@ -15,7 +15,7 @@ public class ContentPacksScreen extends PackSelectionScreen {
     private static Button outputButton;
 
     public ContentPacksScreen(Consumer<PackRepository> applier) {
-        super(ContentPacksClient.PACK_REPOSITORY, applier, ContentPacks.PATH, Component.translatable("options.contentpacks.title"));
+        super(ContentPacksClient.getPackRepository(), applier, ContentPacks.PATH, Component.translatable("options.contentpacks.title"));
     }
 
     public static void setOutputButtonActive(boolean active) {

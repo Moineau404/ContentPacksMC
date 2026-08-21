@@ -5,8 +5,6 @@
   "client": [
     "MinecraftMixin",
     "OptionsScreenMixin",
-    "SheetsMixin",
-    "WorldOpenFlowsMixin",
     "block.BlockColorsMixin"
   ],
   "injectors": {

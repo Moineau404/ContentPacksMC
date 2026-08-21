@@ -8,7 +8,6 @@ import mod.moineau.contentpacks.api.util.CodecUtil;
 import mod.moineau.contentpacks.api.util.FunctionUtil;
 import mod.moineau.contentpacks.mixin.EntityAttachmentsAccessor;
 import mod.moineau.contentpacks.registry.ContentRegistries;
-import mod.moineau.contentpacks.util.CustomTextureProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -29,7 +28,7 @@ public class EntityTypeCodecs {
             ENTITY_ATTACHMENTS.fieldOf("attachments").forGetter(EntityDimensions::attachments),
             Codec.BOOL.fieldOf("fixed").forGetter(EntityDimensions::fixed)
     ).apply(instance, EntityDimensions::new));
-    public static final Codec<EntityType<?>> CODEC = CustomTextureProvider.<EntityType<?>>createCodec(RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final Codec<EntityType<?>> CODEC = RecordCodecBuilder.<EntityType<?>>mapCodec(instance -> instance.group(
             MapCodec.of(
                     Encoder.empty(),
                     ENTITY_FACTORY
@@ -48,10 +47,5 @@ public class EntityTypeCodecs {
             VanillaCodecs.lootTable("entities").forGetter(EntityType::getDefaultLootTable),
             FeatureFlags.CODEC.optionalFieldOf("required_features", FeatureFlags.VANILLA_SET).forGetter(EntityType::requiredFeatures),
             Codec.BOOL.optionalFieldOf("allowed_in_peaceful", true).forGetter(EntityType::isAllowedInPeaceful)
-    ).apply(instance, EntityType::new))).codec();
+    ).apply(instance, EntityType::new)).codec();
 }
-/*
-
-
-
- */
