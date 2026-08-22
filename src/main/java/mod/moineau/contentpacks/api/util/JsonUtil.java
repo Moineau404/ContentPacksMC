@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public final class JsonUtil {
-    private static final Gson GSON = new GsonBuilder().setFormattingStyle(FormattingStyle.PRETTY).create();
+    private static final Gson GSON = new GsonBuilder().setFormattingStyle(FormattingStyle.PRETTY).disableHtmlEscaping().create();
 
     /**
      * Returns {@link Gson} instance.
@@ -201,7 +201,7 @@ public final class JsonUtil {
      * Throws if failed.
      */
     public static <T> T parseOrPartial(Reader reader, Codec<T> codec, Consumer<String> partialErrorHandler) throws IOException, JsonParseException {
-        return parseResult(reader, codec).promotePartial(partialErrorHandler).getPartialOrThrow(JsonParseException::new);
+        return parseResult(reader, codec).promotePartial(partialErrorHandler).getOrThrow(JsonParseException::new);
     }
 
     /**
@@ -209,7 +209,7 @@ public final class JsonUtil {
      * Throws if failed.
      */
     public static <T> T parseOrPartial(File file, Codec<T> codec, Consumer<String> partialErrorHandler) throws IOException, JsonParseException {
-        return parseResult(file, codec).promotePartial(partialErrorHandler).getPartialOrThrow(JsonParseException::new);
+        return parseResult(file, codec).promotePartial(partialErrorHandler).getOrThrow(JsonParseException::new);
     }
 
     /**
@@ -284,7 +284,9 @@ public final class JsonUtil {
      * Writes JSON on file with codec. Throws if failed.
      */
     public static void writeJson(File file, JsonElement json) throws IOException {
+        file.getParentFile().mkdirs();
         JsonWriter writer = new JsonWriter(new FileWriter(file));
+        writer.setFormattingStyle(FormattingStyle.PRETTY);
         GSON.toJson(json, writer);
         writer.flush();
         writer.close();

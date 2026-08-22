@@ -12,18 +12,13 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.StrictJsonParser;
-import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 
 import java.io.Reader;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -31,12 +26,14 @@ import java.util.Map;
  */
 public class RegistryLoader<T> extends ContentLoader<Holder<T>> {
     private static final Logger LOGGER = ContentPacks.LOGGER;
+    private static final Set<RegistryLoader<?>> LOADERS = new HashSet<>();
     private final FileToIdConverter finder;
     private final Registry<T> registry;
     private final Codec<T> codec;
     private final boolean injectId;
 
     protected RegistryLoader(Registry<T> registry, Codec<T> codec, boolean injectId) {
+        LOADERS.add(this);
         this.finder = FileToIdConverter.registry(registry.key());
         this.registry = registry;
         this.codec = codec;
@@ -45,23 +42,6 @@ public class RegistryLoader<T> extends ContentLoader<Holder<T>> {
 
     protected RegistryLoader(Registry<T> registry, Codec<T> codec) {
         this(registry, codec, false);
-    }
-
-    @Deprecated
-    protected RegistryLoader(Registry<T> registry, Codec<T> codec, boolean injectId, String directoryName) {
-        this.finder = FileToIdConverter.json(directoryName);
-        this.registry = registry;
-        this.codec = codec;
-        this.injectId = injectId;
-    }
-
-    @Deprecated
-    protected RegistryLoader(Registry<T> registry, Codec<T> codec, String directoryName) {
-        this(registry, codec, false, directoryName);
-    }
-
-    public final Holder<T> get(Identifier id) {
-        return Holder.Reference.createStandAlone(this.registry, ResourceKey.create(this.registry.key(), id));
     }
 
     @Override
@@ -107,34 +87,11 @@ public class RegistryLoader<T> extends ContentLoader<Holder<T>> {
         return 100;
     }
 
-    // TODO : It should not depend of ErrorLogger
-    @ApiStatus.Internal
-    private Map<Identifier, JsonElement> serialize(Iterable<Holder<T>> entries) {
-        Map<Identifier, JsonElement> jsonElements = new HashMap<>();
-
-        for (Holder<T> entry : entries) {
-            Identifier id = entry.unwrapKey().orElseThrow().identifier();
-            try {
-                DataResult<JsonElement> result = codec.encodeStart(JsonOps.INSTANCE, entry.value());
-                JsonElement jsonElement = result.getPartialOrThrow();
-                jsonElements.put(finder.idToFile(id), jsonElement);
-                result.ifError(error -> ErrorLogger.OUTPUT.write(id, this.registry.key().identifier(), String.format("Partially encoded: %s", error.message())));
-            } catch (Exception e) {
-                ErrorLogger.OUTPUT.write(id, this.registry.key().identifier(), String.format("Failed to encode: %s", e.getMessage()));
-            }
-        }
-
-        return jsonElements;
+    public RegistryOutput<T> getOutput() {
+        return new RegistryOutput<>(this.registry, this.codec, this.finder::idToFile);
     }
 
-    @ApiStatus.Internal
-    @Override
-    public Map<Identifier, JsonElement> serialize() {
-        return serialize(this.entries);
-    }
-
-    @ApiStatus.Internal
-    public Map<Identifier, JsonElement> serializeAll() {
-        return serialize(this.registry.asHolderIdMap());
+    public static List<RegistryLoader<?>> getLoaders() {
+        return List.copyOf(LOADERS);
     }
 }

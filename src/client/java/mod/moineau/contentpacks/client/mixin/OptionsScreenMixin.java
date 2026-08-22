@@ -29,7 +29,7 @@ public abstract class OptionsScreenMixin extends Screen {
     public abstract Button invoke$openScreenButton(final Component message, final Supplier<Screen> screenToScreen);
 
     @Unique
-    private void contentpacks$refreshContentPacks(PackRepository packRepository) {
+    private void contentpacks$applyContentPacks(PackRepository packRepository) {
         if (ContentPacksClient.getOptions().refreshPacks(packRepository)) {
             SystemToast.add(
                     this.minecraft.gui.toastManager(),
@@ -43,6 +43,6 @@ public abstract class OptionsScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/layouts/GridLayout$RowHelper;addChild(Lnet/minecraft/client/gui/layouts/LayoutElement;)Lnet/minecraft/client/gui/layouts/LayoutElement;", ordinal = 9, shift = At.Shift.AFTER))
     public void inject$init(CallbackInfo ci, @Local(name = "helper") GridLayout.RowHelper helper){
-        helper.addChild(this.invoke$openScreenButton(Component.translatable("options.contentpacks"), () -> new ContentPacksScreen(this::contentpacks$refreshContentPacks)));
+        helper.addChild(this.invoke$openScreenButton(Component.translatable("options.contentpacks"), () -> new ContentPacksScreen(this::contentpacks$applyContentPacks)));
     }
 }

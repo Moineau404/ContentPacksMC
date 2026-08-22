@@ -41,8 +41,7 @@ public abstract class DependentReloadListener<D, T> implements PreparableReloadL
                 D dependence = this.getDependence(id);
                 if (dependence != null) {
                     try (Reader reader = resource.openAsReader()) {
-//                        T object = JsonUtil.parseOrPartial(reader, this.codec, e -> this.handlePartialError(id, resource.sourcePackId(), e));
-                        T object = JsonUtil.parse(reader, this.codec);
+                        T object = JsonUtil.parseOrPartial(reader, this.codec, e -> this.handlePartialError(id, resource.sourcePackId(), e));
                         return new Entry<>(dependence, object, id);
                     } catch (Exception e) {
                         this.handleReadingError(id, resource.sourcePackId(), e.getMessage());

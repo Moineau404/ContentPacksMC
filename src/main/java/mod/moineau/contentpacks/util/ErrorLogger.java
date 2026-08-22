@@ -6,9 +6,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.Resource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,15 +19,6 @@ public class ErrorLogger extends WritingLogger {
             super.flush();
         }
     };
-    public static final ErrorLogger OUTPUT = new ErrorLogger("output_errors") {
-        public static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Output");
-
-        @Override
-        public void flush() {
-            if (this.count() > 0) LOGGER.warn("{} errors encountered while outputing content!", this.count());
-            super.flush();
-        }
-    };
 
     public ErrorLogger(String fileName) {
         super(FabricLoader.getInstance().getGameDir().resolve("logs").resolve(ContentPacks.MOD_ID).resolve(fileName + ".log").toFile());
@@ -36,6 +26,10 @@ public class ErrorLogger extends WritingLogger {
 
     public void write(ResourceKey<?> resourceKey, String error) {
         this.write(resourceKey.identifier(), resourceKey.registry(), error);
+    }
+
+    public void write(File file, String error) {
+        this.error(String.format("(%s) %s", file.getPath(), error));
     }
 
     public void write(Identifier id, Identifier registryId, String error) {

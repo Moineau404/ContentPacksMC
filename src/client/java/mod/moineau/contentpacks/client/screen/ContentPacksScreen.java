@@ -2,42 +2,50 @@ package mod.moineau.contentpacks.client.screen;
 
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.client.ContentPacksClient;
-import mod.moineau.contentpacks.client.resource.ContentOutput;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Tooltip;
+import mod.moineau.contentpacks.client.resource.OutputInstance;
 import net.minecraft.client.gui.screens.packs.PackSelectionScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.repository.PackRepository;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
+/**
+ * Content packs selection screen.
+ */
 public class ContentPacksScreen extends PackSelectionScreen {
-    private static Button outputButton;
+    private static ContentPacksScreen instance;
+    private OutputButton outputButton;
 
-    public ContentPacksScreen(Consumer<PackRepository> applier) {
-        super(ContentPacksClient.getPackRepository(), applier, ContentPacks.PATH, Component.translatable("options.contentpacks.title"));
-    }
-
-    public static void setOutputButtonActive(boolean active) {
-        outputButton.active = active;
-        if (active) {
-            outputButton.setTooltip(Tooltip.create(Component.translatable("options.contentpacks.output.tooltip")));
-        } else {
-            outputButton.setTooltip(Tooltip.create(Component.translatable("options.contentpacks.output.loading.tooltip")));
-        }
+    public ContentPacksScreen(Consumer<PackRepository> output) {
+        super(ContentPacksClient.getPackRepository(), output, ContentPacks.PATH, Component.translatable("options.contentpacks.title"));
+        instance = this;
     }
 
     @Override
     protected void init() {
         super.init();
-        outputButton = createOutputButton();
-        setOutputButtonActive(!ContentOutput.isLoading);
+        outputButton = createOutputButton(OutputInstance.getInstance() == null);
+        this.addRenderableWidget(outputButton);
     }
 
-    private Button createOutputButton() {
-        Button button = new OutputButton(_ -> ContentOutput.output());
+    @Override
+    public void onClose() {
+        super.onClose();
+        instance = null;
+    }
+
+    private OutputButton createOutputButton(boolean active) {
+        OutputButton button = new OutputButton(b -> {
+            b.setActive(false);
+            OutputInstance.create(() -> instance.outputButton.setActive(true));
+        });
         button.setPosition(5, 5);
-        this.addRenderableWidget(button);
+        button.setActive(active);
         return button;
+    }
+
+    public static @Nullable ContentPacksScreen getInstance() {
+        return instance;
     }
 }
