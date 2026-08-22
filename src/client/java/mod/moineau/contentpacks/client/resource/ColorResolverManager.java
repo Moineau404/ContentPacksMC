@@ -19,7 +19,7 @@ import java.io.Reader;
 import java.util.Map;
 
 public final class ColorResolverManager implements ResourceLoader {
-    public static final FileToIdConverter FINDER = FileToIdConverter.json("color_resolver");
+    private static final FileToIdConverter FINDER = FileToIdConverter.json("color_resolver");
 
     @Override
     public void load(ResourceManager resourceManager) {

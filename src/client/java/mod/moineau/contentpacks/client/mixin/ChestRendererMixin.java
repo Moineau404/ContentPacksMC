@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ChestRendererMixin<T extends BlockEntity & LidBlockEntity> {
     @Inject(method = "extractRenderState(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState;FLnet/minecraft/world/phys/Vec3;Lnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState;material:Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState$ChestMaterialType;", shift = At.Shift.AFTER))
     private void inject$extractRenderState_customTexture(T blockEntity, ChestRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress, CallbackInfo ci) {
-        ((CustomTextureProvider) blockEntity).contentpacks$getCustomTexture().ifPresent(((CustomTextureProvider) state)::contentpacks$setCustomTexture);
+        CustomTextureProvider.passTexture(blockEntity, state);
     }
 
     @Redirect(method = "submit(Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Sheets;chooseSprite(Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState$ChestMaterialType;Lnet/minecraft/world/level/block/state/properties/ChestType;)Lnet/minecraft/client/resources/model/sprite/SpriteId;"))

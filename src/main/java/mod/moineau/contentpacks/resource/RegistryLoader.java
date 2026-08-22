@@ -5,6 +5,7 @@ import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
+import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.api.util.CodecUtil;
 import mod.moineau.contentpacks.util.ErrorLogger;
 import net.minecraft.core.Holder;
@@ -17,7 +18,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.StrictJsonParser;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.Reader;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ import java.util.Map;
  * @param <T>
  */
 public class RegistryLoader<T> extends ContentLoader<Holder<T>> {
-    private static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/RegistryLoader");
+    private static final Logger LOGGER = ContentPacks.LOGGER;
     private final FileToIdConverter finder;
     private final Registry<T> registry;
     private final Codec<T> codec;
@@ -107,6 +107,7 @@ public class RegistryLoader<T> extends ContentLoader<Holder<T>> {
         return 100;
     }
 
+    // TODO : It should not depend of ErrorLogger
     @ApiStatus.Internal
     private Map<Identifier, JsonElement> serialize(Iterable<Holder<T>> entries) {
         Map<Identifier, JsonElement> jsonElements = new HashMap<>();

@@ -13,20 +13,17 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import org.jspecify.annotations.Nullable;
 
-public class FluidModelReloadListener extends BoundReloadListener<Fluid, FluidModel.Unbaked> {
-    private static final String DIRECTORY = "models/fluid";
-
+public class FluidModelReloadListener extends DependentReloadListener<Fluid, FluidModel.Unbaked> {
     public FluidModelReloadListener() {
-        super(DIRECTORY, ClientCodecs.FLUID_MODEL);
+        super("models/fluid", ClientCodecs.FLUID_MODEL);
     }
 
     @Override
-    protected @Nullable Fluid getBound(Identifier id) {
+    protected @Nullable Fluid getDependence(Identifier id) {
         Block block = BuiltInRegistries.BLOCK.getValue(id);
         if (block != null && block instanceof LiquidBlock liquidBlock) {
             return ((LiquidBlockAccessor) liquidBlock).getFluid();
         }
-
         return null;
     }
 
@@ -40,12 +37,17 @@ public class FluidModelReloadListener extends BoundReloadListener<Fluid, FluidMo
     }
 
     @Override
-    protected void nullErrorProvider(Identifier id) {
+    protected void handleNullError(Identifier id) {
         ContentPacksClient.LOGGER.debug("Discovered unknown fluid model {}, ignoring", id);
     }
 
     @Override
-    protected void readingErrorProvider(Identifier id, String pack, String message) {
+    protected void handleReadingError(Identifier id, String pack, String message) {
         ContentPacksClient.LOGGER.error("Failed to load fluid model for fluid {} from pack {}: {}", id, pack, message);
+    }
+
+    @Override
+    protected void handlePartialError(Identifier id, String pack, String message) {
+        ContentPacksClient.LOGGER.error("Partially loaded fluid model for fluid {} from pack {}: {}", id, pack, message);
     }
 }

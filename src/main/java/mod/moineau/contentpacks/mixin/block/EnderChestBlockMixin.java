@@ -12,5 +12,5 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(EnderChestBlock.class)
 public class EnderChestBlockMixin {
     @Shadow
-    public static final MapCodec<EnderChestBlock> CODEC = CustomTextureProvider.createCodec(EnderChestBlock.CODEC);
+    public static final MapCodec<EnderChestBlock> CODEC = CustomTextureProvider.createCodec(EnderChestBlock.CODEC, CustomTextureProvider.SINGLE_CHEST_BLOCKS::add);
 }

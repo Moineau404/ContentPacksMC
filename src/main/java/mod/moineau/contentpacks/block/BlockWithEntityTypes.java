@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * This is a more or less temporary solution that allows content-loaded blocks with vanilla block types
  * to automatically be registered in their block entity type supported block list.
- * Use {@link #put(Class, BlockEntityType)} to artificially bind a block type to a block entity type.
+ * Use {@link #register(Class, BlockEntityType)} to artificially bind a block type to a block entity type.
  * You can use {@link FabricValidBlocksBlockEntityTypeInteraction FabricSupportedBlocks interaction}
  * to add supported blocks directly with content packs.
  */
@@ -72,7 +72,7 @@ public final class BlockWithEntityTypes {
         put(TestInstanceBlock.class, BlockEntityTypes.TEST_INSTANCE_BLOCK);
     }};
 
-    public static void put(Class<? extends EntityBlock> clazz, BlockEntityType<?> type) {
+    public static void register(Class<? extends EntityBlock> clazz, BlockEntityType<?> type) {
         CLASS2TYPE.put(clazz, type);
     }
 

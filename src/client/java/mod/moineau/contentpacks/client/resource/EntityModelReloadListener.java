@@ -28,9 +28,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public final class EntityModelReloadListener implements PreparableReloadListener {
-    public static final String DIRECTORY = "models/entity";
-    public static final FileToIdConverter FINDER = FileToIdConverter.json(DIRECTORY);
-    public static final Codec<Either<LayerDefinition, Map<String, LayerDefinition>>> CODEC = Codec.either(
+    private static final FileToIdConverter FINDER = FileToIdConverter.json("models/entity");
+    private static final Codec<Either<LayerDefinition, Map<String, LayerDefinition>>> CODEC = Codec.either(
             EntityModelTypes.CODEC,
             Codec.unboundedMap(Codec.STRING, EntityModelTypes.CODEC)
     );

@@ -28,7 +28,6 @@ public final class InteractionManager {
 
     public static void registerLoader(InteractionLoader<?> loader) {
         LOADERS.add(loader);
-//        ContentManager.registerLoader(loader);
     }
 
     public static void load(ResourceManager resourceManager) {

@@ -11,6 +11,9 @@ import net.minecraft.server.packs.repository.RepositorySource;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+/**
+ * Entrypoint for {@link PackRepos}.
+ */
 public class ContentPacksRepositorySource implements RepositorySource, PackRepositoryProvider {
     private static final PackType PACK_TYPE = PackType.valueOf("CONTENTPACKS_CONTENT");
     private static final PackSelectionConfig SELECTION_CONFIG = new PackSelectionConfig(true, PackRepos.MIDDLE_PACK_POSITION, true);

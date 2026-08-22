@@ -48,8 +48,8 @@ dependencies {
 	implementation "mod.moineau:packrepos:${project.pack_repos_version}"
 	include "mod.moineau:packrepos:${project.pack_repos_version}"
 
-	implementation "traben.entity_model_features:entity_model_features:${project.emf_version}-fabric"
-	implementation "traben.entity_texture_features:entity_texture_features:${project.etf_version}-fabric"
+//	implementation "traben.entity_model_features:entity_model_features:${project.emf_version}-fabric"
+//	implementation "traben.entity_texture_features:entity_texture_features:${project.etf_version}-fabric"
 }
 
 processResources {
