@@ -36,8 +36,6 @@ public final class ContentManager {
     public static final RegistryLoader<TreeGrower> TREE_GROWERS = new RegistryLoader<>(ContentRegistries.TREE_GROWER, TreeGrowerCodecs.CODEC, true);
     public static final RegistryLoader<Fluid> FLUIDS = new RegistryLoader<>(BuiltInRegistries.FLUID, ContentFluid.DOWNGRADED_CODEC);
     public static final RegistryLoader<Block> BLOCKS = new RegistryLoader<>(BuiltInRegistries.BLOCK, BlockTypes.CODEC.codec(), true);
-    // TODO boat_type -> entity_type
-//    public static final RegistryLoader<EntityType<?>> BOAT_TYPES = new RegistryLoader<>(BuiltInRegistries.ENTITY_TYPE, CodecUtil.downgrade(BoatType.CODEC), true, "boat_type");
     public static final RegistryLoader<EntityType<?>> ENTITY_TYPES = new RegistryLoader<>(BuiltInRegistries.ENTITY_TYPE, EntityTypeCodecs.CODEC, true);
     public static final RegistryLoader<ToolMaterial> TOOL_MATERIALS = new RegistryLoader<>(ContentRegistries.TOOL_MATERIAL, ToolMaterialCodecs.CODEC);
     public static final RegistryLoader<ArmorMaterial> ARMOR_MATERIALS = new RegistryLoader<>(ContentRegistries.ARMOR_MATERIAL, ArmorMaterialCodecs.CODEC);

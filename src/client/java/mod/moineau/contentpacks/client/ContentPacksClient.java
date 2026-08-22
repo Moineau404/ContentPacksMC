@@ -42,25 +42,24 @@ public final class ContentPacksClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		ColorResolvers.bootStrap();
+		BlockTintSourceTypes.bootStrap();
+		EntityModelTypes.bootStrap();
+		EntityRendererTypes.bootStrap();
+
 		packRepository = new PackRepository(ContentPacks.getRepositorySource());
 		packRepository.reload();
 		options = ContentPacksOptions.read();
-		options.updatePackManager(packRepository);
+		options.updateRepository(packRepository);
+
 		ContentManager.registerLoader(ClientContentManager::load);
 		ContentPacks.getInstance().loadRepository(packRepository);
-
 		ErrorLogger.LOAD.flush();
 
-		ColorResolvers.bootStrap();
-		BlockTintSourceTypes.bootStrap();
-//		BoatTypeRendering.bootStrap();
-		EntityModelTypes.bootStrap();
-		EntityRendererTypes.bootStrap();
 		ChestRendering.bootStrap();
 	}
 
 	public void registerReloadListeners(ReloadableResourceManager resourceManager, BlockColors blockColors) {
-		LOGGER.warn("Registering reload listeners...");
 		colorMapReloadListener = new ColorMapReloadListener();
 		blockColorReloadListener = new BlockColorReloadListener(blockColors);
 		fluidModelReloadListener = new FluidModelReloadListener();

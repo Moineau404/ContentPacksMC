@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BlockColorReloadListener extends BoundReloadListener<Block, Optional<List<BlockTintSource>>> {
+public class BlockColorReloadListener extends DependentReloadListener<Block, Optional<List<BlockTintSource>>> {
     private static final String DIRECTORY = "blockstates";
     private static final Codec<Optional<List<BlockTintSource>>> CODEC = BlockTintSourceTypes.CODEC.listOf().optionalFieldOf("tints").codec();
     private final ContentBlockColors blockColors;
@@ -26,22 +26,22 @@ public class BlockColorReloadListener extends BoundReloadListener<Block, Optiona
     }
 
     @Override
-    protected @Nullable Block getBound(Identifier id) {
+    protected @Nullable Block getDependence(Identifier id) {
         return BuiltInRegistries.BLOCK.getValue(id);
     }
 
     @Override
-    protected void loadEntry(Block bound, Optional<List<BlockTintSource>> optional, Identifier id) {
-        optional.ifPresent(object -> blockColors.contentpacks$addSourceOverrides(bound, new ArrayList<>(object)));
+    protected void loadEntry(Block block, Optional<List<BlockTintSource>> tints, Identifier id) {
+        tints.ifPresent(object -> blockColors.contentpacks$addSourceOverrides(block, new ArrayList<>(object)));
     }
 
     @Override
-    protected void nullErrorProvider(Identifier id) {
+    protected void handleNullError(Identifier id) {
         ContentPacksClient.LOGGER.debug("Discovered unknown block color {}, ignoring", id);
     }
 
     @Override
-    protected void readingErrorProvider(Identifier id, String pack, String message) {
+    protected void handleReadingError(Identifier id, String pack, String message) {
         ContentPacksClient.LOGGER.error("Failed to load block tints for block {} from pack {}: {}", id, pack, message);
     }
 }

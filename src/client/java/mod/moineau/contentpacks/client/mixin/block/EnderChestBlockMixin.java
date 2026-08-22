@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(EnderChestBlock.class)
 public class EnderChestBlockMixin {
     @ModifyReturnValue(method = "newBlockEntity", at = @At(value = "RETURN"))
-    BlockEntity inject$newBlockEntity_customTexture(BlockEntity original) {
-        ((CustomTextureProvider) this).contentpacks$getCustomTexture().ifPresent(((CustomTextureProvider) original)::contentpacks$setCustomTexture);
-        return original;
+    BlockEntity inject$newBlockEntity_customTexture(BlockEntity blockEntity) {
+        CustomTextureProvider.passTexture(this, blockEntity);
+        return blockEntity;
     }
 }

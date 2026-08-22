@@ -1,6 +1,7 @@
 package mod.moineau.contentpacks.registry;
 
 import com.mojang.serialization.MapCodec;
+import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.block.statepredicates.StatePredicateType;
 import mod.moineau.contentpacks.block.statepredicates.entitytyped.EntityTypedStatePredicateType;
 import mod.moineau.contentpacks.fluid.ContentFluid;
@@ -11,8 +12,8 @@ import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
@@ -23,14 +24,13 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
 public final class ContentRegistries {
-    private static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Registries");
+    private static final Logger LOGGER = ContentPacks.LOGGER;
     private static final List<Runnable> INITIALIZERS = new LinkedList<>();
     public static final Registry<Property<?>> PROPERTIES = create(ContentRegistryKeys.PROPERTIES, VanillaProperties::initialize);
     public static final Registry<StatePredicateType<?>> BLOCK_CONTEXT_PREDICATE_TYPE = create(ContentRegistryKeys.BLOCK_CONTEXT_PREDICATE_TYPE, StatePredicateType::initialize);

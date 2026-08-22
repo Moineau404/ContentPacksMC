@@ -1,40 +1,37 @@
 package mod.moineau.contentpacks.client.render.entity;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.util.CustomTextureProvider;
 import net.minecraft.client.renderer.MultiblockChestResources;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.state.ChestRenderState;
 import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.AbstractChestBlock;
-import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.state.properties.ChestType;
+import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import java.util.Map;
-import java.util.Optional;
 
 public final class ChestRendering {
-    public static final Map<Identifier, MultiblockChestResources<SpriteId>> SPRITES = new Object2ObjectOpenHashMap<>();
+    private static final Logger LOGGER = ContentPacks.LOGGER;
+    private static final Map<Identifier, Provider> SPRITES = new Object2ObjectOpenHashMap<>();
+    private static boolean bootStrap;
 
     public static void bootStrap() {
-        CustomTextureProvider.CHESTS.forEach(chest -> {
-            if (chest instanceof AbstractChestBlock<?> block) {
-                register(block);
-            }
-        });
+        if (bootStrap) return;
+        bootStrap = true;
+        CustomTextureProvider.MULTI_CHEST_BLOCKS.forEach(chest -> CustomTextureProvider.getOptionalTexture(chest).ifPresent(ChestRendering::registerMulti));
+        CustomTextureProvider.SINGLE_CHEST_BLOCKS.forEach(chest -> CustomTextureProvider.getOptionalTexture(chest).ifPresent(ChestRendering::registerSingle));
     }
 
-    public static void register(AbstractChestBlock<?> block) {
-        Optional<Identifier> customTexture = ((CustomTextureProvider) block).contentpacks$getCustomTexture();
-        if (customTexture.isPresent()) {
-            Identifier id = customTexture.get();
-            if (block instanceof ChestBlock) {
-                SPRITES.put(id, createDefaultTextures(id).map(Sheets.CHEST_MAPPER::apply));
-            } else {
-                SPRITES.put(id, new MultiblockChestResources<>(Sheets.CHEST_MAPPER.apply(id), null, null));
-            }
-        }
+    public static void registerMulti(Identifier texture) {
+        SPRITES.put(texture, new MultiProvider(createDefaultTextures(texture).map(Sheets.CHEST_MAPPER::apply)));
+    }
+
+    public static void registerSingle(Identifier texture) {
+        SPRITES.put(texture, new SingleProvider(Sheets.CHEST_MAPPER.apply(texture)));
     }
 
     private static MultiblockChestResources<Identifier> createDefaultTextures(final Identifier id) {
@@ -47,16 +44,34 @@ public final class ChestRendering {
         );
     }
 
-    public static SpriteId chooseCustomSprite(final ChestRenderState state, final ChestRenderState.ChestMaterialType materialType, final ChestType type) {
-        Optional<Identifier> customTexture = ((CustomTextureProvider) state).contentpacks$getCustomTexture();
-        if (customTexture.isPresent()) {
-            Identifier id = customTexture.get();
-            MultiblockChestResources<SpriteId> selector = SPRITES.get(id);
-            if (selector != null) {
-                return selector.select(type);
+    public static SpriteId chooseCustomSprite(final ChestRenderState state, final ChestRenderState.ChestMaterialType material, final ChestType type) {
+        @Nullable Identifier texture = CustomTextureProvider.getTexture(state);
+        if (texture != null) {
+            Provider provider = SPRITES.get(texture);
+            if (provider != null) {
+                return provider.select(type);
             }
         }
 
-        return Sheets.chooseSprite(materialType, type);
+        return Sheets.chooseSprite(material, type);
+    }
+
+    @FunctionalInterface
+    private interface Provider {
+        SpriteId select(ChestType type);
+    }
+
+    private record MultiProvider(MultiblockChestResources<SpriteId> sprites) implements Provider {
+        @Override
+        public SpriteId select(ChestType type) {
+            return sprites.select(type);
+        }
+    }
+
+    private record SingleProvider(SpriteId sprite) implements Provider {
+        @Override
+        public SpriteId select(ChestType type) {
+            return sprite;
+        }
     }
 }

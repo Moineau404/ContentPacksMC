@@ -61,57 +61,108 @@ import java.util.function.Supplier;
 public class EntityModelTypes {
     private static final ExtraCodecs.LateBoundIdMapper<Identifier, MapCodec<? extends LayerDefinition>> ID_MAPPER = new ExtraCodecs.LateBoundIdMapper<>();
     public static final Codec<LayerDefinition> CODEC = ID_MAPPER.codec(Identifier.CODEC).dispatch(FunctionUtil::nothing, Function.identity());
+    public static final MapCodec<? extends LayerDefinition> MINECART = of(MinecartModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> SKULL = Codec.BOOL.fieldOf("hat").xmap(
+            hat -> hat ? SkullModel.createHumanoidHeadLayer() : SkullModel.createMobHeadLayer(),
+            FunctionUtil::nothing
+    );
+    public static final MapCodec<? extends LayerDefinition> EQUINE_SADDLE = of(EquineSaddleModel::createSaddleLayer);
+    public static final MapCodec<? extends LayerDefinition> ADULT_AXOLOTL = of(AdultAxolotlModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> COW = of(CowModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> COLD_CHICKEN = of(ColdChickenModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> COLD_COW = of(ColdCowModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> ELYTRA = of(ElytraModel::createLayer);
+    public static final MapCodec<? extends LayerDefinition> BABY_FELINE = of(BabyFelineModel::createBabyLayer);
+    public static final MapCodec<? extends LayerDefinition> ADULT_PIGLIN = of(AdultPiglinModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> ADULT_STRIDER = of(AdultStriderModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> BABY_STRIDER = of(BabyStriderModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> HOGLIN = of(HoglinModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> BABY_HOGLIN = of(BabyHoglinModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> SKELETON = of(SkeletonModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> SPIDER = of(SpiderModel::createSpiderBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> ADULT_CAMEL = of(AdultCamelModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> BABY_CAMEL = of(BabyCamelModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> CAMEL_SADDLE = of(CamelSaddleModel::createSaddleLayer);
+    public static final MapCodec<? extends LayerDefinition> ADULT_CHICKEN = of(AdultChickenModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> PANDA = of(PandaModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> BABY_PANDA = of(BabyPandaModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> SHEEP = of(SheepModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> BABY_SHEEP = of(BabySheepModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> SHEEP_FUR = of(SheepFurModel::createFurLayer);
+    public static final MapCodec<? extends LayerDefinition> SNIFFER = of(SnifferModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> SNIFFLET = of(SniffletModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> ADULT_TURTLE = of(AdultTurtleModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> WARM_COW = of(WarmCowModel::createBodyLayer);
 
-    public static void register(Identifier id, MapCodec<? extends LayerDefinition> entry) {
-        ID_MAPPER.put(id, entry);
-    }
-    
+    public static final MapCodec<? extends LayerDefinition> ZOMBIE_VILLAGER = Codec.BOOL.fieldOf("hat").xmap(
+            hat -> hat ? ZombieVillagerModel.createBodyLayer() : ZombieVillagerModel.createNoHatLayer(),
+            FunctionUtil::nothing
+    );
+    public static final MapCodec<? extends LayerDefinition> BABY_ZOMBIE_VILLAGER = Codec.BOOL.fieldOf("hat").xmap(
+            hat -> hat ? BabyZombieVillagerModel.createBodyLayer() : BabyZombieVillagerModel.createNoHatLayer(),
+            FunctionUtil::nothing
+    );
+    public static final MapCodec<? extends LayerDefinition> ARMOR_STAND = of(ArmorStandModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> SQUID = of(SquidModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> BABY_SQUID = of(BabySquidModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> DOLPHIN = of(DolphinModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> BABY_DOLPHIN = of(BabyDolphinModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> SALMON = of(SalmonModel::createBodyLayer);
+    public static final MapCodec<? extends LayerDefinition> NAUTILUS_SADDLE = of(NautilusSaddleModel::createSaddleLayer);
+    public static final MapCodec<? extends LayerDefinition> BOAT = of(BoatModel::createBoatModel);
+    public static final MapCodec<? extends LayerDefinition> CHEST_BOAT = of(BoatModel::createChestBoatModel);
+    public static final MapCodec<? extends LayerDefinition> RAFT = of(RaftModel::createRaftModel);
+    public static final MapCodec<? extends LayerDefinition> CHEST_RAFT = of(RaftModel::createChestRaftModel);
+    private static boolean bootStrap;
+
     public static void bootStrap() {
-        register(Identifier.withDefaultNamespace("minecart"), of(MinecartModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("skull"), of(SkullModel::createMobHeadLayer));
-        register(Identifier.withDefaultNamespace("equine_saddle"), of(EquineSaddleModel::createSaddleLayer));
-        register(Identifier.withDefaultNamespace("adult_axolotl"), of(AdultAxolotlModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("cow"), of(CowModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("cold_chicken"), of(ColdChickenModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("cold_cow"), of(ColdCowModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("elytra"), of(ElytraModel::createLayer));
-        register(Identifier.withDefaultNamespace("baby_feline"), of(BabyFelineModel::createBabyLayer));
-        register(Identifier.withDefaultNamespace("adult_piglin"), of(AdultPiglinModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("skull"), of(SkullModel::createHumanoidHeadLayer));
-        register(Identifier.withDefaultNamespace("adult_strider"), of(AdultStriderModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("baby_strider"), of(BabyStriderModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("hoglin"), of(HoglinModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("baby_hoglin"), of(BabyHoglinModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("skeleton"), of(SkeletonModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("spider"), of(SpiderModel::createSpiderBodyLayer));
-        register(Identifier.withDefaultNamespace("adult_camel"), of(AdultCamelModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("baby_camel"), of(BabyCamelModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("camel_saddle"), of(CamelSaddleModel::createSaddleLayer));
-        register(Identifier.withDefaultNamespace("adult_chicken"), of(AdultChickenModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("panda"), of(PandaModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("baby_panda"), of(BabyPandaModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("sheep"), of(SheepModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("baby_sheep"), of(BabySheepModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("sheep_fur"), of(SheepFurModel::createFurLayer));
-        register(Identifier.withDefaultNamespace("sniffer"), of(SnifferModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("snifflet"), of(SniffletModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("adult_turtle"), of(AdultTurtleModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("warm_cow"), of(WarmCowModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("zombie_villager"), of(ZombieVillagerModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("baby_zombie_villager"), of(BabyZombieVillagerModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("zombie_villager"), of(ZombieVillagerModel::createNoHatLayer));
-        register(Identifier.withDefaultNamespace("baby_zombie_villager"), of(BabyZombieVillagerModel::createNoHatLayer));
-        register(Identifier.withDefaultNamespace("armor_stand"), of(ArmorStandModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("squid"), of(SquidModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("baby_squid"), of(BabySquidModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("dolphin"), of(DolphinModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("baby_dolphin"), of(BabyDolphinModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("salmon"), of(SalmonModel::createBodyLayer));
-        register(Identifier.withDefaultNamespace("nautilus_saddle"), of(NautilusSaddleModel::createSaddleLayer));
-        register(Identifier.withDefaultNamespace("boat"), of(BoatModel::createBoatModel));
-        register(Identifier.withDefaultNamespace("chest_boat"), of(BoatModel::createChestBoatModel));
-        register(Identifier.withDefaultNamespace("raft"), of(RaftModel::createRaftModel));
-        register(Identifier.withDefaultNamespace("chest_raft"), of(RaftModel::createChestRaftModel));
+        if (bootStrap) return;
+        bootStrap = true;
+        register(Identifier.withDefaultNamespace("minecart"), MINECART);
+        register(Identifier.withDefaultNamespace("skull"), SKULL);
+        register(Identifier.withDefaultNamespace("equine_saddle"), EQUINE_SADDLE);
+        register(Identifier.withDefaultNamespace("adult_axolotl"), ADULT_AXOLOTL);
+        register(Identifier.withDefaultNamespace("cow"), COW);
+        register(Identifier.withDefaultNamespace("cold_chicken"), COLD_CHICKEN);
+        register(Identifier.withDefaultNamespace("cold_cow"), COLD_COW);
+        register(Identifier.withDefaultNamespace("elytra"), ELYTRA);
+        register(Identifier.withDefaultNamespace("baby_feline"), BABY_FELINE);
+        register(Identifier.withDefaultNamespace("adult_piglin"), ADULT_PIGLIN);
+        register(Identifier.withDefaultNamespace("skull"), SKULL);
+        register(Identifier.withDefaultNamespace("adult_strider"), ADULT_STRIDER);
+        register(Identifier.withDefaultNamespace("baby_strider"), BABY_STRIDER);
+        register(Identifier.withDefaultNamespace("hoglin"), HOGLIN);
+        register(Identifier.withDefaultNamespace("baby_hoglin"), BABY_HOGLIN);
+        register(Identifier.withDefaultNamespace("skeleton"), SKELETON);
+        register(Identifier.withDefaultNamespace("spider"), SPIDER);
+        register(Identifier.withDefaultNamespace("adult_camel"), ADULT_CAMEL);
+        register(Identifier.withDefaultNamespace("baby_camel"), BABY_CAMEL);
+        register(Identifier.withDefaultNamespace("camel_saddle"), CAMEL_SADDLE);
+        register(Identifier.withDefaultNamespace("adult_chicken"), ADULT_CHICKEN);
+        register(Identifier.withDefaultNamespace("panda"), PANDA);
+        register(Identifier.withDefaultNamespace("baby_panda"), BABY_PANDA);
+        register(Identifier.withDefaultNamespace("sheep"), SHEEP);
+        register(Identifier.withDefaultNamespace("baby_sheep"), BABY_SHEEP);
+        register(Identifier.withDefaultNamespace("sheep_fur"), SHEEP_FUR);
+        register(Identifier.withDefaultNamespace("sniffer"), SNIFFER);
+        register(Identifier.withDefaultNamespace("snifflet"), SNIFFLET);
+        register(Identifier.withDefaultNamespace("adult_turtle"), ADULT_TURTLE);
+        register(Identifier.withDefaultNamespace("warm_cow"), WARM_COW);
+        register(Identifier.withDefaultNamespace("zombie_villager"), ZOMBIE_VILLAGER);
+        register(Identifier.withDefaultNamespace("baby_zombie_villager"), BABY_ZOMBIE_VILLAGER);
+        register(Identifier.withDefaultNamespace("zombie_villager"), ZOMBIE_VILLAGER);
+        register(Identifier.withDefaultNamespace("baby_zombie_villager"), BABY_ZOMBIE_VILLAGER);
+        register(Identifier.withDefaultNamespace("armor_stand"), ARMOR_STAND);
+        register(Identifier.withDefaultNamespace("squid"), SQUID);
+        register(Identifier.withDefaultNamespace("baby_squid"), BABY_SQUID);
+        register(Identifier.withDefaultNamespace("dolphin"), DOLPHIN);
+        register(Identifier.withDefaultNamespace("baby_dolphin"), BABY_DOLPHIN);
+        register(Identifier.withDefaultNamespace("salmon"), SALMON);
+        register(Identifier.withDefaultNamespace("nautilus_saddle"), NAUTILUS_SADDLE);
+        register(Identifier.withDefaultNamespace("boat"), BOAT);
+        register(Identifier.withDefaultNamespace("chest_boat"), CHEST_BOAT);
+        register(Identifier.withDefaultNamespace("raft"), RAFT);
+        register(Identifier.withDefaultNamespace("chest_raft"), CHEST_RAFT);
         register(Identifier.fromNamespaceAndPath("contentpacks", "dummy"), Codec.STRING.xmap(
                 EntityModelTypes::createDummy, model -> ""
         ).fieldOf("mob_name"));
@@ -119,6 +170,10 @@ public class EntityModelTypes {
 
     public static MapCodec<? extends LayerDefinition> of(Supplier<LayerDefinition> supplier){
         return MapCodec.unit(supplier);
+    }
+
+    public static void register(Identifier id, MapCodec<? extends LayerDefinition> entry) {
+        ID_MAPPER.put(id, entry);
     }
 
     private static LayerDefinition createDummy(String mobName) {

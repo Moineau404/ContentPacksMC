@@ -1,33 +1,29 @@
 package mod.moineau.contentpacks.client.options;
 
 import com.google.common.collect.ImmutableList;
-import com.google.gson.*;
-import com.google.gson.stream.JsonWriter;
+import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mod.moineau.contentpacks.ContentPacks;
+import mod.moineau.contentpacks.api.util.FileUtil;
+import mod.moineau.contentpacks.client.ContentPacksClient;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackRepository;
-import net.minecraft.util.StrictJsonParser;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 public final class ContentPacksOptions {
-    private static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks/Options");
-    private static final Gson GSON = new GsonBuilder().setFormattingStyle(FormattingStyle.PRETTY).create();
+    private static final Logger LOGGER = ContentPacksClient.LOGGER;
     private static final File FILE = FabricLoader.getInstance().getConfigDir().resolve(ContentPacks.MOD_ID + ".json").toFile();
     private static final Codec<ContentPacksOptions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.listOf().fieldOf("enabled").forGetter(ContentPacksOptions::getEnabledContentPacks),
-            Codec.STRING.listOf().fieldOf("disabled").forGetter(ContentPacksOptions::getDisabledContentPacks)
+            Codec.STRING.listOf().fieldOf("enabled").forGetter(ContentPacksOptions::getEnabledPacks),
+            Codec.STRING.listOf().fieldOf("disabled").forGetter(ContentPacksOptions::getDisabledPacks)
     ).apply(instance, ContentPacksOptions::new));
     private final List<String> enabledContentPacks = new ArrayList<>();
     private final List<String> disabledContentPacks = new ArrayList<>();
@@ -40,106 +36,98 @@ public final class ContentPacksOptions {
         this.disabledContentPacks.addAll(disabledContentPacks);
     }
 
-    /**
-     * Return new empty instance
-     */
-    private static ContentPacksOptions empty() {
-        return new ContentPacksOptions(new ArrayList<>(), new ArrayList<>());
+    private ContentPacksOptions() {
+        this(new ArrayList<>(), new ArrayList<>());
     }
 
     /**
-     * Read options from config file and return an instance,
-     * or write blank options file
+     * Reads options from config file and returns a new instance.
+     * Write and returns blank options if failed.
      */
     public static ContentPacksOptions read() {
+        ContentPacksOptions options = null;
+
         if (FILE.exists()) {
             try {
-                Reader reader = new FileReader(FILE);
-                JsonElement jsonElement = StrictJsonParser.parse(reader);
-                DataResult<ContentPacksOptions> result = CODEC.parse(JsonOps.INSTANCE, jsonElement);
-                ContentPacksOptions options = result.getPartialOrThrow();
-                result.ifError(error -> LOGGER.error("Partially loaded options: {}", error.message()));
-                return options;
-            } catch (FileNotFoundException | JsonParseException | IllegalStateException e) {
-                LOGGER.error("Failed to load options:", e);
-            }
-        } else {
-            try {
-                FILE.getParentFile().mkdirs();
-                FILE.createNewFile();
-                ContentPacksOptions empty = empty();
-                empty.write();
-                return empty;
-            } catch (IOException e) {
-                LOGGER.error("Failed to create options file:", e);
+                options = FileUtil.parseJsonResult(FILE, CODEC).promotePartial(e -> LOGGER.warn("Partially read options: {}", e)).getPartialOrThrow(JsonParseException::new);
+            } catch (Exception e) {
+                LOGGER.error("Failed to read options:", e);
             }
         }
-        return empty();
+
+        if (options == null) {
+            options = new ContentPacksOptions();
+        }
+
+        options.write();
+        return options;
     }
 
     /**
-     * Write options to config file
+     * Write options to config file.
      */
     public void write() {
         try {
-            JsonWriter writer = new JsonWriter(new FileWriter(FILE));
-            writer.setFormattingStyle(FormattingStyle.PRETTY);
-            JsonElement jsonElement = CODEC.encodeStart(JsonOps.INSTANCE, this).getOrThrow();
-            GSON.toJson(jsonElement, writer);
-            writer.flush();
-            writer.close();
-        } catch (IOException | JsonParseException e) {
-            LOGGER.error("Failed to write options:", e);
+            FileUtil.write(FILE, this, CODEC);
+        } catch (Exception e) {
+            LOGGER.error("Failed to write options file:", e);
         }
     }
 
     /**
-     * Update enabled content packs in given pack manager
+     * Updates enabled content packs in given pack repositiory.
      */
-    public void updatePackManager(PackRepository manager) {
+    public void updateRepository(PackRepository repository) {
         Set<String> set = new LinkedHashSet<>();
-        for (String pack : this.enabledContentPacks) {
-            Pack profile = manager.getPack(pack);
-            if (profile == null && !pack.startsWith("file/")) {
-                profile = manager.getPack("file/" + pack);
+
+        for (String id : this.enabledContentPacks) {
+            Pack profile = repository.getPack(id);
+
+            if (profile == null && !id.startsWith("file/")) {
+                profile = repository.getPack("file/" + id);
             }
+
             if (profile == null) {
-                set.remove(pack);
-                ContentPacks.LOGGER.warn("Removed content pack {} from config because it doesn't seem to exist anymore!", pack);
+                set.remove(id);
+                LOGGER.warn("Removed content pack {} from config because it doesn't seem to exist anymore!", id);
             } else {
                 set.add(profile.getId());
             }
         }
-        manager.setSelected(set);
-        this.refreshPacks(manager);
+
+        repository.setSelected(set);
+        this.refreshPacks(repository);
     }
 
     /**
-     * Refresh enabled content packs from given pack manager
+     * Refreshes enabled and disabled pack lists from given pack repository.
      */
-    public boolean refreshPacks(PackRepository packManager) {
+    public boolean refreshPacks(PackRepository repository) {
         List<String> old = ImmutableList.copyOf(this.enabledContentPacks);
         this.enabledContentPacks.clear();
         this.disabledContentPacks.clear();
-        for (Pack profile : packManager.getSelectedPacks()) {
+
+        for (Pack profile : repository.getSelectedPacks()) {
             if (!profile.isFixedPosition()) {
                 this.enabledContentPacks.add(profile.getId());
             }
         }
-        for (Pack profile : packManager.getAvailablePacks()) {
+
+        for (Pack profile : repository.getAvailablePacks()) {
             if (!this.enabledContentPacks.contains(profile.getId())) {
                 this.disabledContentPacks.add(profile.getId());
             }
         }
+
         this.write();
         return !old.equals(this.enabledContentPacks);
     }
 
-    public List<String> getEnabledContentPacks() {
+    public List<String> getEnabledPacks() {
         return enabledContentPacks;
     }
 
-    public List<String> getDisabledContentPacks() {
+    public List<String> getDisabledPacks() {
         return disabledContentPacks;
     }
 }

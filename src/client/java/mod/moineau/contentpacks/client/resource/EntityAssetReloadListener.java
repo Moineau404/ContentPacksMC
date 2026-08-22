@@ -9,7 +9,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import org.jspecify.annotations.Nullable;
 
-public class EntityAssetReloadListener extends BoundReloadListener<EntityType<?>, EntityAsset> {
+public class EntityAssetReloadListener extends DependentReloadListener<EntityType<?>, EntityAsset> {
     private static final String DIRECTORY = "entities";
 
     public EntityAssetReloadListener() {
@@ -17,22 +17,22 @@ public class EntityAssetReloadListener extends BoundReloadListener<EntityType<?>
     }
 
     @Override
-    protected @Nullable EntityType<?> getBound(Identifier id) {
+    protected @Nullable EntityType<?> getDependence(Identifier id) {
         return BuiltInRegistries.ENTITY_TYPE.getValue(id);
     }
 
     @Override
-    protected void loadEntry(EntityType<?> type, EntityAsset asset, Identifier id) {
-        EntityRenderers.register((EntityType) type, (EntityRendererProvider) asset.renderer());
+    protected void loadEntry(EntityType<?> entityType, EntityAsset asset, Identifier id) {
+        EntityRenderers.register((EntityType) entityType, (EntityRendererProvider) asset.renderer());
     }
 
     @Override
-    protected void nullErrorProvider(Identifier id) {
+    protected void handleNullError(Identifier id) {
         ContentPacksClient.LOGGER.debug("Discovered unknown entity asset {}, ignoring", id);
     }
 
     @Override
-    protected void readingErrorProvider(Identifier id, String pack, String message) {
+    protected void handleReadingError(Identifier id, String pack, String message) {
         ContentPacksClient.LOGGER.error("Failed to load entity asset for entity type {} from pack {}: {}", id, pack, message);
     }
 }
