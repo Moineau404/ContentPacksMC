@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.block;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
-import mod.moineau.contentpacks.api.util.CodecUtil;
+import mod.moineau.api.util.CodecUtil;
 import mod.moineau.contentpacks.state.VariantMap;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;

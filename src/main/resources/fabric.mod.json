@@ -22,7 +22,7 @@
 			"mod.moineau.contentpacks.client.ContentPacksClient"
 		],
 		"contentpacks": [
-			"mod.moineau.contentpacks.integration.ContentPacksAPI"
+			"mod.moineau.contentpacks.api.ContentPacksAPI"
 		],
 		"packrepos": [
 			"mod.moineau.contentpacks.packs.ContentPacksRepositorySource"
@@ -32,6 +32,11 @@
 		"contentpacks.mixins.json",
 		{
 			"config": "contentpacks.client.mixins.json",
+			"environment": "client"
+		},
+		"contentpacks.api.mixins.json",
+		{
+			"config": "contentpacks.api.client.mixins.json",
 			"environment": "client"
 		}
 	],

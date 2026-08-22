@@ -12,9 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.UnaryOperator;
 
-public record RegistryOutput<T>(Identifier registry, Map<ResourceKey<T>, Entry> results) {
+public final class RegistryOutput<T> {
+    private final Identifier registry;
+    private final Map<ResourceKey<T>, Entry> results;
+
     public RegistryOutput(Registry<T> registry, Codec<T> codec, UnaryOperator<Identifier> locationProvider) {
-        this(registry.key().identifier(), new HashMap<>());
+        this.registry = registry.key().identifier();
+        this.results = new HashMap<>();
         registry.entrySet().forEach(entry -> {
             DataResult<JsonElement> result;
             try {
@@ -24,6 +28,14 @@ public record RegistryOutput<T>(Identifier registry, Map<ResourceKey<T>, Entry> 
             }
             results.put(entry.getKey(), new Entry(locationProvider.apply(entry.getKey().identifier()), result));
         });
+    }
+
+    public Identifier getRegistry() {
+        return registry;
+    }
+
+    public Map<ResourceKey<T>, Entry> getResults() {
+        return results;
     }
 
     public record Entry(Identifier location, DataResult<JsonElement> result) {}

@@ -1,9 +1,9 @@
 package mod.moineau.contentpacks.block.statepredicates.entitytyped;
 
 import com.mojang.serialization.Codec;
-import mod.moineau.contentpacks.api.math.Comparison;
-import mod.moineau.contentpacks.api.util.CodecUtil;
-import mod.moineau.contentpacks.api.util.Workaround;
+import mod.moineau.api.math.Comparison;
+import mod.moineau.api.util.CodecUtil;
+import mod.moineau.api.util.Workaround;
 import mod.moineau.contentpacks.block.statepredicates.StatePredicate;
 import mod.moineau.contentpacks.event.ContentPacksEvents;
 import mod.moineau.contentpacks.registry.ContentRegistries;

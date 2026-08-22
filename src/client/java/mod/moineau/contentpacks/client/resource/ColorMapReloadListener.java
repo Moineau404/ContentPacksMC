@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ColorMapReloadListener extends SimplePreparableReloadListener<Map<ColorMap, int[]>> {
+public final class ColorMapReloadListener extends SimplePreparableReloadListener<Map<ColorMap, int[]>> {
     private static final FileToIdConverter FINDER = new FileToIdConverter("textures/colormap", ".png");
 
     @Override

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mod.moineau.contentpacks.ContentPacks;
-import mod.moineau.contentpacks.api.util.JsonUtil;
+import mod.moineau.api.util.JsonUtil;
 import mod.moineau.contentpacks.client.ContentPacksClient;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.packs.repository.Pack;

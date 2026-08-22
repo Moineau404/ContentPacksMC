@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "package": "mod.moineau.contentpacks.api.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "block.BaseEntityBlockMixin",
+    "block.BlockEntityMixin",
+    "block.ChestBlockMixin",
+    "block.CopperChestBlockMixin",
+    "block.EnderChestBlockMixin",
+    "block.TrappedChestBlockMixin",
+    "block.WeatheringCopperChestBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

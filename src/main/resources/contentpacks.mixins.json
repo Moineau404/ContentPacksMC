@@ -10,20 +10,14 @@
     "PackMetadataSectionMixin",
     "PackTypeMixin",
     "WorldVersionSimpleMixin",
-    "block.BaseEntityBlockMixin",
     "block.BlockBehaviourAccessor",
     "block.BlockBehaviourMixin",
     "block.BlockBehaviourPropertiesMixin",
     "block.BlockSetTypeMixin",
     "block.BlocksMixin",
-    "block.ChestBlockMixin",
-    "block.CopperChestBlockMixin",
-    "block.EnderChestBlockMixin",
     "block.OxidizableStairsBlockMixin",
     "block.StairBlockMixin",
-    "block.TrappedChestBlockMixin",
     "block.TreeGrowerMixin",
-    "block.WeatheringCopperChestBlockMixin",
     "block.WoodTypeMixin",
     "item.AxeItemMixin",
     "item.ItemMixin",
@@ -36,5 +30,5 @@
   },
   "overwrites": {
     "requireAnnotations": true
-	}
+  }
 }

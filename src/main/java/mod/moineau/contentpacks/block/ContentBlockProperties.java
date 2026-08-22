@@ -1,6 +1,6 @@
 package mod.moineau.contentpacks.block;
 
-import mod.moineau.contentpacks.api.math.Comparison;
+import mod.moineau.api.math.Comparison;
 import mod.moineau.contentpacks.block.statepredicates.StatePredicate;
 import mod.moineau.contentpacks.block.statepredicates.entitytyped.EntityTypedStatePredicate;
 import net.minecraft.core.Direction;

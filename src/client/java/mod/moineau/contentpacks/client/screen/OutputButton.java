@@ -9,7 +9,7 @@ import net.minecraft.resources.Identifier;
 
 import java.util.function.Consumer;
 
-public class OutputButton extends SpriteIconButton.CenteredIcon {
+public final class OutputButton extends SpriteIconButton.CenteredIcon {
     private static final Component TOOLTIP = Component.translatable("options.contentpacks.output.tooltip");
     private static final Component MESSAGE = Component.translatable("options.contentpacks.output");
 

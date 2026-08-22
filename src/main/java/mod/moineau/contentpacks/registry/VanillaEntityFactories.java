@@ -4,7 +4,7 @@ import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Function3;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
-import mod.moineau.contentpacks.api.util.FunctionUtil;
+import mod.moineau.api.util.FunctionUtil;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

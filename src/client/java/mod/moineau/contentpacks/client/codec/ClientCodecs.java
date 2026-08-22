@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.client.codec;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mod.moineau.contentpacks.api.util.CodecUtil;
+import mod.moineau.api.util.CodecUtil;
 import mod.moineau.contentpacks.client.render.block.tint.BlockTintSource;
 import mod.moineau.contentpacks.client.render.block.tint.BlockTintSourceTypes;
 import net.minecraft.client.renderer.block.FluidModel;

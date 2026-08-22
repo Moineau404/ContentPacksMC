@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.state;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import mod.moineau.contentpacks.api.math.Comparator;
+import mod.moineau.api.math.Comparator;
 import net.minecraft.world.level.block.state.StateHolder;
 import net.minecraft.world.level.block.state.properties.Property;
 import java.util.Collection;

@@ -2,8 +2,8 @@ package mod.moineau.contentpacks.codec;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mod.moineau.contentpacks.api.util.CodecUtil;
-import mod.moineau.contentpacks.api.util.IdentifierUtil;
+import mod.moineau.api.util.CodecUtil;
+import mod.moineau.api.util.IdentifierUtil;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.DependantName;

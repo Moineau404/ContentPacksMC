@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BlockColorReloadListener extends DependentReloadListener<Block, Optional<List<BlockTintSource>>> {
+public final class BlockColorReloadListener extends DependentReloadListener<Block, Optional<List<BlockTintSource>>> {
     private static final Codec<Optional<List<BlockTintSource>>> CODEC = BlockTintSourceTypes.CODEC.listOf().optionalFieldOf("tints").codec();
     private final ContentBlockColors blockColors;
 
@@ -26,7 +26,7 @@ public class BlockColorReloadListener extends DependentReloadListener<Block, Opt
 
     @Override
     protected @Nullable Block getDependence(Identifier id) {
-        return BuiltInRegistries.BLOCK.getValue(id);
+        return BuiltInRegistries.BLOCK.getOptional(id).orElse(null);
     }
 
     @Override

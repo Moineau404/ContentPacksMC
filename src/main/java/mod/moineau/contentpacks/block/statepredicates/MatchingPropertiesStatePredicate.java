@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mod.moineau.contentpacks.api.math.Comparison;
+import mod.moineau.api.math.Comparison;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.state.BlockState;

@@ -2,9 +2,9 @@ package mod.moineau.contentpacks.block.statepredicates;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import mod.moineau.contentpacks.api.math.Comparison;
-import mod.moineau.contentpacks.api.util.CodecUtil;
-import mod.moineau.contentpacks.api.util.Workaround;
+import mod.moineau.api.math.Comparison;
+import mod.moineau.api.util.CodecUtil;
+import mod.moineau.api.util.Workaround;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;

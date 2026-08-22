@@ -1,7 +1,7 @@
 package mod.moineau.contentpacks.util;
 
 import mod.moineau.contentpacks.ContentPacks;
-import mod.moineau.contentpacks.api.util.WritingLogger;
+import mod.moineau.api.util.WritingLogger;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;

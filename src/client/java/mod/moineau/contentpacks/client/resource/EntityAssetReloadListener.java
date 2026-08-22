@@ -9,14 +9,14 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import org.jspecify.annotations.Nullable;
 
-public class EntityAssetReloadListener extends DependentReloadListener<EntityType<?>, EntityAsset> {
+public final class EntityAssetReloadListener extends DependentReloadListener<EntityType<?>, EntityAsset> {
     public EntityAssetReloadListener() {
         super("entities", EntityAsset.CODEC);
     }
 
     @Override
     protected @Nullable EntityType<?> getDependence(Identifier id) {
-        return BuiltInRegistries.ENTITY_TYPE.getValue(id);
+        return BuiltInRegistries.ENTITY_TYPE.getOptional(id).orElse(null);
     }
 
     @Override

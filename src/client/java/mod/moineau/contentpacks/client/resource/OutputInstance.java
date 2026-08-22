@@ -2,8 +2,8 @@ package mod.moineau.contentpacks.client.resource;
 
 import com.google.gson.JsonElement;
 import com.mojang.serialization.DataResult;
-import mod.moineau.contentpacks.api.util.FileUtil;
-import mod.moineau.contentpacks.api.util.JsonUtil;
+import mod.moineau.api.util.FileUtil;
+import mod.moineau.api.util.JsonUtil;
 import mod.moineau.contentpacks.client.ContentPacksClient;
 import mod.moineau.contentpacks.resource.RegistryLoader;
 import mod.moineau.contentpacks.resource.RegistryOutput;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 
-public class OutputInstance {
+public final class OutputInstance {
     private static final Logger LOGGER = ContentPacksClient.LOGGER;
     private static final Path DIRECTORY = FabricLoader.getInstance().getGameDir().resolve(".contentpacks.out");
     private static final Path CONTENT_DIRECTORY = DIRECTORY.resolve("content");
@@ -47,7 +47,7 @@ public class OutputInstance {
         outputs.forEach(output -> {
             Set<String> set =  new TreeSet<>();
 
-            output.results().forEach((key, entry) -> {
+            output.getResults().forEach((key, entry) -> {
                 Identifier id = key.identifier();
                 set.add(id.toString());
 
@@ -63,7 +63,7 @@ public class OutputInstance {
                 }
             });
 
-            this.names.put(output.registry(), set);
+            this.names.put(output.getRegistry(), set);
         });
     }
 

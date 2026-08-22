@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.client.resource;
 
 import mod.moineau.contentpacks.client.ContentPacksClient;
 import mod.moineau.contentpacks.client.codec.ClientCodecs;
-import mod.moineau.contentpacks.client.mixin.LiquidBlockAccessor;
+import mod.moineau.contentpacks.api.client.mixin.block.LiquidBlockAccessor;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderingRegistry;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,15 +13,15 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import org.jspecify.annotations.Nullable;
 
-public class FluidModelReloadListener extends DependentReloadListener<Fluid, FluidModel.Unbaked> {
+public final class FluidModelReloadListener extends DependentReloadListener<Fluid, FluidModel.Unbaked> {
     public FluidModelReloadListener() {
         super("models/fluid", ClientCodecs.FLUID_MODEL);
     }
 
     @Override
     protected @Nullable Fluid getDependence(Identifier id) {
-        Block block = BuiltInRegistries.BLOCK.getValue(id);
-        if (block != null && block instanceof LiquidBlock liquidBlock) {
+        Block block = BuiltInRegistries.BLOCK.getOptional(id).orElse(null);
+        if (block instanceof LiquidBlock liquidBlock) {
             return ((LiquidBlockAccessor) liquidBlock).getFluid();
         }
         return null;

@@ -1,6 +1,6 @@
 package mod.moineau.contentpacks.block;
 
-import mod.moineau.contentpacks.api.util.Workaround;
+import mod.moineau.api.util.Workaround;
 import mod.moineau.contentpacks.interaction.blockentitytype.FabricValidBlocksBlockEntityTypeInteraction;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;

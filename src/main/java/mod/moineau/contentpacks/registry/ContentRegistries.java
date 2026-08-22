@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.block.statepredicates.StatePredicateType;
 import mod.moineau.contentpacks.block.statepredicates.entitytyped.EntityTypedStatePredicateType;
-import mod.moineau.contentpacks.fluid.ContentFluid;
+import mod.moineau.contentpacks.api.fluid.ContentFluid;
 import mod.moineau.contentpacks.fluid.FluidTypes;
 import mod.moineau.contentpacks.item.ItemTypes;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;

@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 /**
  * Content packs selection screen.
  */
-public class ContentPacksScreen extends PackSelectionScreen {
+public final class ContentPacksScreen extends PackSelectionScreen {
     private static ContentPacksScreen instance;
     private OutputButton outputButton;
 

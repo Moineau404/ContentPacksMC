@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_25",
   "client": [
     "MinecraftMixin",
-    "OptionsScreenMixin",
-    "block.BlockColorsMixin"
+    "block.BlockColorsMixin",
+    "gui.OptionsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -13,13 +13,5 @@
   "overwrites": {
     "requireAnnotations": true
   },
-  "mixins": [
-    "ChestRendererMixin",
-    "LiquidBlockAccessor",
-    "block.BlockEntityMixin",
-    "block.BlockEntityRenderStateMixin",
-    "block.ChestBlockMixin",
-    "block.EnderChestBlockMixin",
-    "block.TrappedChestBlockMixin"
-  ]
+  "mixins": []
 }

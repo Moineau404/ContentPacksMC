@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.client.render.entity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import mod.moineau.contentpacks.api.util.FunctionUtil;
+import mod.moineau.api.util.FunctionUtil;
 import net.minecraft.client.model.animal.axolotl.AdultAxolotlModel;
 import net.minecraft.client.model.animal.camel.AdultCamelModel;
 import net.minecraft.client.model.animal.camel.BabyCamelModel;

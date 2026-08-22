@@ -3,7 +3,7 @@ package mod.moineau.contentpacks.client;
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.client.options.ContentPacksOptions;
 import mod.moineau.contentpacks.client.render.block.tint.BlockTintSourceTypes;
-import mod.moineau.contentpacks.client.render.entity.ChestRendering;
+import mod.moineau.contentpacks.api.client.render.ChestRendering;
 import mod.moineau.contentpacks.client.render.entity.EntityModelTypes;
 import mod.moineau.contentpacks.client.render.entity.EntityRendererTypes;
 import mod.moineau.contentpacks.client.resource.*;

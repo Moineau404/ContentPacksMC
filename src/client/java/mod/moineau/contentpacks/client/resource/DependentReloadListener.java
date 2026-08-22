@@ -1,7 +1,7 @@
 package mod.moineau.contentpacks.client.resource;
 
 import com.mojang.serialization.Codec;
-import mod.moineau.contentpacks.api.util.JsonUtil;
+import mod.moineau.api.util.JsonUtil;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.PreparableReloadListener;

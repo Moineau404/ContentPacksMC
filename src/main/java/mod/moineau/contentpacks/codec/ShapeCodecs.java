@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mod.moineau.contentpacks.api.util.FunctionUtil;
+import mod.moineau.api.util.FunctionUtil;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;

@@ -10,6 +10,7 @@ import mod.moineau.contentpacks.interaction.fluid.FluidInteractionTypes;
 import mod.moineau.contentpacks.interaction.fluidtag.FluidTagInteractionTypes;
 import mod.moineau.contentpacks.interaction.item.ItemInteractionTypes;
 import mod.moineau.contentpacks.interaction.itemtag.ItemTagInteractionTypes;
+import mod.moineau.contentpacks.item.ItemTypes;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import mod.moineau.contentpacks.resource.ContentManager;
 import mod.moineau.contentpacks.resource.ResourceLoader;
@@ -52,8 +53,9 @@ public abstract class ContentPacksExtension {
         Registry.register(BuiltInRegistries.BLOCK_TYPE, id, type);
     }
 
-    protected static void registerItemType(Identifier id, MapCodec<? extends Item> type) {
+    protected static void registerItemType(Identifier id, MapCodec<? extends Item> type, Class<? extends Item> clazz) {
         Registry.register(ContentRegistries.ITEM_TYPE, id, type);
+        ItemTypes.register(clazz, type);
     }
 
     protected static void registerBlockInteraction(Identifier id, InteractionType<Block, ?> type) {

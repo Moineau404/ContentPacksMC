@@ -3,7 +3,7 @@ package mod.moineau.contentpacks.resource;
 import mod.moineau.contentpacks.block.BlockWithEntityTypes;
 import mod.moineau.contentpacks.codec.*;
 import mod.moineau.contentpacks.event.ContentPacksEvents;
-import mod.moineau.contentpacks.fluid.ContentFluid;
+import mod.moineau.contentpacks.api.fluid.ContentFluid;
 import mod.moineau.contentpacks.item.ItemTypes;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -78,7 +78,6 @@ public final class ContentManager {
         registerLoader(TREE_GROWERS);
         registerLoader(FLUIDS);
         registerLoader(BLOCKS);
-//        registerLoader(BOAT_TYPES);
         registerLoader(ENTITY_TYPES);
         registerLoader(TOOL_MATERIALS);
         registerLoader(ARMOR_MATERIALS);

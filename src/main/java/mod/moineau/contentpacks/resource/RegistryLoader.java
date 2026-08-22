@@ -6,7 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import mod.moineau.contentpacks.ContentPacks;
-import mod.moineau.contentpacks.api.util.CodecUtil;
+import mod.moineau.api.util.CodecUtil;
 import mod.moineau.contentpacks.util.ErrorLogger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
