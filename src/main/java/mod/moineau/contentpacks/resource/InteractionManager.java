@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public final class InteractionManager {
     private static final List<InteractionLoader<?>> LOADERS = new LinkedList<>();
@@ -30,8 +31,8 @@ public final class InteractionManager {
         LOADERS.add(loader);
     }
 
-    public static void load(ResourceManager resourceManager) {
-        LOADERS.forEach(loader -> loader.load(resourceManager));
+    public static void load(ResourceManager resourceManager, Consumer<String> errorHandler) {
+        LOADERS.forEach(loader -> loader.load(resourceManager, errorHandler));
     }
 
     static {

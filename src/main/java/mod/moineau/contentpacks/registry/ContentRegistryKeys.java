@@ -20,8 +20,8 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 
 public final class ContentRegistryKeys {
     public static final ResourceKey<Registry<Property<?>>> PROPERTIES = ofVanilla("properties");
-    public static final ResourceKey<Registry<StatePredicateType<?>>> BLOCK_CONTEXT_PREDICATE_TYPE = of("block_context_predicate_type");
-    public static final ResourceKey<Registry<EntityTypedStatePredicateType<?>>> ENTITY_TYPED_BLOCK_CONTEXT_PREDICATE_TYPE = of("entity_typed_block_context_predicate_type");
+    public static final ResourceKey<Registry<StatePredicateType<?>>> STATE_PREDICATE_TYPE = of("state_predicate_type");
+    public static final ResourceKey<Registry<EntityTypedStatePredicateType<?>>> ENTITY_TYPED_STATE_PREDICATE_TYPE = of("entity_typed_state_predicate_type");
     public static final ResourceKey<Registry<SoundType>> SOUND_TYPE = ofVanilla("sound_type");
     public static final ResourceKey<Registry<BlockSetType>> BLOCK_SET_TYPE = ofVanilla("block_set_type");
     public static final ResourceKey<Registry<WoodType>> WOOD_TYPE = ofVanilla("wood_type");
@@ -33,7 +33,7 @@ public final class ContentRegistryKeys {
     public static final ResourceKey<Registry<MapCodec<? extends EntityType.EntityFactory<?>>>> ENTITY_FACTORY = of("entity_factory");
 
     private static <T> ResourceKey<Registry<T>> of(String id) {
-        return ResourceKey.createRegistryKey(Identifier.fromNamespaceAndPath(ContentPacks.MOD_ID, id));
+        return ResourceKey.createRegistryKey(ContentPacks.id(id));
     }
 
     private static <T> ResourceKey<Registry<T>> ofVanilla(String id) {

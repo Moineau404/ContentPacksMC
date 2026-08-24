@@ -3,7 +3,6 @@ package mod.moineau.contentpacks.block.statepredicates;
 import com.mojang.serialization.MapCodec;
 import mod.moineau.contentpacks.ContentPacks;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.Identifier;
 
 public interface StatePredicateType<P extends StatePredicate> {
 	StatePredicateType<MatchingBlocksStatePredicate> MATCHING_BLOCKS = () -> MatchingBlocksStatePredicate.CODEC;
@@ -39,7 +38,7 @@ public interface StatePredicateType<P extends StatePredicate> {
 		Registry.register(registry, "not", NOT);
 		Registry.register(registry, "true", TRUE);
 		Registry.register(registry, "false", FALSE);
-		Registry.register(registry, Identifier.fromNamespaceAndPath(ContentPacks.MOD_ID, "matching_properties"), MATCHING_PROPERTIES);
+		Registry.register(registry, ContentPacks.id("matching_properties"), MATCHING_PROPERTIES);
 		Registry.register(registry, "is_face_sturdy", IS_FACE_STURDY);
 		Registry.register(registry, "is_collision_shape_full_block", IS_COLLISION_SHAPE_FULL_BLOCK);
 		Registry.register(registry, "blocks_motion", BLOCKS_MOTION);

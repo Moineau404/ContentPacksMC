@@ -2,7 +2,6 @@ package mod.moineau.api.util;
 
 import com.google.common.base.Suppliers;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mod.moineau.api.codec.*;
@@ -131,14 +130,21 @@ public final class CodecUtil {
         );
     }
 
-    //
-
-    public static JsonElement jsonInjectId(JsonElement jsonElement, Identifier id) {
+    /**
+     *
+     * @param jsonElement
+     * @param id
+     * @return
+     */
+    public static void jsonInjectId(JsonElement jsonElement, Identifier id) {
         if (jsonElement.isJsonObject()) {
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
-            jsonObject.addProperty(INJECT_ID_KEY, id.toString());
-            return jsonObject;
+            jsonElement.getAsJsonObject().addProperty(INJECT_ID_KEY, id.toString());
         }
-        return jsonElement;
+    }
+
+    public static void jsonInjectLocation(JsonElement jsonElement, Identifier location) {
+        if (jsonElement.isJsonObject()) {
+            jsonElement.getAsJsonObject().addProperty(INJECT_LOCATION_KEY, location.toString());
+        }
     }
 }

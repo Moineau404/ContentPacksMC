@@ -20,7 +20,7 @@ public class ContentPacksRepositorySource implements RepositorySource, PackRepos
 
     @Override
     public void loadPacks(final Consumer<Pack> result) {
-        for (Pack pack : ContentPacks.getActivePacks()) {
+        for (Pack pack : ContentPacks.getInstance().getActivePacks()) {
             Pack requiredPack = Pack.readMetaAndCreate(pack.location(), pack.resources, PACK_TYPE, SELECTION_CONFIG);
             if (requiredPack != null) {
                 result.accept(requiredPack);

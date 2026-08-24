@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface StatePredicate extends BlockBehaviour.StatePredicate {
-	Codec<StatePredicate> BASE_CODEC = ContentRegistries.BLOCK_CONTEXT_PREDICATE_TYPE.byNameCodec()
+	Codec<StatePredicate> BASE_CODEC = ContentRegistries.STATE_PREDICATE_TYPE.byNameCodec()
 			.dispatch(StatePredicate::getType, StatePredicateType::codec);
-	MapCodec<StatePredicate> MAP_CODEC = ContentRegistries.BLOCK_CONTEXT_PREDICATE_TYPE.byNameCodec()
+	MapCodec<StatePredicate> MAP_CODEC = ContentRegistries.STATE_PREDICATE_TYPE.byNameCodec()
 			.dispatchMap(StatePredicate::getType, StatePredicateType::codec);
 	@Workaround
 	Codec<BlockBehaviour.StatePredicate> DOWNGRADED_CODEC = CodecUtil.downgrade(BASE_CODEC, true);

@@ -4,7 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
-import mod.moineau.contentpacks.client.ContentPacksClient;
 import mod.moineau.contentpacks.client.world.biome.ColorMap;
 import mod.moineau.contentpacks.client.world.biome.ColorResolvers;
 import mod.moineau.contentpacks.resource.ResourceLoader;
@@ -17,17 +16,17 @@ import net.minecraft.util.StrictJsonParser;
 
 import java.io.Reader;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public final class ColorResolverManager implements ResourceLoader {
     private static final FileToIdConverter FINDER = FileToIdConverter.json("color_resolver");
 
     @Override
-    public void load(ResourceManager resourceManager) {
+    public void load(ResourceManager resourceManager, Consumer<String> errorHandler) {
         Map<Identifier, Resource> resourceMap = FINDER.listMatchingResources(resourceManager);
 
-        for (Map.Entry<Identifier, Resource> entry : resourceMap.entrySet()) {
-            Identifier id = FINDER.fileToId(entry.getKey());
-            Resource resource = entry.getValue();
+        resourceMap.forEach((location, resource) -> {
+            Identifier id = FINDER.fileToId(location);
 
             try (Reader reader = resource.openAsReader()) {
                 JsonElement jsonElement = StrictJsonParser.parse(reader);
@@ -36,11 +35,11 @@ public final class ColorResolverManager implements ResourceLoader {
                 ColorMap value = result.getPartialOrThrow(JsonParseException::new);
 
                 register(id, value);
-                result.ifError(error -> ContentPacksClient.LOGGER.error("Partially loaded color resolver {} from pack {}: {}", id, resource.sourcePackId(), error.message()));
+                result.ifError(e -> errorHandler.accept(String.format("(%s) [%s] %s", resource.sourcePackId(), location, e.message())));
             } catch (Exception e) {
-                ContentPacksClient.LOGGER.error("Failed to load color resolver {} from pack {}", id, resource.sourcePackId(), e);
+                errorHandler.accept(String.format("(%s) [%s] %s", resource.sourcePackId(), location, e.getMessage()));
             }
-        }
+        });
     }
 
     private void register(Identifier id, ColorMap entry) {

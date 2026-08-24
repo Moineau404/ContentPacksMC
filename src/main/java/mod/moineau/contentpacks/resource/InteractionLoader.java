@@ -8,7 +8,6 @@ import com.mojang.serialization.JsonOps;
 import mod.moineau.contentpacks.interaction.Interaction;
 import mod.moineau.contentpacks.interaction.InteractionSet;
 import mod.moineau.contentpacks.interaction.InteractionType;
-import mod.moineau.contentpacks.util.ErrorLogger;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
@@ -24,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import java.io.Reader;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class InteractionLoader<T> implements ResourceLoader {
@@ -64,20 +64,20 @@ public class InteractionLoader<T> implements ResourceLoader {
     }
 
     @Override
-    public void load(ResourceManager resourceManager) {
+    public void load(ResourceManager resourceManager, Consumer<String> errorHandler) {
         Map<Identifier, List<Resource>> resourceMap = finder.listMatchingResourceStacks(resourceManager);
 
-        for (Map.Entry<Identifier, List<Resource>> entry : resourceMap.entrySet()) {
-            Identifier id = finder.fileToId(entry.getKey());
+        resourceMap.forEach((location, resources) -> {
+            Identifier id = finder.fileToId(location);
 
             try {
                 T target = this.resolver.apply(id);
                 if (target == null) {
-                    continue;
+                    return;
                 }
 
                 InteractionSet<T> entries = new InteractionSet<>();
-                for (Resource resource : entry.getValue()) {
+                for (Resource resource : resources) {
                     try {
                         Reader reader = resource.openAsReader();
 
@@ -87,20 +87,20 @@ public class InteractionLoader<T> implements ResourceLoader {
                         Map<InteractionType<T, ?>, Interaction<T>> value = result.getPartialOrThrow(JsonParseException::new);
 
                         entries.addAll(value.values());
-                        result.ifError(error -> ErrorLogger.LOAD.write(entry.getKey(), resource, error.message()));
+                        result.ifError(e -> errorHandler.accept(String.format("(%s) [%s] %s", resource.sourcePackId(), location, e.message())));
 
                         try {
                             reader.close();
                         } catch (Throwable ignored) {}
                     } catch (Exception e) {
-                        ErrorLogger.LOAD.write(entry.getKey(), resource, e.getMessage());
+                        errorHandler.accept(String.format("(%s) [%s] %s", resource.sourcePackId(), location, e.getMessage()));
                     }
                 }
 
                 entries.forEach(interaction -> interaction.register(target));
             } catch (Exception e) {
-                ErrorLogger.LOAD.write(entry.getKey(), entry.getValue(), e.getMessage());
+                errorHandler.accept(String.format("(%s) [%s] %s", String.join(", ", resources.stream().map(Resource::sourcePackId).toList()), location, e.getMessage()));
             }
-        }
+        });
     }
 }

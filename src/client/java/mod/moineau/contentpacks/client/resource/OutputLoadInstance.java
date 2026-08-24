@@ -4,10 +4,9 @@ import com.google.gson.JsonElement;
 import com.mojang.serialization.DataResult;
 import mod.moineau.api.util.FileUtil;
 import mod.moineau.api.util.JsonUtil;
+import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.client.ContentPacksClient;
-import mod.moineau.contentpacks.resource.RegistryLoader;
 import mod.moineau.contentpacks.resource.RegistryOutput;
-import mod.moineau.contentpacks.util.ErrorLogger;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
@@ -18,33 +17,27 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 
-public final class OutputInstance {
+public final class OutputLoadInstance {
     private static final Logger LOGGER = ContentPacksClient.LOGGER;
     private static final Path DIRECTORY = FabricLoader.getInstance().getGameDir().resolve(".contentpacks.out");
     private static final Path CONTENT_DIRECTORY = DIRECTORY.resolve("content");
     private static final Path REGISTRIES_DIRECTORY = DIRECTORY.resolve("registries");
-    private static OutputInstance instance;
-    private final ErrorLogger logger = new ErrorLogger("output_errors") {
-        @Override
-        public void flush() {
-            if (this.count() > 0) LOGGER.warn("{} errors encountered while outputing content!", this.count());
-            super.flush();
-        }
-    };
+    private static final Path ERRORS_PATH = DIRECTORY.resolve("errors.log");
+    private static OutputLoadInstance instance;
     private final Collection<RegistryOutput<?>> outputs;
     private final Map<Identifier, JsonElement> entries = new HashMap<>();
     private final Map<Identifier, Set<String>> names = new HashMap<>();
+    private final List<String> errors = new LinkedList<>();
 
-    private OutputInstance(Collection<RegistryOutput<?>> outputs) {
+    private OutputLoadInstance(Collection<RegistryOutput<?>> outputs) {
         this.outputs = List.copyOf(outputs);
     }
 
     private void load() {
-        outputs.forEach(output -> {
+        this.outputs.forEach(output -> {
             Set<String> set =  new TreeSet<>();
 
             output.getResults().forEach((key, entry) -> {
@@ -54,12 +47,12 @@ public final class OutputInstance {
                 try {
                     DataResult<JsonElement> result = entry.result();
                     if (result.hasResultOrPartial()) {
-                        result.ifError(e -> this.logger.write(id, key.registry(), String.format("Partially encoded: %s", e.message())));
+                        result.ifError(e -> this.errors.add(String.format("[%s / %s] Partially encoded: %s", key.registry(), id, e.message())));
                     }
 
                     this.entries.put(entry.location(), result.getPartialOrThrow());
                 } catch (Exception e) {
-                    this.logger.write(id, key.registry(), String.format("Failed to encode: %s", e.getMessage()));
+                    this.errors.add(String.format("[%s / %s] Partially encoded: %s", key.registry(), id, e.getMessage()));
                 }
             });
 
@@ -72,8 +65,8 @@ public final class OutputInstance {
             File file = CONTENT_DIRECTORY.resolve(location.getNamespace()).resolve(location.getPath()).toFile();
             try {
                 JsonUtil.writeJson(file, json);
-            } catch (IOException e) {
-                logger.write(file, String.format("Failed to write file: %s", e.getMessage()));
+            } catch (Exception e) {
+                this.errors.add(String.format("[%s] Failed to write file: %s", location, e.getMessage()));
             }
         });
 
@@ -81,12 +74,17 @@ public final class OutputInstance {
             File file = REGISTRIES_DIRECTORY.resolve(location.getNamespace() + "." + location.getPath() + ".txt").toFile();
             try {
                 FileUtil.writeLines(file, set);
-            } catch (IOException e) {
-                logger.write(file, String.format("Failed to write file: %s", e.getMessage()));
+            } catch (Exception e) {
+                this.errors.add(String.format("[%s] Failed to write file: %s", location, e.getMessage()));
             }
         });
 
-        this.logger.flush();
+        if (errors.isEmpty()) {
+            LOGGER.info("Content outputted successfully!");
+        } else {
+            LOGGER.warn("Content outputted with {} errors!", errors.size());
+        }
+        FileUtil.writeLinesSafe(ERRORS_PATH.toFile(), errors, e -> LOGGER.error("Failed to write errors file:", e));
     }
 
     public static void create(Collection<RegistryOutput<?>> outputs, Runnable onFinished) {
@@ -95,7 +93,7 @@ public final class OutputInstance {
             return;
         }
 
-        instance = new OutputInstance(outputs);
+        instance = new OutputLoadInstance(outputs);
         Thread.startVirtualThread(() -> {
             Util.backgroundExecutor().forName("contentOutput").execute(() -> {
                 instance.load();
@@ -106,7 +104,7 @@ public final class OutputInstance {
                 SystemToast.add(
                         Minecraft.getInstance().gui.toastManager(),
                         ContentPacksClient.TOAST_OUTPUT,
-                        Component.translatable("options.contentpacks.toast.output.title", ErrorLogger.LOAD.count()),
+                        Component.translatable("options.contentpacks.toast.output.title"),
                         Component.translatable("options.contentpacks.toast.output.description")
                 );
                 Util.getPlatform().openFile(DIRECTORY.toFile());
@@ -115,14 +113,10 @@ public final class OutputInstance {
     }
 
     public static void create(Runnable onFinished) {
-        List<RegistryOutput<?>> outputs = new ArrayList<>();
-        RegistryLoader.getLoaders().forEach(loader -> {
-            outputs.add(loader.getOutput());
-        });
-        create(outputs, onFinished);
+        create(ContentPacks.getInstance().getRegistryManager().getOutputs(), onFinished);
     }
 
-    public static @Nullable OutputInstance getInstance() {
+    public static @Nullable OutputLoadInstance getInstance() {
         return instance;
     }
 }

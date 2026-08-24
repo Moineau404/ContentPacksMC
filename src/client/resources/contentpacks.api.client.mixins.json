@@ -10,7 +10,6 @@
     "requireAnnotations": true
   },
   "mixins": [
-    "block.BlockEntityRenderStateMixin",
     "block.ChestBlockMixin",
     "block.EnderChestBlockMixin",
     "block.LiquidBlockAccessor",

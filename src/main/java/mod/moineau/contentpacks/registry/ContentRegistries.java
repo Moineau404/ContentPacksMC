@@ -33,8 +33,8 @@ public final class ContentRegistries {
     private static final Logger LOGGER = ContentPacks.LOGGER;
     private static final List<Runnable> INITIALIZERS = new LinkedList<>();
     public static final Registry<Property<?>> PROPERTIES = create(ContentRegistryKeys.PROPERTIES, VanillaProperties::initialize);
-    public static final Registry<StatePredicateType<?>> BLOCK_CONTEXT_PREDICATE_TYPE = create(ContentRegistryKeys.BLOCK_CONTEXT_PREDICATE_TYPE, StatePredicateType::initialize);
-    public static final Registry<EntityTypedStatePredicateType<?>> ENTITY_TYPED_BLOCK_CONTEXT_PREDICATE_TYPE = create(ContentRegistryKeys.ENTITY_TYPED_BLOCK_CONTEXT_PREDICATE_TYPE, EntityTypedStatePredicateType::initialize);
+    public static final Registry<StatePredicateType<?>> STATE_PREDICATE_TYPE = create(ContentRegistryKeys.STATE_PREDICATE_TYPE, StatePredicateType::initialize);
+    public static final Registry<EntityTypedStatePredicateType<?>> ENTITY_TYPED_STATE_PREDICATE_TYPE = create(ContentRegistryKeys.ENTITY_TYPED_STATE_PREDICATE_TYPE, EntityTypedStatePredicateType::initialize);
     public static final Registry<SoundType> SOUND_TYPE = create(ContentRegistryKeys.SOUND_TYPE, VanillaSoundTypes::initialize);
     public static final Registry<BlockSetType> BLOCK_SET_TYPE = create(ContentRegistryKeys.BLOCK_SET_TYPE, VanillaBlockSetTypes::initialize);
     public static final Registry<WoodType> WOOD_TYPE = create(ContentRegistryKeys.WOOD_TYPE, VanillaWoodTypes::initialize);

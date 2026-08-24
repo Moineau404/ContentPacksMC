@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.client.screen;
 
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.client.ContentPacksClient;
-import mod.moineau.contentpacks.client.resource.OutputInstance;
+import mod.moineau.contentpacks.client.resource.OutputLoadInstance;
 import net.minecraft.client.gui.screens.packs.PackSelectionScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.repository.PackRepository;
@@ -25,7 +25,7 @@ public final class ContentPacksScreen extends PackSelectionScreen {
     @Override
     protected void init() {
         super.init();
-        outputButton = createOutputButton(OutputInstance.getInstance() == null);
+        outputButton = createOutputButton(OutputLoadInstance.getInstance() == null);
         this.addRenderableWidget(outputButton);
     }
 
@@ -38,7 +38,7 @@ public final class ContentPacksScreen extends PackSelectionScreen {
     private OutputButton createOutputButton(boolean active) {
         OutputButton button = new OutputButton(b -> {
             b.setActive(false);
-            OutputInstance.create(() -> instance.outputButton.setActive(true));
+            OutputLoadInstance.create(() -> instance.outputButton.setActive(true));
         });
         button.setPosition(5, 5);
         button.setActive(active);

@@ -15,8 +15,8 @@ public final class BlockInteractionTypes {
     public static final InteractionType<Block, FabricFlammableBlockInteraction> FABRIC_FLAMMABLE = () -> FabricFlammableBlockInteraction.CODEC;
 
     public static void bootStrap() {
-        ID_MAPPER.put(Identifier.fromNamespaceAndPath(ContentPacks.MOD_ID, "strippable"), STRIPPABLE);
-        ID_MAPPER.put(Identifier.fromNamespaceAndPath(ContentPacks.MOD_ID, "flattenable"), FLATTENABLE);
+        ID_MAPPER.put(ContentPacks.id("strippable"), STRIPPABLE);
+        ID_MAPPER.put(ContentPacks.id("flattenable"), FLATTENABLE);
         ID_MAPPER.put(Identifier.fromNamespaceAndPath("fabric", "strippable"), FABRIC_STRIPPABLE);
         ID_MAPPER.put(Identifier.fromNamespaceAndPath("fabric", "flattenable"), FABRIC_FLATTENABLE);
         ID_MAPPER.put(Identifier.fromNamespaceAndPath("fabric", "flammable"), FABRIC_FLAMMABLE);

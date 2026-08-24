@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public interface EntityTypedStatePredicate extends BlockBehaviour.StateArgumentPredicate<EntityType<?>> {
-	Codec<EntityTypedStatePredicate> BASE_CODEC = ContentRegistries.ENTITY_TYPED_BLOCK_CONTEXT_PREDICATE_TYPE.byNameCodec()
+	Codec<EntityTypedStatePredicate> BASE_CODEC = ContentRegistries.ENTITY_TYPED_STATE_PREDICATE_TYPE.byNameCodec()
 			.dispatch(EntityTypedStatePredicate::getType, EntityTypedStatePredicateType::codec);
 	Codec<EntityTypedStatePredicate> EXTENDED_CODEC = Codec.withAlternative(BASE_CODEC,
 			DelegatingEntityTypedStatePredicate.CODEC.codec());

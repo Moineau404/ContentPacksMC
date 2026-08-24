@@ -1,7 +1,7 @@
 package mod.moineau.contentpacks.client.mixin;
 
+import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.client.ContentPacksClient;
-import mod.moineau.contentpacks.util.ErrorLogger;
 import net.minecraft.client.GameLoadCookie;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
@@ -39,11 +39,12 @@ public abstract class MinecraftMixin {
 
     @Inject(method = "onGameLoadFinished", at = @At(value = "TAIL"))
     private void inject$onGameLoadFinished_popup(GameLoadCookie cookie, CallbackInfo ci) {
-        if (ErrorLogger.LOAD.count() > 0) {
+        int count = ContentPacks.getInstance().getErrors().size();
+        if (count > 0) {
             SystemToast.add(
                     gui.toastManager(),
                     ContentPacksClient.TOAST_LOAD_FAILURE,
-                    Component.translatable("options.contentpacks.toast.errors.title", ErrorLogger.LOAD.count()).withColor(CommonColors.SOFT_RED),
+                    Component.translatable("options.contentpacks.toast.errors.title", count).withColor(CommonColors.SOFT_RED),
                     Component.translatable("options.contentpacks.toast.errors.description").withColor(CommonColors.SOFT_RED)
             );
         }

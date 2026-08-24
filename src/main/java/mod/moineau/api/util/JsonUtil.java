@@ -25,10 +25,10 @@ public final class JsonUtil {
     }
 
     /**
-     * Reads JSON from file.
+     * Reads JSON from reader.
      * Throws if failed.
      */
-    public static JsonElement readJson(Reader reader) throws IOException, JsonParseException {
+    public static JsonElement readJson(Reader reader) throws JsonParseException {
         return StrictJsonParser.parse(reader);
     }
 
@@ -41,7 +41,7 @@ public final class JsonUtil {
     }
 
     /**
-     * Reads JSON from file.
+     * Reads JSON from reader.
      * Returns null if failed.
      */
     public static @Nullable JsonElement readJsonSafe(Reader reader, Consumer<Exception> errorHandler) {
@@ -67,7 +67,7 @@ public final class JsonUtil {
     }
 
     /**
-     * Reads JSON from file.
+     * Reads JSON from reader.
      * Returns null if failed.
      */
     public static @Nullable JsonElement readJsonSafe(Reader reader) {
@@ -80,6 +80,30 @@ public final class JsonUtil {
      */
     public static @Nullable JsonElement readJsonSafe(File file) {
         return readJsonSafe(file, _ -> {});
+    }
+
+    /**
+     * Reads JSON {@link DataResult} from reader.
+     * Returns {@link DataResult.Error} if failed.
+     */
+    public static DataResult<JsonElement> readResult(Reader reader) {
+        try {
+            return DataResult.success(readJson(reader));
+        } catch (Exception e) {
+            return DataResult.error(e::getMessage);
+        }
+    }
+
+    /**
+     * Reads JSON {@link DataResult} from file.
+     * Returns {@link DataResult.Error} if failed.
+     */
+    public static DataResult<JsonElement> readResult(File file) {
+        try {
+            return DataResult.success(readJson(file));
+        } catch (Exception e) {
+            return DataResult.error(e::getMessage);
+        }
     }
 
     /**

@@ -17,7 +17,7 @@ public final class FileUtil {
     }
 
     /**
-     * Writes content to file. Returns null if failed.
+     * Writes content to file.
      */
     public static void writeSafe(File file, String content, Consumer<Exception> errorHandler) {
         try {
@@ -39,5 +39,16 @@ public final class FileUtil {
      */
     public static void writeLines(File file, Collection<String> lines) throws IOException {
         FileUtils.writeLines(file, Charset.defaultCharset().name(), lines, null, false);
+    }
+
+    /**
+     * Writes lines to file.
+     */
+    public static void writeLinesSafe(File file, Collection<String> lines, Consumer<Exception> errorHandler) {
+        try {
+            writeLines(file, lines);
+        } catch (Exception e) {
+            errorHandler.accept(e);
+        }
     }
 }

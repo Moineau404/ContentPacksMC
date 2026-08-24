@@ -1,18 +1,9 @@
 package mod.moineau.contentpacks.resource;
 
 import net.minecraft.server.packs.resources.ResourceManager;
-import org.jetbrains.annotations.NotNull;
 
-@FunctionalInterface
-public interface ResourceLoader extends Comparable<ResourceLoader> {
-    void load(ResourceManager resourceManager);
+import java.util.function.Consumer;
 
-    default int getPriority() {
-        return 0;
-    }
-
-    @Override
-    default int compareTo(@NotNull ResourceLoader resourceLoader) {
-        return this.getPriority() - resourceLoader.getPriority();
-    }
+public interface ResourceLoader {
+    void load(ResourceManager resourceManager, Consumer<String> errorHandler);
 }

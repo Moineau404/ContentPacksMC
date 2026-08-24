@@ -22,7 +22,8 @@
 			"mod.moineau.contentpacks.client.ContentPacksClient"
 		],
 		"contentpacks": [
-			"mod.moineau.contentpacks.api.ContentPacksAPI"
+			"mod.moineau.contentpacks.api.ContentPacksAPI",
+			"mod.moineau.contentpacks.api.client.ContentPacksAPIClient"
 		],
 		"packrepos": [
 			"mod.moineau.contentpacks.packs.ContentPacksRepositorySource"

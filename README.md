@@ -2,13 +2,16 @@
 
 # Introduction
 
-**Content** is a new pack type (such as resource and data) that allows creation of various objects that could otherwise only be defined with code. It aims to offer an alternative to basic modding by allowing creators to use an intuitive format, stable across Minecraft versions, rather than committing to the maintenance of a code project.
+**Content** is a new pack type (such as resource and data) that allows creation of various objects that could otherwise only be defined with code.
+It aims to offer an alternative to basic modding by allowing creators to use an intuitive format, stable across Minecraft versions, rather than committing to the maintenance of a code project.
 
 # Content pack type
 
 ⚠ _Disclaimer : due to the way Minecraft is coded, content is only loaded at game start (allowing for an in-game reload would recquire a complete rewrite of Minecraft itself lol)._
 
-Content packs are located in the ```<game_dir>/contentpacks``` folder, and can be a folder or a zip file (like other pack types). They can load ```content```, but also automatically client resources (```assets```) and server data (```data```) depending on active content packs. Active packs and their loading order can be configured via a menu with a new button at the bottom of the options screen.
+Content packs are located in the ```<game_dir>/contentpacks``` folder, and can be a folder or a zip file (like other pack types).
+It can load ```content```, but also automatically client resources (```assets```) and server data (```data```) depending on active content packs (similar to a mod).
+Active packs and their loading order can be configured via a menu with a new button at the bottom of the options screen.
 
 # Features
 
@@ -34,7 +37,7 @@ Content packs are located in the ```<game_dir>/contentpacks``` folder, and can b
 - Documentation.
 - JSON block collision boxes.
 - JSON mob variants.
-- Advanced support for Polytone and other mods.
+- Advanced support for EMF, ETF, Polytone and maybe other mods.
 - Web interface for creating objects (like [Misode's Data Pack Generators](https://misode.github.io/)).
 
 </details>

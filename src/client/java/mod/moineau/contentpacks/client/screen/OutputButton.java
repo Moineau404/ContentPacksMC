@@ -5,7 +5,6 @@ import net.minecraft.client.gui.components.SpriteIconButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 
 import java.util.function.Consumer;
 
@@ -22,7 +21,7 @@ public final class OutputButton extends SpriteIconButton.CenteredIcon {
                 16,
                 0,
                 0,
-                new WidgetSprites(Identifier.fromNamespaceAndPath(ContentPacks.MOD_ID, "content/output")),
+                new WidgetSprites(ContentPacks.id("content/output")),
                 button -> onPress.accept((OutputButton) button),
                 TOOLTIP,
                 null,
