@@ -18,8 +18,8 @@ repositories {
 	// for more information about repositories.
 
 	flatDir {
-        dir 'libs'
-    }
+		dir 'libs'
+	}
 }
 
 loom {
@@ -99,4 +99,72 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+def filesToBackup = [
+		'.git/',
+		'.github/',
+		'.idea/',
+		'run/contentpacks/',
+		'run/options.txt',
+		'src/',
+		'.gitattributes',
+		'.gitignore',
+		'build.gradle',
+		'gradle.properties',
+		'gradlew',
+		'gradlew.bat',
+		'LICENSE',
+		'README.md',
+		'settings.gradle'
+]
+
+tasks.register('exportJars') {
+	dependsOn 'clean'
+	dependsOn 'assemble'
+
+	copy {
+		from "./build/libs"
+		into "./../.jars"
+	}
+
+	println 'Jars export done!'
+}
+
+tasks.register('buildAndExportJars') {
+	dependsOn 'clean'
+	dependsOn 'assemble'
+	dependsOn 'exportJars'
+}
+
+tasks.register('makeBackupFolder', Copy) {
+		filesToBackup.each { fileName ->
+			from ('.') {
+				include fileName
+			}
+		}
+		into "./../.archives/${archives_base_name}-${version}"
+
+		println 'Folder backup done!'
+}
+
+tasks.register('makeBackupZip', Zip) {
+	archiveFileName = "${archives_base_name}-${version}.zip"
+	destinationDirectory = file('./../.archives')
+
+	filesToBackup.each { fileName ->
+		from ('.') {
+			include fileName
+		}
+	}
+
+	println 'Zip backup done!'
+}
+
+tasks.named('assemble').configure {
+	mustRunAfter 'clean'
+}
+
+tasks.named('exportJars').configure {
+	mustRunAfter 'assemble'
 }

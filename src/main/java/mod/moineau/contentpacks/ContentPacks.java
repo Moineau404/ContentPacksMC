@@ -134,6 +134,7 @@ public final class ContentPacks implements ModInitializer {
         if (this.errors.isEmpty()) {
             LOGGER.info("Content loaded successfully!");
         } else {
+            this.errors.forEach(LOGGER::debug);
             LOGGER.error("Content loaded with {} errors!", errors.size());
         }
         FileUtil.writeLinesSafe(ERRORS_PATH.toFile(), errors, e -> LOGGER.error("Failed to write errors file:", e));
