@@ -6,11 +6,9 @@ import mod.moineau.contentpacks.block.BlockWithEntityTypes;
 import mod.moineau.contentpacks.block.MapColors;
 import mod.moineau.contentpacks.codec.*;
 import mod.moineau.contentpacks.integration.ContentPacksExtension;
-import mod.moineau.contentpacks.interaction.InteractionType;
 import mod.moineau.contentpacks.item.ItemTypes;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import mod.moineau.contentpacks.registry.ContentRegistryKeys;
-import mod.moineau.contentpacks.resource.InteractionManager;
 import mod.moineau.contentpacks.resource.RegistryLoader;
 import mod.moineau.contentpacks.resource.RegistryManager;
 import mod.moineau.contentpacks.resource.ResourceLoader;
@@ -53,7 +51,7 @@ public final class ContentPacks implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("ContentPacks");
     public static final String MOD_ID = "contentpacks";
     public static final Path PATH = FabricLoader.getInstance().getGameDir().resolve("contentpacks");
-    public static final PackFormat PACK_VERSION = PackFormat.of(9);
+    public static final PackFormat PACK_VERSION = PackFormat.of(10);
     public static final int PACK_LAST_PRE_MINOR_VERSION = 0;
     public static final PackType PACK_TYPE = PackType.valueOf("CONTENTPACKS_CONTENT");
     public static final MetadataSectionType<PackMetadataSection> PACK_METADATA_SECTION_TYPE = new MetadataSectionType<>("pack", PackMetadataSection.codecForPackType(PACK_TYPE));
@@ -79,8 +77,8 @@ public final class ContentPacks implements ModInitializer {
     public void onInitialize() {
         ContentRegistries.bootStrap();
         MapColors.bootStrap();
-        InteractionType.bootStrap();
         this.repositorySource = new FolderRepositorySource(PATH, PACK_TYPE, PACK_SOURCE, new DirectoryValidator(_ -> true));
+        //
         this.registryManager = new RegistryManager();
         this.registryManager.register(new RegistryLoader<>(ContentRegistries.SOUND_TYPE, SoundTypeCodecs.CODEC));
         this.registryManager.register(new RegistryLoader<>(ContentRegistries.BLOCK_SET_TYPE, BlockSetTypeCodecs.CODEC, RegistryLoader.Flag.INJECT_ID));
@@ -105,7 +103,9 @@ public final class ContentPacks implements ModInitializer {
                 BlockWithEntityTypes.register(block);
             }
         });
-        this.extensions = FabricLoader.getInstance().getEntrypoints("contentpacks", ContentPacksExtension.class);
+        //
+        LOGGER.debug("Initializing extensions...");
+        this.extensions = FabricLoader.getInstance().getEntrypoints("contentpacks.main", ContentPacksExtension.class);
         this.extensions.forEach(ContentPacksExtension::onInitialize);
     }
 
@@ -126,21 +126,20 @@ public final class ContentPacks implements ModInitializer {
             throw new IllegalStateException("Cannot load content twice!");
         }
 
+        LOGGER.info("Loading content... ({} packs)", packResources.size());
         MultiPackResourceManager resourceManager = new MultiPackResourceManager(PACK_TYPE, packResources);
         this.errors = new LinkedList<>();
-        LOGGER.info("Loading content... ({} packs)", packResources.size());
         this.registryManager.load(resourceManager, this.errors::add);
         this.loaders.values().forEach(list -> list.forEach(loader -> loader.load(resourceManager, this.errors::add)));
-        InteractionManager.load(resourceManager, this.errors::add);
         if (this.errors.isEmpty()) {
             LOGGER.info("Content loaded successfully!");
         } else {
             LOGGER.error("Content loaded with {} errors!", errors.size());
         }
         FileUtil.writeLinesSafe(ERRORS_PATH.toFile(), errors, e -> LOGGER.error("Failed to write errors file:", e));
-        this.extensions.forEach(ContentPacksExtension::onContentLoaded);
 
         this.hasLoaded = true;
+        this.extensions.forEach(ContentPacksExtension::onContentLoaded);
     }
 
     public void registerLoader(ResourceLoader loader, int priority) {

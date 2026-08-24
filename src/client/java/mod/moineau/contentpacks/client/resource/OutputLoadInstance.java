@@ -29,6 +29,7 @@ public final class OutputLoadInstance {
     private static OutputLoadInstance instance;
     private final Collection<RegistryOutput<?>> outputs;
     private final Map<Identifier, JsonElement> entries = new HashMap<>();
+    private final Map<Identifier, JsonElement> metadatas = new HashMap<>();
     private final Map<Identifier, Set<String>> names = new HashMap<>();
     private final List<String> errors = new LinkedList<>();
 
@@ -44,8 +45,8 @@ public final class OutputLoadInstance {
                 Identifier id = key.identifier();
                 set.add(id.toString());
 
+                DataResult<JsonElement> result = entry.result();
                 try {
-                    DataResult<JsonElement> result = entry.result();
                     if (result.hasResultOrPartial()) {
                         result.ifError(e -> this.errors.add(String.format("[%s / %s] Partially encoded: %s", key.registry(), id, e.message())));
                     }
@@ -53,6 +54,19 @@ public final class OutputLoadInstance {
                     this.entries.put(entry.location(), result.getPartialOrThrow());
                 } catch (Exception e) {
                     this.errors.add(String.format("[%s / %s] Partially encoded: %s", key.registry(), id, e.getMessage()));
+                }
+
+                DataResult<JsonElement> metadataResult = entry.metadataResult();
+                if (metadataResult.result().filter(JsonElement::isJsonNull).isEmpty()) {
+                    try {
+                        if (metadataResult.hasResultOrPartial()) {
+                            metadataResult.ifError(e -> this.errors.add(String.format("[%s / %s (metadata)] Partially encoded: %s", key.registry(), id, e.message())));
+                        }
+
+                        this.metadatas.put(entry.location().withSuffix(".mcmeta"), metadataResult.getPartialOrThrow());
+                    } catch (Exception e) {
+                        this.errors.add(String.format("[%s / %s (metadata)] Partially encoded: %s", key.registry(), id, e.getMessage()));
+                    }
                 }
             });
 
@@ -62,6 +76,15 @@ public final class OutputLoadInstance {
 
     private void flush() {
         this.entries.forEach((location, json) -> {
+            File file = CONTENT_DIRECTORY.resolve(location.getNamespace()).resolve(location.getPath()).toFile();
+            try {
+                JsonUtil.writeJson(file, json);
+            } catch (Exception e) {
+                this.errors.add(String.format("[%s] Failed to write file: %s", location, e.getMessage()));
+            }
+        });
+
+        this.metadatas.forEach((location, json) -> {
             File file = CONTENT_DIRECTORY.resolve(location.getNamespace()).resolve(location.getPath()).toFile();
             try {
                 JsonUtil.writeJson(file, json);

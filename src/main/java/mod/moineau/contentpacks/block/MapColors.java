@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.material.MapColor;
 
-// TODO Content-driven map colors ?
 public final class MapColors {
     public static final ExtraCodecs.LateBoundIdMapper<String, MapColor> ID_MAPPER = new ExtraCodecs.LateBoundIdMapper<>();
     public static final Codec<MapColor> CODEC = ID_MAPPER.codec(Codec.STRING);

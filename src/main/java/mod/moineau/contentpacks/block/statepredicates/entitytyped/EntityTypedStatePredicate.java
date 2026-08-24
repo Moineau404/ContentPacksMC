@@ -219,6 +219,7 @@ public interface EntityTypedStatePredicate extends BlockBehaviour.StateArgumentP
 		return whitelist(List.of(types));
 	}
 
+	// TODO : Use class Holder<T> to register whitelists
 	@Workaround
 	@ApiStatus.Internal
 	static EntityTypedStatePredicate whitelist(Supplier<List<EntityType<?>>> types) {

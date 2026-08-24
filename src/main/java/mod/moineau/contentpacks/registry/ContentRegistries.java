@@ -67,6 +67,7 @@ public final class ContentRegistries {
     }
 
     public static void bootStrap() {
+        LOGGER.debug("Initializing additional vanilla registries...");
         INITIALIZERS.forEach(Runnable::run);
     }
 }

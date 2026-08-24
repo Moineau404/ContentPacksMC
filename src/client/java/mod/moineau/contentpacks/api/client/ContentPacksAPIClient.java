@@ -1,19 +1,18 @@
 package mod.moineau.contentpacks.api.client;
 
-import mod.moineau.contentpacks.api.client.render.CustomTextureRegistry;
-import mod.moineau.contentpacks.integration.ContentPacksExtension;
-import net.minecraft.core.registries.Registries;
+import mod.moineau.contentpacks.ContentPacks;
+import mod.moineau.contentpacks.api.client.modifier.CustomTextureModifier;
+import mod.moineau.contentpacks.api.modifier.ModifierType;
+import mod.moineau.contentpacks.client.integration.ContentPacksClientExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ContentPacksAPIClient extends ContentPacksExtension {
+public class ContentPacksAPIClient extends ContentPacksClientExtension {
     public static final Logger LOGGER = LoggerFactory.getLogger("ContentPacksAPI/Client");
 
     @Override
     public void onInitialize() {
-        subscribeRegistry(Registries.BLOCK, (id, value, metadata) -> {
-            metadata.getSection(CustomTextureRegistry.METADATA_SECTION_TYPE).ifPresent(texture -> CustomTextureRegistry.register(value, texture));
-        });
+        ModifierType.BLOCK.register(ContentPacks.id("custom_texture"), CustomTextureModifier.createCodec(), CustomTextureModifier::get);
     }
 
     @Override
