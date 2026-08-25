@@ -2,7 +2,7 @@ package mod.moineau.contentpacks.client.resource;
 
 import mod.moineau.contentpacks.client.ContentPacksClient;
 import mod.moineau.contentpacks.client.codec.ClientCodecs;
-import mod.moineau.contentpacks.api.client.mixin.block.LiquidBlockAccessor;
+import mod.moineau.contentpacks.extra.client.mixin.block.LiquidBlockAccessor;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderingRegistry;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.core.registries.BuiltInRegistries;

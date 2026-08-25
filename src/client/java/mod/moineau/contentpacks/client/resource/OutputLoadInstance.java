@@ -1,6 +1,7 @@
 package mod.moineau.contentpacks.client.resource;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.DataResult;
 import mod.moineau.api.util.FileUtil;
 import mod.moineau.api.util.JsonUtil;
@@ -56,8 +57,8 @@ public final class OutputLoadInstance {
                     this.errors.add(String.format("[%s / %s] Partially encoded: %s", key.registry(), id, e.getMessage()));
                 }
 
-                DataResult<JsonElement> metadataResult = entry.metadataResult();
-                if (metadataResult.result().filter(JsonElement::isJsonNull).isEmpty()) {
+                DataResult<JsonObject> metadataResult = entry.metadataResult();
+                if (metadataResult.result().filter(JsonObject::isEmpty).isEmpty()) {
                     try {
                         if (metadataResult.hasResultOrPartial()) {
                             metadataResult.ifError(e -> this.errors.add(String.format("[%s / %s (metadata)] Partially encoded: %s", key.registry(), id, e.message())));

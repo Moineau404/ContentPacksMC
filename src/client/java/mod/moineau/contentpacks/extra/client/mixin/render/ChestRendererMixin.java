@@ -1,0 +1,32 @@
+package mod.moineau.contentpacks.extra.client.mixin.render;
+
+import com.llamalad7.mixinextras.sugar.Local;
+import mod.moineau.contentpacks.extra.client.render.ChestSprites;
+import mod.moineau.contentpacks.client.render.CustomTextureRegistry;
+import net.minecraft.client.renderer.blockentity.ChestRenderer;
+import net.minecraft.client.renderer.blockentity.state.ChestRenderState;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.resources.model.sprite.SpriteId;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.LidBlockEntity;
+import net.minecraft.world.level.block.state.properties.ChestType;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+@Mixin(ChestRenderer.class)
+public class ChestRendererMixin<T extends BlockEntity & LidBlockEntity> {
+    @Inject(method = "extractRenderState(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState;FLnet/minecraft/world/phys/Vec3;Lnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState;material:Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState$ChestMaterialType;", shift = At.Shift.AFTER))
+    private void inject$extractRenderState_customTexture(T blockEntity, ChestRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress, CallbackInfo ci) {
+        CustomTextureRegistry.pass(blockEntity, state);
+    }
+
+    @Redirect(method = "submit(Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/Sheets;chooseSprite(Lnet/minecraft/client/renderer/blockentity/state/ChestRenderState$ChestMaterialType;Lnet/minecraft/world/level/block/state/properties/ChestType;)Lnet/minecraft/client/resources/model/sprite/SpriteId;"))
+    private SpriteId redirect$chooseSprite_customTexture(ChestRenderState.ChestMaterialType materialType, ChestType type, @Local(argsOnly = true, name = "state") ChestRenderState state) {
+        return ChestSprites.chooseCustomSprite(state, materialType, type);
+    }
+}

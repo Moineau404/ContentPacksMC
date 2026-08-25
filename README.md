@@ -272,7 +272,7 @@ Active packs and their loading order can be configured via a menu with a new but
 ```
 </details>
 
-_You may want to download the [test pack](https://raw.githubusercontent.com/Moineau404/ContentPacksMC/master/.assets/test/willow-wood-9.0.zip) shown in the gallery._
+_You may want to download the [test pack](https://raw.githubusercontent.com/Moineau404/ContentPacksMC/master/.assets/test/willow-wood-10.0.zip) shown in the gallery._
 
 # Known limitations
 

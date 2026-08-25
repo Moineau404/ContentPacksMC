@@ -2,8 +2,8 @@ package mod.moineau.contentpacks.fluid;
 
 import com.mojang.serialization.MapCodec;
 import mod.moineau.contentpacks.ContentPacks;
-import mod.moineau.contentpacks.api.fluid.ContentFluid;
-import mod.moineau.contentpacks.api.fluid.WaterLikeFluid;
+import mod.moineau.contentpacks.extra.fluid.ContentFluid;
+import mod.moineau.contentpacks.extra.fluid.WaterLikeFluid;
 import net.minecraft.core.Registry;
 
 public final class FluidTypes {

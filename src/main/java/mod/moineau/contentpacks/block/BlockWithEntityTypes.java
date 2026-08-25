@@ -1,7 +1,6 @@
 package mod.moineau.contentpacks.block;
 
 import mod.moineau.api.util.Workaround;
-import mod.moineau.contentpacks.api.modifier.blockentitytype.FabricValidBlocksBlockEntityTypeModifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityTypes;
@@ -14,7 +13,7 @@ import java.util.Map;
  * This is a more or less temporary solution that allows content-loaded blocks with vanilla block types
  * to automatically be registered in their block entity type supported block list.
  * Use {@link #register(Class, BlockEntityType)} to artificially bind a block type to a block entity type.
- * You can use {@link FabricValidBlocksBlockEntityTypeModifier FabricSupportedBlocks interaction}
+ * You can use {@link mod.moineau.contentpacks.metadata.MetaProperties#VALID_BLOCKS} for that
  * to add supported blocks directly with content packs.
  */
 @Workaround

@@ -7,6 +7,8 @@ import com.mojang.serialization.JsonOps;
 import mod.moineau.api.util.CodecUtil;
 import mod.moineau.api.util.JsonUtil;
 import mod.moineau.contentpacks.ContentPacks;
+import mod.moineau.contentpacks.metadata.MetaProperties;
+import mod.moineau.contentpacks.metadata.MetaProperty;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
@@ -17,7 +19,10 @@ import net.minecraft.server.packs.resources.ResourceMetadata;
 import org.slf4j.Logger;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -31,6 +36,7 @@ public class RegistryLoader<T> {
     private final Codec<T> codec;
     private final Set<Flag> flags;
 
+    @Deprecated
     public RegistryLoader(Registry<T> registry, Codec<T> codec, Flag... flags) {
         this.finder = FileToIdConverter.registry(registry.key());
         this.registry = registry;
@@ -39,15 +45,16 @@ public class RegistryLoader<T> {
     }
 
     public RegistryLoader(Registry<T> registry, Codec<T> codec) {
-        this(registry, codec, new Flag[0]);
+        this(registry, codec, Flag.values());
     }
 
-    public List<Finalizer<T>> load(ResourceManager resourceManager, Consumer<String> errorHandler) {
+    public List<Finalizer> load(ResourceManager resourceManager, Consumer<String> errorHandler) {
         Map<Identifier, Resource> resourceMap = finder.listMatchingResources(resourceManager);
 
         List<Result> results = new LinkedList<>();
         resourceMap.forEach((location, resource) -> {
             Identifier id = this.finder.fileToId(location);
+            ResourceKey<T> resourceKey = ResourceKey.create(this.registry.key(), id);
             String pack = resource.sourcePackId();
             if (!registry.containsKey(id)) {
                 try {
@@ -70,19 +77,19 @@ public class RegistryLoader<T> {
                         metadataResult = DataResult.error(e::getMessage);
                     }
 
-                    results.add(new Result(id, location, pack, result, metadataResult));
+                    results.add(new Result(resourceKey, location, pack, result, metadataResult));
                 } catch (IOException e) {
-                    results.add(new Result(id, location, pack, DataResult.error(e::getMessage), DataResult.success(ResourceMetadata.EMPTY)));
+                    results.add(new Result(resourceKey, location, pack, DataResult.error(e::getMessage), DataResult.success(ResourceMetadata.EMPTY)));
                 }
             } else {
-                results.add(new Result(id, location, pack, DataResult.error(() -> String.format("Cannot override existing entry %s in registry %s", id, registry.key().identifier())), DataResult.success(ResourceMetadata.EMPTY)));
+                results.add(new Result(resourceKey, location, pack, DataResult.error(() -> String.format("Cannot override existing entry %s in registry %s", id, registry.key().identifier())), DataResult.success(ResourceMetadata.EMPTY)));
             }
         });
 
-        List<Finalizer<T>> finalizers = new LinkedList<>();
+        List<Finalizer> finalizers = new LinkedList<>();
         results.forEach(result -> {
-            result.ifSuccess((value, metadata) -> finalizers.add(new Finalizer<>(result.id, () -> {
-                Registry.register(this.registry, result.id, value);
+            result.ifSuccess((value, metadata) -> finalizers.add(new Finalizer(result.resourceKey, () -> {
+                Registry.register(this.registry, result.resourceKey.identifier(), value);
                 return value;
             }, metadata)));
             result.ifError(errorHandler);
@@ -91,7 +98,7 @@ public class RegistryLoader<T> {
         return finalizers;
     }
 
-    public ResourceKey<? extends Registry<T>> getRegistryId() {
+    public ResourceKey<? extends Registry<T>> getRegistryName() {
         return registry.key();
     }
 
@@ -100,14 +107,14 @@ public class RegistryLoader<T> {
     }
 
     private final class Result {
-        private final Identifier id;
+        private final ResourceKey<T> resourceKey;
         private final Identifier location;
         private final String pack;
         private final DataResult<T> result;
         private final DataResult<ResourceMetadata> metadataResult;
 
-        private Result(Identifier id, Identifier location, String pack, DataResult<T> result, DataResult<ResourceMetadata> metadataResult) {
-            this.id = id;
+        private Result(ResourceKey<T> resourceKey, Identifier location, String pack, DataResult<T> result, DataResult<ResourceMetadata> metadataResult) {
+            this.resourceKey = resourceKey;
             this.location = location;
             this.pack = pack;
             this.result = result;
@@ -126,23 +133,28 @@ public class RegistryLoader<T> {
         }
     }
 
-    public static final class Finalizer<T> {
-        private final Identifier id;
+    public final class Finalizer {
+        private final ResourceKey<T> resourceKey;
         private final Supplier<T> applier;
         private final ResourceMetadata metadata;
 
-        public Finalizer(Identifier id, Supplier<T> applier, ResourceMetadata metadata) {
-            this.id = id;
+        public Finalizer(ResourceKey<T> resourceKey, Supplier<T> applier, ResourceMetadata metadata) {
+            this.resourceKey = resourceKey;
             this.applier = applier;
             this.metadata = metadata;
         }
 
         public Runnable apply(Callback<T> callback) {
             T value = applier.get();
-            return () -> callback.apply(this.id, value, metadata);
+            return () -> {
+                callback.apply(this.resourceKey, value);
+                List<MetaProperty.Value<T, ?>> metaProperties = MetaProperties.get(RegistryLoader.this.registry.key(), metadata);
+                metaProperties.forEach(metaPropertyValue -> metaPropertyValue.apply(value));
+            };
         }
     }
 
+    @Deprecated
     public enum Flag {
         INJECT_ID,
         INJECT_LOCATION;

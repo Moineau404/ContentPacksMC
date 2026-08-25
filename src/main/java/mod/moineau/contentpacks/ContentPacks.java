@@ -1,12 +1,13 @@
 package mod.moineau.contentpacks;
 
 import mod.moineau.api.util.FileUtil;
-import mod.moineau.contentpacks.api.fluid.ContentFluid;
+import mod.moineau.contentpacks.extra.fluid.ContentFluid;
 import mod.moineau.contentpacks.block.BlockWithEntityTypes;
 import mod.moineau.contentpacks.block.MapColors;
 import mod.moineau.contentpacks.codec.*;
 import mod.moineau.contentpacks.integration.ContentPacksExtension;
 import mod.moineau.contentpacks.item.ItemTypes;
+import mod.moineau.contentpacks.metadata.MetaProperties;
 import mod.moineau.contentpacks.registry.ContentRegistries;
 import mod.moineau.contentpacks.registry.ContentRegistryKeys;
 import mod.moineau.contentpacks.resource.RegistryLoader;
@@ -77,8 +78,8 @@ public final class ContentPacks implements ModInitializer {
     public void onInitialize() {
         ContentRegistries.bootStrap();
         MapColors.bootStrap();
+        MetaProperties.bootStrap();
         this.repositorySource = new FolderRepositorySource(PATH, PACK_TYPE, PACK_SOURCE, new DirectoryValidator(_ -> true));
-        //
         this.registryManager = new RegistryManager();
         this.registryManager.register(new RegistryLoader<>(ContentRegistries.SOUND_TYPE, SoundTypeCodecs.CODEC));
         this.registryManager.register(new RegistryLoader<>(ContentRegistries.BLOCK_SET_TYPE, BlockSetTypeCodecs.CODEC, RegistryLoader.Flag.INJECT_ID));
@@ -103,7 +104,6 @@ public final class ContentPacks implements ModInitializer {
                 BlockWithEntityTypes.register(block);
             }
         });
-        //
         LOGGER.debug("Initializing extensions...");
         this.extensions = FabricLoader.getInstance().getEntrypoints("contentpacks.main", ContentPacksExtension.class);
         this.extensions.forEach(ContentPacksExtension::onInitialize);

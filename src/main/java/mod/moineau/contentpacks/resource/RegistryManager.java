@@ -2,10 +2,8 @@ package mod.moineau.contentpacks.resource;
 
 import mod.moineau.contentpacks.ContentPacks;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.server.packs.resources.ResourceMetadata;
 import org.slf4j.Logger;
 
 import java.util.*;
@@ -23,7 +21,7 @@ public final class RegistryManager implements ResourceLoader {
     public void load(ResourceManager resourceManager, Consumer<String> errorHandler) {
         List<Runnable> callbackRuns = new LinkedList<>();
         this.loaders.values().forEach(list -> list.forEach(loader -> {
-            Callback callback = Callback.of((List) this.callbacks.getOrDefault(loader.getRegistryId(), List.of()));
+            Callback callback = Callback.of((List) this.callbacks.getOrDefault(loader.getRegistryName(), List.of()));
             loader.load(resourceManager, errorHandler).forEach(finalizer -> callbackRuns.add(finalizer.apply(callback)));
         }));
         callbackRuns.forEach(Runnable::run);
@@ -38,16 +36,16 @@ public final class RegistryManager implements ResourceLoader {
         return this.register(loader, 0);
     }
 
-    public <T> void subscribe(ResourceKey<? extends Registry<T>> registry, Callback<T> callback) {
-        this.callbacks.computeIfAbsent(registry, _ -> new LinkedList<>()).add(callback);
+    public <T> void subscribe(ResourceKey<? extends Registry<T>> registryName, Callback<T> callback) {
+        this.callbacks.computeIfAbsent(registryName, _ -> new LinkedList<>()).add(callback);
     }
 
-    public <T> void subscribe(ResourceKey<? extends Registry<T>> registry, Consumer<T> consumer) {
-        this.callbacks.computeIfAbsent(registry, _ -> new LinkedList<>()).add(Callback.of(consumer));
+    public <T> void subscribe(ResourceKey<? extends Registry<T>> registryName, Consumer<T> consumer) {
+        this.callbacks.computeIfAbsent(registryName, _ -> new LinkedList<>()).add(Callback.of(consumer));
     }
 
-    public <T> void subscribe(ResourceKey<? extends Registry<T>> registry, List<Callback<T>> callbacks) {
-        this.callbacks.computeIfAbsent(registry, _ -> new LinkedList<>()).addAll(callbacks);
+    public <T> void subscribe(ResourceKey<? extends Registry<T>> registryName, List<Callback<T>> callbacks) {
+        this.callbacks.computeIfAbsent(registryName, _ -> new LinkedList<>()).addAll(callbacks);
     }
 
     public List<RegistryOutput<?>> getOutputs() {
@@ -55,14 +53,14 @@ public final class RegistryManager implements ResourceLoader {
     }
 
     public interface Callback<T> {
-        void apply(Identifier id, T value, ResourceMetadata metadata);
+        void apply(ResourceKey<T> resourceKey, T value);
 
         static <T> Callback<T> of(Consumer<T> consumer) {
-            return (_, value, _) -> consumer.accept(value);
+            return (_, value) -> consumer.accept(value);
         }
 
         static <T> Callback<T> of(List<Callback<T>> callbacks) {
-            return (id, value, metadata) -> callbacks.forEach(callback -> callback.apply(id, value, metadata));
+            return (id, value) -> callbacks.forEach(callback -> callback.apply(id, value));
         }
     }
 }

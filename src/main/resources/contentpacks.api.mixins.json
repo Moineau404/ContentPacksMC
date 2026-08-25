@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "mod.moineau.contentpacks.api.mixin",
+  "package": "mod.moineau.contentpacks.extra.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [],
   "injectors": {

@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.block.statepredicates.StatePredicateType;
 import mod.moineau.contentpacks.block.statepredicates.entitytyped.EntityTypedStatePredicateType;
-import mod.moineau.contentpacks.api.fluid.ContentFluid;
+import mod.moineau.contentpacks.extra.fluid.ContentFluid;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;

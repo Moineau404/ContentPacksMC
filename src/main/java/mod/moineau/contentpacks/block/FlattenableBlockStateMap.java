@@ -1,12 +1,14 @@
 package mod.moineau.contentpacks.block;
 
+import mod.moineau.contentpacks.state.VariantMap;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 
 public final class FlattenableBlockStateMap {
     private static final Map<BlockState, BlockState> TEMP = new HashMap<>();
@@ -16,6 +18,15 @@ public final class FlattenableBlockStateMap {
 
     public static void put(BlockState input, BlockState output) {
         HANDLER.accept(input, output);
+    }
+
+    public static void put(Block input, VariantMap<BlockState> outputs) {
+        for (BlockState state : input.getStateDefinition().getPossibleStates()) {
+            BlockState value = outputs.get(state);
+            if (value != null) {
+                put(state, value);
+            }
+        }
     }
 
     public static Optional<BlockState> get(BlockState state) {

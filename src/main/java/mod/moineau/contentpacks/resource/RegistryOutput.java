@@ -1,28 +1,25 @@
 package mod.moineau.contentpacks.resource;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
-import mod.moineau.contentpacks.api.modifier.Modifier;
-import mod.moineau.contentpacks.api.modifier.ModifierType;
+import mod.moineau.contentpacks.metadata.MetaProperties;
+import mod.moineau.contentpacks.metadata.MetaProperty;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public final class RegistryOutput<T> {
     private final Identifier registry;
     private final Map<ResourceKey<T>, OutputResult> results;
 
-    @SuppressWarnings("unchecked")
     public RegistryOutput(Registry<T> registry, Codec<T> codec, UnaryOperator<Identifier> locationProvider) {
         this.registry = registry.key().identifier();
         this.results = new HashMap<>();
@@ -34,27 +31,16 @@ public final class RegistryOutput<T> {
                 result = DataResult.error(e::getMessage);
             }
 
-            DataResult<JsonElement> metadataResult;
-            ModifierType<T> modifierType = (ModifierType<T>) ModifierType.getInstances().get(registry.key());
-            if (modifierType != null) {
-                metadataResult = DataResult.success(modifierType.getModifiers(entry.getValue())).flatMap(map -> {
-                    if (!map.isEmpty()) {
-                        DataResult<JsonObject> jsonResult = DataResult.success(new JsonObject());
-                        for (Map.Entry<String, Pair<Modifier<T>, Codec<Modifier<T>>>> mapEntry : map.entrySet()) {
-                            DataResult<JsonElement> valueResult = mapEntry.getValue().getSecond().encodeStart(JsonOps.INSTANCE, mapEntry.getValue().getFirst());
-                            jsonResult = jsonResult.apply2((jsonObject, value) -> {
-                                jsonObject.add(mapEntry.getKey(), value);
-                                return jsonObject;
-                            }, valueResult);
-                        }
+            DataResult<JsonObject> metadataResult = DataResult.success(new JsonObject());
+            List<MetaProperty.Value<T, ?>> metaPropertyValues = MetaProperties.get(registry.key(), entry.getValue());
 
-                        return jsonResult.map(Function.identity());
-                    } else {
-                        return DataResult.success(JsonNull.INSTANCE);
-                    }
-                });
-            } else {
-                metadataResult = DataResult.success(JsonNull.INSTANCE);
+            if (!metaPropertyValues.isEmpty()) {
+                for (MetaProperty.Value<T, ?> propertyValue : metaPropertyValues) {
+                    metadataResult = metadataResult.apply2((jsonObject, jsonElement) -> {
+                        jsonObject.add(propertyValue.property().getName(), jsonElement);
+                        return jsonObject;
+                    }, propertyValue.encode());
+                }
             }
 
             results.put(entry.getKey(), new OutputResult(locationProvider.apply(entry.getKey().identifier()), result, metadataResult));
@@ -69,5 +55,5 @@ public final class RegistryOutput<T> {
         return results;
     }
 
-    public record OutputResult(Identifier location, DataResult<JsonElement> result, DataResult<JsonElement> metadataResult) {}
+    public record OutputResult(Identifier location, DataResult<JsonElement> result, DataResult<JsonObject> metadataResult) {}
 }

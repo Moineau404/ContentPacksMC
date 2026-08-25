@@ -2,6 +2,7 @@ package mod.moineau.contentpacks.client;
 
 import mod.moineau.contentpacks.ContentPacks;
 import mod.moineau.contentpacks.client.integration.ContentPacksClientExtension;
+import mod.moineau.contentpacks.client.metadata.MetaPropertiesClient;
 import mod.moineau.contentpacks.client.options.ContentPacksOptions;
 import mod.moineau.contentpacks.client.render.block.tint.BlockTintSourceTypes;
 import mod.moineau.contentpacks.client.render.entity.EntityModelTypes;
@@ -57,6 +58,7 @@ public final class ContentPacksClient implements ClientModInitializer {
 		BlockTintSourceTypes.bootStrap();
 		EntityModelTypes.bootStrap();
 		EntityRendererTypes.bootStrap();
+		MetaPropertiesClient.bootStrap();
 		this.colorResolverManager = new ColorResolverManager();
 		//
 		REQUIRED_CONTENT_PACK_DIRECTORY.toFile().mkdirs();
